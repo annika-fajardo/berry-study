@@ -49,10 +49,11 @@ export function Empty({ children, status = 'question', size = 64 }: { children: 
   return <div className="empty-state"><Cat status={status} size={size} /><div>{children}</div></div>
 }
 
-export function ReadyBar({ pct, compact }: { pct: number; compact?: boolean }) {
+export function ReadyBar({ pct, compact, tracked, total }: { pct: number | null; compact?: boolean; tracked?: number; total?: number }) {
   const tone = readinessTone(pct)
+  if (pct == null) return <span className={'ready ready-none' + (compact ? ' compact' : '')} title="No question bank for this course yet">{total ? `0 of ${total} topics tracked` : 'not tracked'}</span>
   return (
-    <span className={'ready ready-' + tone + (compact ? ' compact' : '')} title={pct + '% ready'}>
+    <span className={'ready ready-' + tone + (compact ? ' compact' : '')} title={pct + '% ready' + (tracked != null && total != null ? ` · ${tracked} of ${total} topics tracked` : '')}>
       <span className="ready-bar" aria-hidden="true"><span style={{ width: pct + '%' }} /></span>
       <span className="ready-num">{pct}% ready</span>
     </span>

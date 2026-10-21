@@ -6,7 +6,7 @@ import { Dumbbell, Layers, Shuffle, ListChecks, SquareStack, RotateCcw } from 'l
 import { useData, useToday } from '../lib/hooks'
 import { buildQ, pickQTypes, DRILLS, f2, type BuiltQ } from '../data/drills'
 import { COURSE_CONTENT } from '../data/content'
-import { conceptsFor, slug, type Concept } from '../lib/concepts'
+import { conceptsFor, slug } from '../lib/concepts'
 import { todayStr } from '../lib/dates'
 import { update, getState } from '../store/store'
 import { recordMastery, recordPractice, answerXp, setSetting } from '../store/actions'
@@ -39,7 +39,8 @@ export function PracticeSurface({ c, mode }: { c: string; mode?: string }) {
   const t = useToday()
   const cc = COURSE_CONTENT[c]
   const avail: { v: Mode; label: string; icon: Icon }[] = []
-  if (cc) avail.push({ v: 'quiz', label: c === 'FNCE 445' ? 'Quiz-style questions' : 'Concept quiz', icon: ListChecks })
+  const hasBank = c === 'FNCE 445'
+  if (hasBank) avail.push({ v: 'quiz', label: 'Quiz-style questions', icon: ListChecks })
   if (cc?.drills?.length) avail.push({ v: 'drills', label: 'Drills', icon: Dumbbell })
   if (cc) avail.push({ v: 'cards', label: 'Flashcards', icon: Layers })
   if (Object.values(s.decks).some(d => d.c === c)) avail.push({ v: 'decks', label: 'Decks', icon: SquareStack })
@@ -57,13 +58,15 @@ export function PracticeSurface({ c, mode }: { c: string; mode?: string }) {
         tabs={<ViewTabs value={cur} onChange={setCur} options={avail} label="Practice modes" />}
         right={nextTest ? <span className="note">Aimed at {nextTest.t}</span> : undefined}>
         <p className="note">
-          {cur === 'quiz' ? (c === 'FNCE 445' ? "Questions written like your prof's practice set: same wording and assumptions, with wrong answers built from the usual mistakes. You see the steps and why each wrong option is wrong." : 'Read the description, pick the concept it matches. Wrong options are neighbouring concepts, each explained.')
+          {cur === 'quiz' ? "Questions written like your prof's practice set: same wording and assumptions, with wrong answers built from the usual mistakes. You see the steps and why each wrong option is wrong."
+
             : cur === 'drills' ? 'Fresh numbers every time, so you can drill a question type until it is automatic. Answer to 2 decimals.'
             : cur === 'cards' ? 'Say it out loud, then flip to check.'
             : cur === 'decks' ? 'Step 1 decks check what you know. Step 2 decks test whether you can apply it. Submit to see marks and an explanation for every question.'
             : "Your prof's practice questions, with a hint on a wrong pick and the full solution once you get it or after two tries."}
         </p>
       </Panel>
+      {!hasBank && <NoBankNote c={c} />}
       {cur === 'quiz' && <QuizMode c={c} />}
       {cur === 'drills' && <DrillMode c={c} />}
       {cur === 'cards' && <CardMode c={c} />}
@@ -73,42 +76,24 @@ export function PracticeSurface({ c, mode }: { c: string; mode?: string }) {
   )
 }
 
-/* ---------------- concept quiz (no AI) ---------------- */
-function masteryOf(mastery: Record<string, Mastery>, id: string) { const m = mastery[id]; return m && m.seen ? m.correct / m.seen : null }
-function pickTargets(c: string, n: number, mastery: Record<string, Mastery>) {
-  const cs = conceptsFor(c)
-  const scored = cs.map(k => { const a = masteryOf(mastery, k.id), seen = (mastery[k.id] || {}).seen || 0; return { k, w: a == null ? 1 : Math.max(0.15, (1 - a) * 1.6 + (seen < 3 ? 0.3 : 0)) } })
-  const total = scored.reduce((s, x) => s + x.w, 0), picks: Concept[] = []
-  if (!Object.keys(mastery).some(id => id.startsWith(slug(c) + '--') && !id.includes('--deck-'))) {
-    const sh = [...cs].sort(() => Math.random() - 0.5); for (let i = 0; i < n; i++) picks.push(sh[i % sh.length]); return picks
-  }
-  for (let i = 0; i < n; i++) { let r = Math.random() * total; for (const x of scored) { r -= x.w; if (r <= 0) { picks.push(x.k); break } } if (picks.length <= i) picks.push(scored[0].k) }
-  return picks
+/** Courses with no question bank say so, rather than generating questions that teach the generator. */
+function NoBankNote({ c }: { c: string }) {
+  return (
+    <Panel title="No question bank yet" id="nobank">
+      <Empty>There are no real {c} questions in here yet, so Berry Study doesn't invent any — made-up multiple choice teaches the shape of the generator, not the material. Flashcards below come from the course's own concepts; for the rest, the formula sheet, the readings and the assignment coach are where the work is. Add a past quiz or problem set to the course's bank and this page turns into real practice.</Empty>
+    </Panel>
+  )
 }
-const clip = (s: string, n: number) => (s.length <= n ? s : s.slice(0, s.lastIndexOf(' ', n)) + ' …')
-function mask(text: string, name: string) {
-  const esc = (w: string) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  let out = text.replace(new RegExp(esc(name), 'gi'), '____')
-  for (const w of name.replace(/\(.*?\)/g, '').split(/[^A-Za-z0-9’']+/).filter(w => w.length > 3)) out = out.replace(new RegExp('\\b' + esc(w) + '\\b', 'gi'), '____')
-  return out
-}
-function buildConceptQ(c: string, k: Concept): ConceptQ {
-  const cs = conceptsFor(c).filter(x => x.id !== k.id)
-  const same = cs.filter(x => x.section === k.section).sort(() => Math.random() - 0.5)
-  const other = cs.filter(x => x.section !== k.section).sort(() => Math.random() - 0.5)
-  const opts = [{ t: k.name, why: null as string | null, ok: true }, ...[...same, ...other].slice(0, 3).map(d => ({ t: d.name, why: 'is about: ' + clip(d.text, 120), ok: false }))].sort(() => Math.random() - 0.5)
-  return { stem: 'Which concept does this describe? “' + clip(mask(k.text, k.name), 340) + '”', options: opts.map(o => o.t), answer: opts.findIndex(o => o.ok), whys: opts.map(o => o.why), explain: k.name + ' (' + k.section + '): ' + clip(k.text, 260), cid: k.id, cname: k.name, picked: null }
-}
+
 function startRound(c: string) {
   const s = getState()
   const round = (ui.aq && ui.aq.c === c ? ui.aq.round || 0 : 0) + 1
-  const qs = c === 'FNCE 445'
-    ? pickQTypes(10, s.settings.ch5only, s.mastery).map(buildQ).filter((x): x is BuiltQ => !!x)
-    : pickTargets(c, 10, s.mastery).map(k => buildConceptQ(c, k))
+  const qs = pickQTypes(10, s.settings.ch5only, s.mastery).map(buildQ).filter((x): x is BuiltQ => !!x)
   ui.aq = { c, state: 'quiz', qs, round, focusWeak: true }
 }
 function finishRound() {
-  const aq = ui.aq!; const per: Record<string, { name: string; seen: number; correct: number }> = {}
+  const aq = ui.aq!
+  const per: Record<string, { name: string; seen: number; correct: number }> = {}
   for (const q of aq.qs) { const p = per[q.cid] || (per[q.cid] = { name: q.cname, seen: 0, correct: 0 }); p.seen++; if (q.picked === q.answer) p.correct++ }
   aq.results = per; aq.state = 'done'
   const right = aq.qs.filter(q => q.picked === q.answer).length
@@ -123,11 +108,10 @@ function finishRound() {
 function QuizMode({ c }: { c: string }) {
   const { s } = useData()
   const force = useForce()
-  const is445 = c === 'FNCE 445'
+  const is445 = true
   const aq = ui.aq && ui.aq.c === c ? ui.aq : null
   const has = Object.values(s.mastery).some(m => m.c === c && m.seen)
   const begin = () => { startRound(c); force(); setTimeout(() => document.getElementById('round')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30) }
-  if (!conceptsFor(c).length && !is445) return <Empty>No concepts to quiz from yet.</Empty>
   if (!aq) return (
     <Panel title="Ready when you are" id="start">
       {is445 && (

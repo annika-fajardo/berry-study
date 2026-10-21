@@ -1,3 +1,6 @@
+# UNUSED. Actions never fires on this repo, so Pages is published from the gh-pages branch instead:
+#   npm run deploy   (scripts/deploy.mjs builds and force-pushes dist/ to gh-pages)
+# Kept for reference in case Actions is ever turned on for the repo.
 name: Deploy to GitHub Pages
 
 on:

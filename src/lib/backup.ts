@@ -8,6 +8,8 @@ export function makeBackup(s: AppState): Backup { return { app: 'berry-study', s
 export function backupFilename() { const d = new Date(); return `berry-study-backup-${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}.json` }
 
 const isObj = (x: unknown): x is Record<string, any> => !!x && typeof x === 'object' && !Array.isArray(x)
+/** These maps hold plain values, not documents: a mark, a what-if percentage, a rounding policy. */
+const SCALAR_KEYS = new Set(['written', 'workMarks', 'whatIf', 'd2lIgnore', 'rounding'])
 
 /** Accepts a Berry Study backup, or a raw Course Desk export (collections → doc id → document). Throws a friendly Error if invalid. */
 export function parseBackup(text: string): AppState {
@@ -20,7 +22,7 @@ export function parseBackup(text: string): AppState {
   for (const k of [...COLLECTION_KEYS, ...APP_KEYS]) {
     if (raw[k] == null) continue
     if (!isObj(raw[k])) throw new Error(`"${k}" should be a collection of documents.`)
-    if (k !== 'written') for (const [id, doc] of Object.entries(raw[k])) if (!isObj(doc)) throw new Error(`${k}/${id} isn't a document.`)
+    if (!SCALAR_KEYS.has(k)) for (const [id, doc] of Object.entries(raw[k])) if (!isObj(doc)) throw new Error(`${k}/${id} isn't a document.`)
   }
   for (const [id, i] of Object.entries((raw.items || {}) as Record<string, any>)) {
     if (typeof i.c !== 'string' || typeof i.t !== 'string' || !['test', 'due', 'class'].includes(i.k)) throw new Error(`Schedule item ${id} is missing its course, title or type.`)

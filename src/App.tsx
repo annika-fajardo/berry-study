@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { LayoutDashboard, CalendarDays, BookOpen, Sprout, GraduationCap, Settings as SettingsIcon, Menu, X, Plus, CalendarPlus, ClipboardList, Timer as TimerIcon } from 'lucide-react'
-import { useRoute, type Route } from './lib/router'
+import { LayoutDashboard, CalendarDays, BookOpen, Sprout, GraduationCap, Settings as SettingsIcon, Menu, X, Plus, Timer as TimerIcon } from 'lucide-react'
+import { useRoute, go, type Route } from './lib/router'
 import { I, type Icon } from './components/ui'
 import { Toasts, XpFloats, LevelUpToasts } from './components/Overlays'
 import { Dashboard } from './views/Dashboard'
@@ -15,7 +15,7 @@ import { completeTimer } from './store/actions'
 import { useNow } from './lib/hooks'
 import { startAutoSync } from './lib/calendar'
 import { levelInfo, xpTotal, streak } from './lib/game'
-import { todayStr } from './lib/dates'
+import { todayStr, daysBetween } from './lib/dates'
 import { on } from './lib/events'
 
 const NAV_ITEMS: { k: string; label: string; icon: Icon }[] = [
@@ -28,6 +28,18 @@ const MORE: { k: string; label: string; icon: Icon }[] = [
   { k: 'grades', label: 'Grades', icon: GraduationCap },
   { k: 'settings', label: 'Settings', icon: SettingsIcon },
 ]
+
+/** The home-screen badge counts what is actually overdue — never a streak, never an unread count. */
+function AppBadge() {
+  const s = useAppState()
+  const t = todayStr()
+  useEffect(() => {
+    const n = Object.values(s.items).filter(i => !i.done && i.d && i.d < t && i.k !== 'class').length
+    const nav = navigator as Navigator & { setAppBadge?: (n?: number) => Promise<void>; clearAppBadge?: () => Promise<void> }
+    try { if (n > 0) void nav.setAppBadge?.(n); else void nav.clearAppBadge?.() } catch { /* unsupported */ }
+  }, [s.items, t])
+  return null
+}
 
 /** Completes a focus session when its time is up, whatever page is open (and after a reload). */
 function TimerWatcher() {
@@ -52,14 +64,12 @@ function LevelLine() {
   )
 }
 
-function Capture({ onPick }: { onPick: (k: 'due' | 'test' | 'class' | 'focus') => void }) {
+function Capture({ onPick }: { onPick: (k: 'add' | 'focus') => void }) {
   return (
     <div className="nav-group">
       <div className="nav-label">Quick capture</div>
       <div className="capture">
-        <button type="button" onClick={() => onPick('due')}><I as={Plus} />New deadline</button>
-        <button type="button" onClick={() => onPick('test')}><I as={CalendarPlus} />New exam</button>
-        <button type="button" onClick={() => onPick('class')}><I as={ClipboardList} />New reading</button>
+        <button type="button" onClick={() => onPick('add')}><I as={Plus} />Add anything<kbd>a</kbd></button>
         <button type="button" onClick={() => onPick('focus')}><I as={TimerIcon} />Log focus time</button>
       </div>
     </div>
@@ -83,7 +93,7 @@ export function App() {
   const r = useRoute()
   const s = useAppState()
   const [drawer, setDrawer] = useState(false)
-  const [capture, setCapture] = useState<null | 'due' | 'test' | 'class' | 'focus'>(null)
+  const [capture, setCapture] = useState<null | { kind?: 'due' | 'test' | 'class' | 'focus'; text?: string }>(null)
   useEffect(() => { applyTheme(s.settings.theme) }, [s.settings.theme])
   useEffect(() => {
     const t = NAV_ITEMS.concat(MORE).find(x => x.k === r.tab)
@@ -91,7 +101,26 @@ export function App() {
   }, [r.tab])
   useEffect(() => { setDrawer(false) }, [r.tab, r.parts.join('/')])
   useEffect(() => { if (s.cal.connected) startAutoSync() }, [s.cal.connected])
-  useEffect(() => on('capture', e => setCapture(e.k)), [])
+  useEffect(() => on('capture', e => setCapture({ kind: e.k })), [])
+  // #/add?t=… — the entry point for the iOS Shortcut, a bookmarklet and the manifest shortcuts.
+  useEffect(() => {
+    if (r.tab !== 'add') return
+    const q = new URLSearchParams(location.hash.split('?')[1] || '')
+    const parts = [q.get('c'), q.get('t')].filter(Boolean).join(' ')
+    setCapture({ text: parts || '' })
+    go('home')
+  }, [r.tab, r.parts.join('/')])
+  // Keyboard: "a" opens capture when nothing else has focus.
+  useEffect(() => {
+    const f = (e: KeyboardEvent) => {
+      const el = document.activeElement
+      if (e.key !== 'a' || e.metaKey || e.ctrlKey || e.altKey) return
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || (el as HTMLElement).isContentEditable)) return
+      e.preventDefault(); setCapture({})
+    }
+    window.addEventListener('keydown', f)
+    return () => window.removeEventListener('keydown', f)
+  }, [])
 
   const body = (
     <>
@@ -108,7 +137,7 @@ export function App() {
       <a href="#main" className="sr-only skip">Skip to content</a>
       <aside className="side">
         <a className="wordmark" href="#/home">Berry Study<small>·</small></a>
-        <Capture onPick={setCapture} />
+        <Capture onPick={k => setCapture(k === 'focus' ? { kind: 'focus' } : {})} />
         <NavList route={r} />
         <LevelLine />
         <div className="side-foot"><span className="script">Small steps,<br />most days.</span></div>
@@ -130,15 +159,15 @@ export function App() {
           <div className="drawer-back" onClick={() => setDrawer(false)} />
           <div className="drawer" role="dialog" aria-label="Menu">
             <div className="row-between"><span className="wordmark">Berry Study</span><button type="button" className="icon-btn" aria-label="Close menu" onClick={() => setDrawer(false)}><I as={X} size={20} /></button></div>
-            <Capture onPick={k => { setDrawer(false); setCapture(k) }} />
+            <Capture onPick={k => { setDrawer(false); setCapture(k === 'focus' ? { kind: 'focus' } : {}) }} />
             <NavList route={r} onNavigate={() => setDrawer(false)} />
             <LevelLine />
           </div>
         </>
       )}
 
-      {capture && <QuickCapture kind={capture} onClose={() => setCapture(null)} />}
-      <TimerWatcher />
+      {capture && <QuickCapture kind={capture.kind} initial={capture.text} onClose={() => setCapture(null)} />}
+      <TimerWatcher /><AppBadge />
       <Toasts /><XpFloats /><LevelUpToasts />
     </div>
   )

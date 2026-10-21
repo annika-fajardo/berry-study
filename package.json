@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit -p . && vite build && vite build --mode single",
+    "build": "tsc --noEmit -p . && vite build",
     "build:pwa": "tsc --noEmit -p . && vite build",
-    "build:single": "vite build --mode single",
     "preview": "vite preview --port 4173 --strictPort",
+    "deploy": "node scripts/deploy.mjs",
     "icons": "node scripts/gen-icons.mjs",
     "verify": "node scripts/verify.mjs",
     "typecheck": "tsc --noEmit -p .",
@@ -32,7 +32,6 @@
     "typescript": "5.9.3",
     "vite": "7.3.7",
     "vite-plugin-pwa": "1.1.0",
-    "vite-plugin-singlefile": "2.3.0",
     "vitest": "3.2.7",
     "workbox-window": "7.3.0"
   }

@@ -10,8 +10,13 @@ import { daysBetween } from './dates'
 import { effortHours } from './scheduler'
 import { courseSlug } from './router'
 
-export type Topic = { id: string; name: string; acc: number; seen: number; last?: string; href: string }
-export type Readiness = { pct: number; knowledge: number; studied: number; topics: Topic[]; weak: Topic[] }
+export type TopicState = 'new' | 'weak' | 'solid'
+export type Topic = { id: string; name: string; acc: number; seen: number; last?: string; href: string; state: TopicState }
+export type Readiness = {
+  pct: number | null; knowledge: number; studied: number; topics: Topic[]; weak: Topic[]
+  /** How many topics have any practice behind them, so a course with no question bank says so instead of showing 0%. */
+  tracked: number; total: number
+}
 
 export function decayed(acc: number, last: string | undefined, today: string) {
   if (!last) return acc
@@ -49,15 +54,21 @@ export function readiness(s: AppState, item: Item, today: string, nowMs = Date.n
   const ts = topicsFor(s, item.c)
   const topics: Topic[] = ts.map(t => {
     const r = t.rec, raw = r && r.seen ? r.correct / r.seen : 0
-    return { id: t.id, name: t.name, acc: r && r.seen ? decayed(raw, r.last, today) : 0, seen: r?.seen || 0, last: r?.last, href: t.href }
+    const acc = r && r.seen ? decayed(raw, r.last, today) : 0
+    const seen = r?.seen || 0
+    return { id: t.id, name: t.name, acc, seen, last: r?.last, href: t.href, state: seen === 0 ? 'new' : acc >= 0.75 ? 'solid' : 'weak' }
   })
-  const knowledge = topics.length ? topics.reduce((a, t) => a + t.acc, 0) / topics.length : 0
+  // Topics she has never been given a way to practise are excluded from the mean rather than counted as zero:
+  // otherwise the three courses without a question bank sit near 0% all term and the number stops meaning anything.
+  const tracked = topics.filter(t => t.seen > 0)
+  const knowledge = tracked.length ? tracked.reduce((a, t) => a + t.acc, 0) / tracked.length : 0
   const effort = effortHours(item) * 60
   let done = 0
   for (const e of Object.values(s.events)) if (e.itemId === item.id && e.kind === 'study' && new Date(e.end).getTime() <= nowMs) done += (new Date(e.end).getTime() - new Date(e.start).getTime()) / 60000
   const studied = effort ? Math.min(1, done / effort) : 0
-  const pct = Math.round(100 * (0.75 * knowledge + 0.25 * studied))
-  const weak = [...topics].sort((a, b) => a.acc - b.acc || a.seen - b.seen).slice(0, 3)
-  return { pct, knowledge, studied, topics, weak }
+  const pct = tracked.length ? Math.round(100 * (0.75 * knowledge + 0.25 * studied)) : null
+  // Weakest first, but a topic she has never touched is a better next move than one she is merely mediocre at.
+  const weak = [...topics].sort((a, b) => (a.state === 'new' ? -0.5 : a.acc) - (b.state === 'new' ? -0.5 : b.acc) || a.seen - b.seen).slice(0, 3)
+  return { pct, knowledge, studied, topics, weak, tracked: tracked.length, total: topics.length }
 }
-export const readinessTone = (p: number) => (p < 50 ? 'low' : p >= 75 ? 'high' : 'mid')
+export const readinessTone = (p: number | null) => (p == null ? 'none' : p < 50 ? 'low' : p >= 75 ? 'high' : 'mid')

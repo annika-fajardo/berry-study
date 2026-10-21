@@ -2,7 +2,10 @@
    (items, grades, practice, mastery, study, decks, deckruns, deckmeta) so ids keep matching. */
 export type Kind = 'test' | 'due' | 'class'
 export type Item = { id: string; c: string; d?: string | null; k: Kind; t: string; w?: string | null; n?: string | null; done?: boolean; effort?: number | null }
-export type Grade = { id: string; c: string; name: string; wt: number; score?: number | null; d?: string; o?: number }
+export type Grade = { id: string; c: string; name: string; wt: number; score?: number | null; d?: string; o?: number; cat?: string }
+export type Rounding = 'exact' | 'whole' | 'half'
+/** "Assignments 20%, best 8 of 10 quizzes" — rows inside a category share its weight. */
+export type GradeCategory = { id: string; name: string; weight: number; drop?: number }
 export type Practice = { c: string; label: string; tries: number; correct: number; last?: string }
 export type Mastery = { c: string; concept: string; seen: number; correct: number; last?: string }
 export type StudyDay = Record<string, number> // course -> minutes
@@ -30,7 +33,15 @@ export type Session = {
 }
 export type Timer = { c: string; start: number; planned: number } | null
 export type CatAnim = 'auto' | 'full' | 'calm' | 'off'
-export type Settings = { theme: 'auto' | 'light' | 'dark'; catName: string; onboarded: boolean; planOpen: boolean; ch5only: boolean; catAnim: CatAnim; companion: string }
+export type Settings = { theme: 'auto' | 'light' | 'dark'; catName: string; onboarded: boolean; planOpen: boolean; ch5only: boolean; catAnim: CatAnim; companion: string
+  /** Right Now candidates she pushed past, newest last, cleared each day. */
+  notThis?: string[]
+  /** The day those skips belong to; a new day starts clean. */
+  notThisDay?: string
+  /** The day of her last visit, for the "since you were last here" line. */
+  lastSeen?: string
+  capture?: { lastCourse?: string }
+}
 
 /* Calendar (v3). Times are local wall-clock strings 'YYYY-MM-DDTHH:mm'; all-day events use 'YYYY-MM-DD'. */
 export type CalEvent = { title: string; start: string; end: string; c?: string; kind: 'study' | 'custom'; itemId?: string; note?: string; gcalId?: string; gcalCal?: string; created?: string }
@@ -77,8 +88,10 @@ export type AppState = Collections & {
   workMarks: Record<string, boolean>
   /** what-if marks per grade row; never written into grades */
   whatIf: Record<string, number>
+  /** Per-course rounding policy, set on the Grades card. */
+  rounding: Record<string, Rounding>
   /** D2L updates the user chose to ignore, by key */
   d2lIgnore: Record<string, boolean>
 }
 export const COLLECTION_KEYS = ['items', 'grades', 'practice', 'mastery', 'study', 'decks', 'deckruns', 'deckmeta'] as const
-export const APP_KEYS = ['xp', 'sessions', 'written', 'events', 'skips', 'ics', 'classes', 'workMarks', 'whatIf', 'd2lIgnore'] as const
+export const APP_KEYS = ['xp', 'sessions', 'written', 'events', 'skips', 'ics', 'classes', 'workMarks', 'whatIf', 'd2lIgnore', 'rounding'] as const

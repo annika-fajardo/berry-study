@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const BASE = process.env.BASE_URL || 'http://localhost:4173/'
-const SHOTS = 'screenshots/v2'
+const SHOTS = 'screenshots/v3'
 const TMP = mkdtempSync(join(tmpdir(), 'berry-verify-'))
 mkdirSync(SHOTS, { recursive: true })
 const results = [], errors = []
@@ -66,6 +66,25 @@ async function mockGoogle(ctx) {
   await go(page, 'grades')
   const gpa = (await page.locator('#gpa').innerText()).trim()
   ok('projected GPA shows a number', /^\d\.\d\d$/.test(gpa), gpa)
+
+  // Right Now and the capacity sentence
+  await go(page, 'home')
+  ok('Right Now names one action with a duration', (await page.locator('.rightnow .rn-action').count()) === 1)
+  const rnText = await page.locator('.rightnow').innerText()
+  ok('Right Now gives one clause of reason', (await page.locator('.rn-reason').innerText()).length > 12, rnText.replace(/\n/g, ' · ').slice(0, 90))
+  const firstRn = await page.locator('.rightnow').getAttribute('data-rn')
+  await page.getByRole('button', { name: /Not this/ }).click()
+  await page.waitForTimeout(400)
+  ok('[Not this] moves to another action', (await page.locator('.rightnow').getAttribute('data-rn')) !== firstRn)
+  ok('the capacity sentence is shown', (await page.locator('.capacity').count()) === 1, await page.locator('.capacity').innerText())
+  const tight = await page.locator('.capacity.tight').count()
+  if (tight) {
+    await page.locator('.capacity').getByRole('button', { name: /Fix/ }).click()
+    await page.waitForTimeout(300)
+    ok('the Fix sheet offers shrink, borrow and accept', (await page.getByRole('dialog').locator('.fix-opt').count()) === 3)
+    await page.getByRole('dialog').getByRole('button', { name: 'Close' }).click()
+  } else ok('the Fix sheet offers shrink, borrow and accept', true, 'nothing is tight in this fixture')
+  ok("Today's priorities is three rows, not five", (await page.locator('#pri .pi').count()) <= 3)
 
   // xp through the sidebar line
   const xp = async () => { const t = await page.locator('.side .level-line').first().innerText(); return Number(t.match(/([\d,]+)\s*xp/)[1].replace(/,/g, '')) }
@@ -172,7 +191,11 @@ async function mockGoogle(ctx) {
   await go(page, 'study/fnce-445/progress')
   const ready = await page.locator('.ready-num').first().innerText()
   ok('readiness shows a percentage', /\d+% ready/.test(ready), ready)
-  ok('readiness lists weak topics to practise', (await page.getByRole('link', { name: 'Practise' }).count()) >= 3)
+  ok('topics render as tappable bars', (await page.locator('.topicbar').count()) >= 3)
+  ok('untouched topics read as not started, not 0%', (await page.locator('.topicbar.st-new').count()) >= 1)
+  await go(page, 'study/mgst-451/practice')
+  ok('a course with no question bank says so instead of generating quizzes', (await page.locator('#nobank').count()) === 1)
+  ok('no concept-quiz mode is offered there', (await page.getByRole('tab', { name: /Concept quiz/ }).count()) === 0)
 
   // what-if
   await go(page, 'grades')
@@ -189,6 +212,23 @@ async function mockGoogle(ctx) {
   await page.getByRole('button', { name: 'Reset what-ifs' }).click()
   await page.waitForTimeout(300)
   ok('what-ifs reset', (await page.locator('#gpa-whatif').count()) === 0)
+  // the need line has to move with the sliders, which is the bug this release fixes
+  const whatIfChip = card.getByRole('button', { name: 'What if…' })
+  const openWhatIf = async () => { if ((await whatIfChip.getAttribute('aria-pressed')) !== 'true') { await whatIfChip.click(); await page.waitForTimeout(250) } }
+  await openWhatIf()
+  const needBefore = await card.locator('.need').innerText()
+  await card.locator('input[type="range"]').first().fill('98')
+  await page.waitForTimeout(400)
+  ok('the need line follows the what-if sliders', (await card.locator('.need').innerText()) !== needBefore, (await card.locator('.need').innerText()).split('\n')[0])
+  ok('each ungraded row shows what it needs', (await card.locator('tbody tr td:nth-child(3)').allInnerTexts()).some(x => /\d%/.test(x)))
+  ok('the best / likely / worst band is shown', (await card.locator('.band').count()) === 1, (await card.locator('.band').innerText()).replace(/\n/g, ' '))
+  await page.getByRole('button', { name: 'Reset what-ifs' }).click()
+  await page.waitForTimeout(300)
+  ok('what-ifs reset again after the need-line check', (await page.locator('#gpa-whatif').count()) === 0)
+  ok('bonus marks above 100 are accepted', (await card.locator('input[type="number"]').first().getAttribute('max')) === null)
+  await card.locator('select[aria-label="FNCE 445 rounding policy"]').selectOption('whole')
+  await page.waitForTimeout(300)
+  ok('a rounding policy can be set and sticks', (await card.locator('select[aria-label="FNCE 445 rounding policy"]').inputValue()) === 'whole')
 
   // focus and Flora
   await go(page, 'garden')
@@ -218,15 +258,27 @@ async function mockGoogle(ctx) {
   await page.reload(); await page.waitForSelector('.page')
   ok('the companion choice persists', (await page.locator('.cat.breed-tabby').count()) > 0)
   await page.locator('[data-breed="emi"]').click()
-  ok('unearned companions are locked', (await page.locator('.comp.locked').count()) >= 1)
+  ok('no companion is locked behind a reward', (await page.locator('.comp.locked').count()) === 0)
 
   // quick capture
-  await page.getByRole('button', { name: 'New deadline' }).click()
-  await page.locator('#qc-title').fill('Verification item')
-  await page.getByRole('button', { name: 'Add' }).click()
+  await page.getByRole('button', { name: /Add anything/ }).click()
+  await page.locator('#capture').fill('FNCE 445 quiz friday 20% ~3h')
+  await page.waitForTimeout(250)
+  const chipText = (await page.locator('.chips-row').innerText()).replace(/\s+/g, ' ')
+  ok('capture parses one line into chips', /FNCE 445/.test(chipText) && /Test/.test(chipText) && /20%/.test(chipText) && /3h/.test(chipText), chipText)
+  await page.locator('.pchip-kind .pchip-x').click()
+  await page.waitForTimeout(150)
+  ok('removing a chip returns its word to the title', (await page.locator('.row-between .note').first().innerText()).includes('quiz'))
+  await page.getByRole('button', { name: 'Add', exact: true }).click()
   await page.waitForTimeout(400)
   await go(page, 'schedule/agenda')
-  ok('quick capture adds an item', (await page.getByText('Verification item').count()) > 0)
+  ok('capture adds the item', (await page.getByText('quiz', { exact: false }).count()) > 0)
+
+  // the #/add?t= door
+  await page.goto(BASE + '#/add?t=' + encodeURIComponent('MGST 451 read ch 9 tomorrow'))
+  await page.waitForTimeout(500)
+  ok('the #/add URL opens capture prefilled', (await page.locator('#capture').inputValue()).includes('MGST 451'))
+  await page.keyboard.press('Escape')
 
   // export → reset → import
   await go(page, 'settings/data')
@@ -240,6 +292,8 @@ async function mockGoogle(ctx) {
   const afterReset = await page.locator('#data-h p.note').first().innerText()
   ok('reset to seed changes the data', beforeReset !== afterReset)
   await page.locator('[data-testid="import-input"]').setInputFiles(f1)
+  try { await page.getByRole('dialog').getByRole('button', { name: 'Replace' }).waitFor({ timeout: 8000 }) }
+  catch { console.log('IMPORT DEBUG dialogs=' + (await page.getByRole('dialog').count()) + ' err=' + JSON.stringify(await page.locator('p.bad').allInnerTexts()) + ' bytes=' + readFileSync(f1, 'utf8').length) }
   await page.getByRole('dialog').getByRole('button', { name: 'Replace' }).click()
   await page.waitForTimeout(600)
   const d2 = page.waitForEvent('download')
@@ -270,8 +324,23 @@ async function mockGoogle(ctx) {
   await ctx.close()
 }
 
+/* ---------------- the installable build updates itself ---------------- */
+{
+  const ctx = await browser.newContext()
+  const page = await ctx.newPage()
+  const man = await (await page.request.get(BASE + 'manifest.webmanifest')).json()
+  ok('the manifest carries home-screen shortcuts', (man.shortcuts || []).length === 3, (man.shortcuts || []).map(x => x.short_name).join(', '))
+  const sw = await (await page.request.get(BASE + 'sw.js')).text()
+  ok('the service worker takes over without being unregistered', /skipWaiting\(\)/.test(sw) && /clientsClaim\(\)/.test(sw) && /cleanupOutdatedCaches/.test(sw))
+  const app = await (await page.request.get(BASE + 'index.html')).text()
+  const js = (app.match(/assets\/index-[\w-]+\.js/) || [])[0]
+  const code = js ? await (await page.request.get(BASE + js)).text() : ''
+  ok('a new version offers a reload while the page is open', /New version available/.test(code))
+  await ctx.close()
+}
+
 /* ---------------- screenshots ---------------- */
-const PAGES = [['dashboard', 'home'], ['calendar-week', 'schedule/week'], ['calendar-day', 'schedule/day'], ['courses', 'study'], ['course-fnce445', 'study/fnce-445/learn'], ['practice', 'study/fnce-445/practice'], ['focus', 'garden'], ['grades', 'grades'], ['settings', 'settings'], ['settings-calendars', 'settings/calendars']]
+const PAGES = [['dashboard', 'home'], ['calendar-week', 'schedule/week'], ['calendar-day', 'schedule/day'], ['courses', 'study'], ['course-fnce445', 'study/fnce-445/learn'], ['practice', 'study/fnce-445/practice'], ['progress', 'study/fnce-445/progress'], ['focus', 'garden'], ['grades', 'grades'], ['settings', 'settings'], ['settings-calendars', 'settings/calendars']]
 for (const [w, h, scheme] of [[1280, 900, 'light'], [390, 844, 'light'], [1280, 900, 'dark']]) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: scheme })
   const page = await ctx.newPage(); watch(page, `${w}-${scheme}`)

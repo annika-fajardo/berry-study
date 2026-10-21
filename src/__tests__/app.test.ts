@@ -15,7 +15,7 @@ describe('seed and migration', () => {
     expect(Object.keys(S.items).length).toBe(64)
     expect(Object.keys(S.grades).length).toBe(36)
     expect(Object.keys(S.practice).length).toBe(28)
-    expect(S.schema).toBe(3)
+    expect(S.schema).toBe(4)
   })
   it('keeps the old document ids', () => { expect(S.items.a01).toBeTruthy(); expect(S.grades['g445-01']).toBeTruthy(); expect(S.deckruns['fnce477-d1--1']).toBeTruthy() })
   it('turns history into xp', () => expect(xpTotal(S)).toBeGreaterThan(1000))

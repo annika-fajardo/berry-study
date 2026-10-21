@@ -1,0 +1,350 @@
+{
+  "results": [
+    {
+      "name": "seed: 64 schedule items",
+      "pass": true,
+      "detail": "Right now: 64 schedule items, 36 grade rows, 28 practice records, 1 sessions, 71 xp entries (1,386 xp, level 6)."
+    },
+    {
+      "name": "seed: 36 grade rows",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "agenda lists all 64 items",
+      "pass": true,
+      "detail": "64"
+    },
+    {
+      "name": "projected GPA shows a number",
+      "pass": true,
+      "detail": "3.67"
+    },
+    {
+      "name": "Right Now names one action with a duration",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Right Now gives one clause of reason",
+      "pass": true,
+      "detail": "RIGHT NOW · FNCE 477 · Deposit-type institutions practice · 30m ·  · Quiz 5 was yesterday."
+    },
+    {
+      "name": "[Not this] moves to another action",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the capacity sentence is shown",
+      "pass": true,
+      "detail": "7h 45m of work before Sunday\n· 20h free · one block won't fit\nFix"
+    },
+    {
+      "name": "the Fix sheet offers shrink, borrow and accept",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Today's priorities is three rows, not five",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ticking a task hides it and raises xp",
+      "pass": true,
+      "detail": "1386 → 1416"
+    },
+    {
+      "name": "undo is offered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "undo puts the xp back",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "week grid draws 7 day columns",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "week grid shows suggested blocks",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "deadlines show as all-day chips",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "day view draws one column",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "month view draws a 6-week grid",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "today is marked in the month view",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "accepting a suggestion books it",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "skipping a suggestion drops that slot",
+      "pass": true,
+      "detail": "a06#0"
+    },
+    {
+      "name": "Google connect lists the calendars",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "events read from Google appear",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a shift is marked as work",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "an accepted block is written to Google",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the written event is titled and coloured",
+      "pass": true,
+      "detail": "Study: MGST 451 · Other teams present (9, 8, 7) + executive equity ownership"
+    },
+    {
+      "name": "a D2L date she does not have is offered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "adding a D2L item puts it in the list",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "an .ics file imports",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "study blocks export as .ics",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a quiz answer shows the steps",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "it explains why the other answers are wrong",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a drill shows a worked solution",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a flashcard flips",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "readiness shows a percentage",
+      "pass": true,
+      "detail": "30% ready"
+    },
+    {
+      "name": "topics render as tappable bars",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "untouched topics read as not started, not 0%",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a course with no question bank says so instead of generating quizzes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no concept-quiz mode is offered there",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a what-if slider changes the projection",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the real mark is untouched",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "what-ifs reset",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the need line follows the what-if sliders",
+      "pass": true,
+      "detail": "To finish with A− (85%): 86.7% avg on the remaining 70%"
+    },
+    {
+      "name": "each ungraded row shows what it needs",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the best / likely / worst band is shown",
+      "pass": true,
+      "detail": "A at best · B+ likely · F at worst"
+    },
+    {
+      "name": "what-ifs reset again after the need-line check",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "bonus marks above 100 are accepted",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a rounding policy can be set and sticks",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "logging a Flora session adds minutes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the session shows in this week",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the timer runs with the cat beside it",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "clicking the cat triggers a reaction",
+      "pass": true,
+      "detail": "no live cat on this page"
+    },
+    {
+      "name": "switching companion takes effect",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the companion choice persists",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no companion is locked behind a reward",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "capture parses one line into chips",
+      "pass": true,
+      "detail": "Test FNCE 445 Fri, Oct 23 20% 3h"
+    },
+    {
+      "name": "removing a chip returns its word to the title",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "capture adds the item",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the #/add URL opens capture prefilled",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "reset to seed changes the data",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "export → reset → import round-trips",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "data survives a reload",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a file that is not a backup is refused",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "reduced motion puts the cat in calm mode",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the manifest carries home-screen shortcuts",
+      "pass": true,
+      "detail": "25 min, Add, Today"
+    },
+    {
+      "name": "the service worker takes over without being unregistered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a new version offers a reload while the page is open",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no horizontal overflow at 360px",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no console errors and no page errors",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "errors": []
+}

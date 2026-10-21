@@ -17,34 +17,54 @@ default; the dark theme is a deep matcha-charcoal. Icons are Lucide at 1.5px. No
 ```bash
 npm install
 npm run dev          # http://localhost:5173
-npm run build        # type-check, then dist/ (PWA) and dist-single/index.html
+npm run build        # type-check, then dist/ (the PWA)
 npm run preview      # serve dist/ at http://localhost:4173
+npm run deploy       # build, then force-push dist/ to the gh-pages branch (--dry stages without pushing)
 npm test             # vitest: scheduler, readiness, grades, .ics, D2L, backups
 npm run verify       # Playwright end-to-end (needs the preview server running)
 npm run icons        # regenerate the favicon and PWA icons from Emi's head
 ```
 
 - `dist/` is the installable PWA: manifest, service worker, offline cache of the app shell, fonts and PDFs.
-- `dist-single/index.html` is one self-contained file (fonts and both PDFs inlined, PWA off) to open straight
-  from disk. It keeps its own data, separate from the hosted copy, because browsers store data per site.
+  The manifest carries three shortcuts (Start 25 min, Add a deadline, Today), the app icon shows a badge with
+  the number of overdue items where the browser supports it, and storage asks to be made persistent on boot.
 
 ## Deploy to GitHub Pages
 
-1. Push to the repo and open **Settings → Pages**, then set **Source** to **GitHub Actions**.
-2. `.github/workflows/deploy.yml` builds with `npm run build:pwa` and publishes `dist/`.
-3. It serves at `https://<user>.github.io/berry-study/`.
+Pages serves the **`gh-pages` branch**, which holds a prebuilt `dist/`. Actions never fires on this repo, so
+`.github/workflows/deploy.yml` is kept only for reference — it is unused, and pushing to `main` deploys nothing.
+
+```bash
+npm run deploy        # build, then force-push dist/ to gh-pages
+npm run deploy -- --dry   # build and stage .deploy/ without pushing, to see what would go up
+```
+
+`scripts/deploy.mjs` builds, copies `dist/` into a scratch clone under `.deploy/`, adds `.nojekyll` and
+force-pushes `gh-pages`. Your working tree is never touched. In **Settings → Pages**, Source is
+**Deploy from a branch** → `gh-pages` / `/ (root)`. It serves at `https://<user>.github.io/berry-study/`.
 
 Vite's `base` is `./` and routing is hash-based (`#/schedule/week`, `#/study/fnce-445/practice`), so it works
 from any sub-path. Set `BASE_PATH=/berry-study/` to force an absolute base.
+
+**Updates.** The service worker is built with `registerType: 'autoUpdate'` plus `skipWaiting`, `clientsClaim`
+and `cleanupOutdatedCaches`, so a new build takes over by itself and the old caches are dropped — nobody has to
+unregister anything or clear site data, which is what v2 needed. The app also re-checks for a new version on
+focus and every 30 minutes, and if one lands while the page is open it says **New version available · Reload**.
 
 **Install it.** iPhone: open in Safari, then **Share → Add to Home Screen**. Desktop Chrome: the install icon in
 the address bar. After the first visit it works offline.
 
 ## The app
 
-**Dashboard** — Emi's scene (it changes with the time of day and season, and she wanders in it), the streak and
-xp chips, then: Ready to study?, today's timeline, today's priorities, suggested study blocks, updates from D2L,
-and the four course tiles.
+**Dashboard** — **Right now** comes first, above everything, on every screen size: one card with the course, the
+action, how long it should take, a Start button, one clause of why ("Quiz 5 was yesterday. You're 53% ready, and
+this topic is untouched"), and **Not this** to move on, which is remembered for the rest of that day. It is built
+from `prioritize()` × `readiness().weak` × `schedule()`; on a quiet day it offers a way to get ahead instead.
+
+Under it, the **capacity sentence**: "7h 45m of work before Sunday · 20h free · two blocks won't fit", with
+**Fix** offering Shrink, Borrow or Accept when it doesn't fit. Then "since you were last here" if she's been
+away, Emi's scene, the next three priorities, the four course tiles, today's timeline, the next test with its
+readiness, at most two suggested blocks per day, and updates from D2L.
 
 **Calendar** — a real week grid (7am–11pm, 15-minute snapping), plus day, month and the old agenda list.
 Deadlines and exams are all-day chips, connected calendars show as busy time, accepted study blocks are solid
@@ -65,8 +85,17 @@ fill them in.
 
 **Focus** — a timer with Emi loafing beside it, this week's sessions, and Flora logging.
 
-**Grades** — a report card per course with the projected GPA, what it takes to hold or raise a letter, and
-**what if** sliders on anything unmarked.
+**Grades** — a report card per course: the projected GPA (weighted by course units), what the course is tracking
+at, an **A at best · B+ likely · F at worst** band, what it takes to hold or raise a letter, and a **Need**
+column saying what each unmarked item has to score on its own. **What if** sliders on anything unmarked feed all
+of it — the need lines move with the sliders, which they did not in Course Desk. Marks above 100 are accepted as
+bonus and reported; a category scheme (FNCE 445's assignments / quizzes / midterm / participation / final) shares
+its weight across its rows and can drop the lowest N; and a per-course rounding policy says when exact and
+rounded land on different letters.
+
+**Add anything** — one field. "FNCE 445 quiz friday 20% ~3h" becomes correctable chips for course, kind, date,
+weight and effort; removing a chip puts its words back in the title. `#/add?t=…` opens it prefilled, which is
+what the home-screen shortcut and an iOS Shortcut use, and dropping an `.ics` file on the window still imports.
 
 **Settings** — appearance and cat animations, the companion picker, calendars, classes, study time, and data.
 
@@ -92,11 +121,12 @@ calendar. All four numbers are editable.
 optional 30-minute pre-read. A class marked "I self-study instead" (on by default for FNCE 445) frees that hour
 and gets a self-study block on that week's topic, taken from the week's class-prep items and their readings.
 
-**Readiness.** For each upcoming test: 75% topic knowledge, 25% study already done. Knowledge is the mean
-accuracy over the topics that test covers — mapped through the course's question types, concepts and deck topics
-— where topics never practised count as zero and accuracy older than 14 days decays by half every further 14
-days. It shows on the test chip, the dashboard and the course page, with the weakest three topics linked
-straight to that drill or quiz.
+**Readiness.** For each upcoming test: 75% topic knowledge, 25% study already done. Every topic is in one of
+three states — not started, weak or solid. Knowledge is the mean accuracy over the topics she has actually
+practised; **a topic she has never opened is left out rather than counted as zero**, and the card says "9 of 15
+topics tracked" so the number is honest about what it covers. A course with no practice behind it at all says so
+instead of showing 0%. Accuracy older than 14 days decays by half every further 14 days. Topics render as
+tappable bars, weakest (and never-started) first, each linking straight to that drill or quiz.
 
 ## Calendars
 
@@ -141,8 +171,8 @@ the megaphone for overdue work, a scribble bubble when there are no free slots, 
 stretch when it finishes, and a proud sit on a level-up.
 
 **Settings → Companion** switches her for Tabby, Smoke, Pip or Mochi, each with its own timing and quirks
-(Tabby loafs and yawns, Smoke is shy, Pip has zoomies, Mochi talks). Void unlocks at level 10 and Goldie at a
-30-day streak. Emi is the default and never locked. **Cat animations: Full / Calm / Off** is in Settings, and
+(Tabby loafs and yawns, Smoke is shy, Pip has zoomies, Mochi talks). Every companion is available from the
+start: nothing is locked behind xp or a streak. **Cat animations: Full / Calm / Off** is in Settings, and
 reduced-motion defaults to Calm.
 
 ## Data and backups
@@ -155,7 +185,8 @@ reduced-motion defaults to Calm.
   It also accepts a raw Course Desk export. Export → reset → import round-trips exactly, and the tests check it.
 - **Reset to seed** restores the original data and keeps your theme, companion, calendars, classes and prefs.
 - Storage sits behind `StorageAdapter` (`src/store/storage.ts`), so a cloud adapter (Supabase, say) can be
-  added without touching the UI. Migrations are keyed by schema version in `src/store/migrate.ts` (now v3).
+  added without touching the UI. Migrations are keyed by schema version in `src/store/migrate.ts` (now v4; v4
+  attaches FNCE 445's rows to their real weighting categories and adds the per-course rounding policy).
 - "Today" always comes from the device's local date, which is Calgary time on your devices.
 
 ## xp
@@ -170,8 +201,13 @@ and beyond; a level-up is a small toast with the cat, not confetti.
 
 - **Old history counts.** Done tasks, past correct answers and Course Desk study time became dated xp on first
   launch, so she starts at level 6 rather than zero.
-- **No AI.** The adaptive quiz became a concept quiz built from each course's own concepts; written deck answers
-  are self-marked against the key points. An AI module could slot in where `startRound` and `score` live.
+- **No AI, and no invented questions.** Only FNCE 445 and FNCE 477 have real question banks, so only they offer
+  quizzes. The other courses say plainly that there's no question bank yet and point at what is there (formula
+  sheets, readings, the assignment coach) rather than generating filler from a concept list. Written deck
+  answers are self-marked against the key points. An AI module could slot in where `startRound` and `score` live.
+- **Honest numbers over full ones.** Readiness leaves untracked topics out instead of scoring them zero, the
+  grade card refuses to print a need line for a course with nothing graded, and the capacity sentence names the
+  work that will not fit rather than quietly dropping it.
 - **Finance maths is verbatim.** `COURSE_CONTENT`, `DRILLS`, `QTYPES`, `buildQ`, `pickQTypes` and the helpers
   were lifted from `course-desk.html`; only type annotations changed, and `pickQTypes` takes mastery as an
   argument instead of reading a global. `prioritize()`, `courseStats()`, `letterFor()` and `needLine()` were
@@ -187,11 +223,11 @@ src/
   main.tsx, App.tsx        boot; sidebar / top bar + drawer / 4-item bottom bar
   components/              Cat (poses, behaviour, breeds), Scene, ui (Panel, ViewTabs, PageHead, Empty), Modal, Overlays
   data/                    courses, ported content and drills, seed.json
-  lib/                     scheduler, readiness, calendar, google, ics, d2l, work, schedule, grades, game, backup, time, dates, router, events
+  lib/                     scheduler, rightnow, capacity, readiness, calendar, google, ics, d2l, work, schedule, grades, parse, game, backup, time, dates, router, events
   store/                   types, store (one save path), storage adapters, migrations, seed, actions
-  views/                   Dashboard, Calendar (+ Agenda, D2lPanel), Courses (+ Quizzes, CourseTile), Focus, Grades, Settings, QuickCapture
+  views/                   Dashboard, RightNow (+ capacity line, Fix sheet), Digest, Calendar (+ Agenda, D2lPanel), Courses (+ Quizzes, CourseTile), Focus, Grades, Settings, QuickCapture
   styles/                  app.css (tokens and layout), cat.css (Emi's animations)
 public/                    PDFs, favicon, PWA icons
 scripts/                   verify.mjs (Playwright), gen-icons.mjs
-screenshots/v2/            current screenshots      screenshots/progress/  milestone shots + LOG.md
+screenshots/v3/            current screenshots      screenshots/progress/  milestone shots + LOG.md
 ```

@@ -1,7 +1,7 @@
 /* In-memory store with a single save() path. Every change goes through update(); saving is debounced. */
 import { useSyncExternalStore } from 'react'
 import type { AppState } from './types'
-import { pickAdapter, type StorageAdapter } from './storage'
+import { pickAdapter, requestPersistence, type StorageAdapter } from './storage'
 import { migrate } from './migrate'
 import { seedState } from './seed'
 import { levelInfo, xpTotal } from '../lib/game'
@@ -45,6 +45,7 @@ export function replaceState(next: AppState) { state = next; notify(); save() }
 
 export async function initStore() {
   adapter = await pickAdapter()
+  void requestPersistence()
   let raw: unknown = null
   try { raw = await adapter.load() } catch { raw = null }
   if (raw && typeof raw === 'object') {

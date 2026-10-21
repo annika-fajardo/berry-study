@@ -67,28 +67,19 @@ function Appearance() {
 
 function Companion() {
   const { s } = useData()
-  const info = levelInfo(xpTotal(s)), st = streak(s, todayStr())
   const [name, setName] = useState(s.settings.catName)
   const cur = (s.settings.companion || 'emi') as Breed
-  const locked = (b: Breed) => {
-    const u = BREEDS[b].unlock
-    if (!u) return false
-    return u.kind === 'level' ? info.level < u.n : st.count < u.n
-  }
   return (
     <Panel icon={CatIcon} title="Companion" id="companion">
       <div className="companions">
-        {(Object.keys(BREEDS) as Breed[]).map(b => {
-          const isLocked = locked(b)
-          return (
-            <button key={b} type="button" className={'comp' + (cur === b ? ' on' : '') + (isLocked ? ' locked' : '')} aria-pressed={cur === b} disabled={isLocked}
-              onClick={() => setSetting('companion', b)} title={isLocked ? BREEDS[b].unlock!.hint : BREEDS[b].blurb} data-breed={b}>
-              <Cat breed={b} status="idle" size={66} />
-              <b>{b === 'emi' ? (s.settings.catName || 'Emi') : BREEDS[b].name}</b>
-              <span className="note">{isLocked ? BREEDS[b].unlock!.hint : BREEDS[b].blurb}</span>
-            </button>
-          )
-        })}
+        {(Object.keys(BREEDS) as Breed[]).map(b => (
+          <button key={b} type="button" className={'comp' + (cur === b ? ' on' : '')} aria-pressed={cur === b}
+            onClick={() => setSetting('companion', b)} title={BREEDS[b].blurb} data-breed={b}>
+            <Cat breed={b} status="idle" size={66} />
+            <b>{b === 'emi' ? (s.settings.catName || 'Emi') : BREEDS[b].name}</b>
+            <span className="note">{BREEDS[b].blurb}</span>
+          </button>
+        ))}
       </div>
       {cur === 'emi' && (
         <form className="wrap" onSubmit={e => { e.preventDefault(); const n = name.trim().slice(0, 24) || 'Emi'; setSetting('catName', n); setName(n); toast('Say hi to ' + n + '.') }}>

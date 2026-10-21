@@ -28,6 +28,19 @@ export class MemoryAdapter implements StorageAdapter {
   async clear() { this.v = null }
 }
 
+/** Ask the browser to keep this origin's data. Without it storage is best-effort and evictable —
+    Safari clears script-writable storage for origins untouched for seven days of browser use. */
+export async function requestPersistence() {
+  try {
+    if (!navigator.storage?.persist) return null
+    if (await navigator.storage.persisted?.()) return true
+    return await navigator.storage.persist()
+  } catch { return null }
+}
+export async function storageEstimate() {
+  try { return (await navigator.storage?.estimate?.()) ?? null } catch { return null }
+}
+
 export async function pickAdapter(): Promise<StorageAdapter> {
   try {
     const a = new IndexedDbAdapter()

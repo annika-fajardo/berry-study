@@ -9,6 +9,7 @@ import { toast } from '../lib/events'
 import { Modal, Confirm } from '../components/Modal'
 import { Empty, I } from '../components/ui'
 import { Pencil } from 'lucide-react'
+import { FitChip } from './RightNow'
 import { effortHours } from '../lib/scheduler'
 import type { Item, Kind } from '../store/types'
 
@@ -46,6 +47,7 @@ export function Agenda() {
         <div className="body">
           <div className="top"><span className="course-tag" style={{ color: courseColor(i.c) }}>{i.c}</span><label className="title" htmlFor={'cb-' + i.id}>{i.t}</label></div>
           {i.n && <div className="note">{i.n}</div>}
+          <FitChip itemId={i.id} />
         </div>
         <div className="meta">
           <span className={'tag k-' + i.k}>{kb[0]}</span>

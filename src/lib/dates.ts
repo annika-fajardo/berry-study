@@ -8,5 +8,5 @@ export function fmt(d: Date, o: Intl.DateTimeFormatOptions) { return d.toLocaleD
 export function monday(d: Date) { const x = new Date(d); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); x.setHours(0, 0, 0, 0); return x }
 export function daysBetween(a: string, b: string) { return Math.round((parse(b).getTime() - parse(a).getTime()) / 864e5) }
 export function addDays(s: string, n: number) { const d = parse(s); d.setDate(d.getDate() + n); return todayStr(d) }
-export function hm(m: number) { m = Math.round(m); return m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + 'm' }
+export function hm(m: number) { m = Math.round(m); if (m < 60) return m + 'm'; const r = m % 60; return Math.floor(m / 60) + 'h' + (r ? ' ' + r + 'm' : '') }
 export function uid(prefix = 'u') { return prefix + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7) }

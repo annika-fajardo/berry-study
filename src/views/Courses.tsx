@@ -43,10 +43,32 @@ export function Courses({ parts }: { parts: string[] }) {
 }
 
 function CoursePicker() {
+  const { s, items, grades } = useData()
+  const t = useToday()
   return (
     <div className="page">
       <PageHead title="Courses" desc="Four courses, each with the same four sections: what to learn, what to practise, what's due, and where you stand." />
       <div className="tilegrid">{COURSE_KEYS.map(c => <CourseTile key={c} c={c} />)}</div>
+      <Panel icon={BarChart3} title="Where you stand" id="stand">
+        <div className="stand">
+          {COURSE_KEYS.map(c => {
+            const open = items.filter(i => i.c === c && !i.done && i.d && i.d >= t).sort((a, b) => a.d!.localeCompare(b.d!))
+            const next = open[0]
+            const test = open.find(i => i.k === 'test')
+            const r = test ? readiness(s, test, t) : null
+            const st = courseStats(grades, c)
+            const n = next ? daysBetween(t, next.d!) : null
+            return (
+              <a className="stand-row" key={c} href={'#/study/' + courseSlug(c)}>
+                <span className="course-tag" style={{ color: COURSES[c].color }}>{c}</span>
+                <span className="grow note">{next ? <>{next.t} · {n === 0 ? 'today' : n === 1 ? 'tomorrow' : 'in ' + n + ' days'}</> : 'Nothing coming up'}</span>
+                <span className="note num">{st.pct == null || st.li == null ? 'not graded yet' : Math.round(st.pct * 10) / 10 + '% · ' + (LET[st.li] || 'F')}</span>
+                {r && <ReadyBar pct={r.pct} tracked={r.tracked} total={r.total} compact />}
+              </a>
+            )
+          })}
+        </div>
+      </Panel>
     </div>
   )
 }
@@ -109,13 +131,13 @@ export function NextAction({ c }: { c: string }) {
   const n = daysBetween(t, target.d!)
   const r = test ? readiness(s, test, t) : null
   const weak = r?.weak[0]
-  const mins = r ? (r.pct < 50 ? 50 : 20) : 25
+  const mins = r && r.pct != null ? (r.pct < 50 ? 50 : 20) : 25
   return (
     <div className="next-action">
       <div className="grow">
         <b>{target.t} {n === 0 ? 'today' : n === 1 ? 'tomorrow' : 'in ' + n + ' days'}</b>
         <span className="note">
-          {r ? <>{r.pct}% ready · {weak && weak.seen === 0 ? `start with ${weak.name}` : weak ? `${mins} min on ${weak.name}` : `${mins} min of practice`}</> : `${mins} min on ${target.t}`}
+          {r ? <>{r.pct != null ? r.pct + '% ready' : `${r.tracked} of ${r.total} topics tracked`} · {weak && weak.seen === 0 ? `start with ${weak.name}` : weak ? `${mins} min on ${weak.name}` : `${mins} min of practice`}</> : `${mins} min on ${target.t}`}
         </span>
       </div>
       {r && <ReadyBar pct={r.pct} />}
@@ -279,14 +301,16 @@ function Progress({ c, r, nextTestName }: { c: string; r: ReturnType<typeof read
     <>
       {r && nextTestName && (
         <Panel icon={BarChart3} title={'Readiness · ' + nextTestName} id="ready" right={<ReadyBar pct={r.pct} />}>
-          <p className="note">Topic knowledge {Math.round(r.knowledge * 100)}% · study done {Math.round(r.studied * 100)}%. Accuracy older than two weeks counts for less, and topics you've never practised count as zero.</p>
-          <div className="stack" style={{ gap: 6 }}>
-            {r.weak.map(w => (
-              <div className="prow" key={w.id}>
-                <span>{w.name}<span className="note"> {w.seen ? `· ${Math.round(w.acc * 100)}% over ${w.seen}` : '· not practised'}</span></span>
-                <span className="bar"><span style={{ width: Math.round(w.acc * 100) + '%', background: col(w.acc) }} /></span>
-                <a className="btn quiet sm" href={w.href}>Practise</a>
-              </div>
+          <p className="note">{r.pct != null
+            ? <>Topic knowledge {Math.round(r.knowledge * 100)}% · study done {Math.round(r.studied * 100)}% · <b>{r.tracked} of {r.total} topics tracked</b>. Accuracy older than two weeks counts for less; topics with no practice yet are left out of the average rather than counted as zero.</>
+            : <>No practice behind this course yet, so there's no honest number to show. {r.total} topics are listed below — tap one to start.</>}</p>
+          <div className="topicbars">
+            {[...r.topics].sort((a, b) => (a.state === 'new' ? -0.5 : a.acc) - (b.state === 'new' ? -0.5 : b.acc)).slice(0, 12).map(w => (
+              <a className={'topicbar st-' + w.state} key={w.id} href={w.href} style={{ opacity: w.state === 'new' ? 1 : 0.65 + Math.min(0.35, (w.seen || 0) / 12) }}>
+                <span className="tb-fill" style={{ width: Math.max(3, Math.round(w.acc * 100)) + '%' }} />
+                <span className="tb-label">{w.name}</span>
+                <span className="tb-num">{w.state === 'new' ? 'not started' : Math.round(w.acc * 100) + '%'}</span>
+              </a>
             ))}
           </div>
         </Panel>

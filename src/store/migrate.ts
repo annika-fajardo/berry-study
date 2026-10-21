@@ -6,7 +6,7 @@ import { COLLECTION_KEYS } from './types'
 import { itemXp, makeXp, plantFor, XP } from '../lib/game'
 import { todayStr } from '../lib/dates'
 
-export const CURRENT_SCHEMA = 3
+export const CURRENT_SCHEMA = 4
 type Loose = Record<string, any>
 
 export const DEFAULT_SETTINGS = { theme: 'light' as const, catName: 'Emi', onboarded: false, planOpen: true, ch5only: false, catAnim: 'auto' as const, companion: 'emi' }
@@ -55,6 +55,19 @@ const MIGRATIONS: Record<number, (s: Loose) => Loose> = {
     if (out.settings && out.settings.theme === 'auto') out.settings.theme = 'light'
     // the cat has a name now: Emi (only replaces the old default)
     if (out.settings && (!out.settings.catName || out.settings.catName === 'Tux')) out.settings.catName = 'Emi'
+    return out
+  },
+  4: (s) => {
+    const out: Loose = { ...s, schema: 4 }
+    // FNCE 445's scheme was flattened by hand into per-row weights; attach the rows to real categories.
+    const CAT: [RegExp, string][] = [[/^assignment/i, 'assign'], [/^quiz/i, 'quiz'], [/^midterm/i, 'mid'], [/^participation/i, 'part'], [/^final/i, 'final']]
+    for (const g of Object.values(out.grades as Record<string, Loose>)) {
+      if (g.c !== 'FNCE 445' || g.cat) continue
+      const hit = CAT.find(([re]) => re.test(String(g.name || '')))
+      if (hit) g.cat = hit[1]
+    }
+    out.rounding = out.rounding || {}
+    out.settings = { ...(out.settings || {}), notThis: [] }
     return out
   },
 }

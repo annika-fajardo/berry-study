@@ -30,14 +30,14 @@ export function useCatMode(): AnimMode {
 export type Breed = 'emi' | 'tabby' | 'grey' | 'calico' | 'siamese' | 'void' | 'goldstripe'
 type Look = { fur: string; white: string; eye: string; whisker: string; point?: string; stripes?: string; patches?: [string, string]; tailTip?: string; marks: boolean }
 type Personality = { fidget: number; wander: number; blink: number; yawn: number; zoom: number; mrrp: number; follow: number; knock: number; slow: number }
-export const BREEDS: Record<Breed, { name: string; blurb: string; look: Look; p: Personality; unlock?: { kind: 'level' | 'streak'; n: number; hint: string } }> = {
+export const BREEDS: Record<Breed, { name: string; blurb: string; look: Look; p: Personality }> = {
   emi: { name: 'Emi', blurb: 'Tuxedo. The real one.', look: { fur: '#171816', white: '#FAF9F4', eye: '#8FB85F', whisker: '#FAF9F4', marks: true }, p: { fidget: 1, wander: 1, blink: 1, yawn: 1, zoom: 1, mrrp: 1, follow: 1, knock: 1, slow: 1 } },
   tabby: { name: 'Tabby', blurb: 'Orange, lazy, loafs a lot.', look: { fur: '#CE8244', white: '#F7E9D4', eye: '#7E9A3E', whisker: '#FBF3E6', stripes: '#A75A26', marks: false }, p: { fidget: 0.6, wander: 0.5, blink: 1.4, yawn: 2.6, zoom: 0.3, mrrp: 0.8, follow: 0.6, knock: 0.5, slow: 1.6 } },
   grey: { name: 'Smoke', blurb: 'Soft grey, shy at first.', look: { fur: '#868A91', white: '#F4F3F0', eye: '#C9B458', whisker: '#FFFFFF', marks: true }, p: { fidget: 0.8, wander: 0.7, blink: 1.1, yawn: 1, zoom: 0.5, mrrp: 0.6, follow: 0.8, knock: 0.4, slow: 1.2 } },
   calico: { name: 'Pip', blurb: 'Calico chaos. Zoomies.', look: { fur: '#F3EDE2', white: '#FFFDF8', eye: '#B39A3C', whisker: '#8B8378', patches: ['#D98A45', '#2A2622'], marks: false }, p: { fidget: 1.5, wander: 1.6, blink: 0.9, yawn: 0.7, zoom: 4, mrrp: 1.2, follow: 1.2, knock: 3, slow: 0.8 } },
   siamese: { name: 'Mochi', blurb: 'Siamese. Very chatty.', look: { fur: '#E8DCC7', white: '#F6EFE2', eye: '#5E9CC8', whisker: '#FFFFFF', point: '#564031', marks: false }, p: { fidget: 1.2, wander: 1.1, blink: 1, yawn: 0.8, zoom: 0.8, mrrp: 3.5, follow: 2, knock: 1, slow: 0.9 } },
-  void: { name: 'Void', blurb: 'All black, gold eyes.', look: { fur: '#121311', white: '#121311', eye: '#E2B33E', whisker: '#4A4C46', marks: false }, p: { fidget: 0.9, wander: 1, blink: 0.8, yawn: 1, zoom: 1.2, mrrp: 0.7, follow: 1.4, knock: 1.2, slow: 1 }, unlock: { kind: 'level', n: 10, hint: 'Reach level 10' } },
-  goldstripe: { name: 'Goldie', blurb: 'Black, gold-tipped tail.', look: { fur: '#171816', white: '#FAF9F4', eye: '#C9B458', whisker: '#F0E7D2', tailTip: '#D9AF4A', marks: true }, p: { fidget: 1, wander: 1, blink: 1, yawn: 1, zoom: 1.5, mrrp: 1, follow: 1, knock: 1, slow: 1 }, unlock: { kind: 'streak', n: 30, hint: 'Keep a 30-day streak' } },
+  void: { name: 'Void', blurb: 'All black, gold eyes.', look: { fur: '#121311', white: '#121311', eye: '#E2B33E', whisker: '#4A4C46', marks: false }, p: { fidget: 0.9, wander: 1, blink: 0.8, yawn: 1, zoom: 1.2, mrrp: 0.7, follow: 1.4, knock: 1.2, slow: 1 } },
+  goldstripe: { name: 'Goldie', blurb: 'Black, gold-tipped tail.', look: { fur: '#171816', white: '#FAF9F4', eye: '#C9B458', whisker: '#F0E7D2', tailTip: '#D9AF4A', marks: true }, p: { fidget: 1, wander: 1, blink: 1, yawn: 1, zoom: 1.5, mrrp: 1, follow: 1, knock: 1, slow: 1 } },
 }
 export function useBreed(): Breed {
   const s = useAppState()

@@ -1,11 +1,11 @@
 /* Hash routing, so the app works from any sub-path and from the single-file build opened off disk. */
 import { useEffect, useState } from 'react'
 export type Route = { tab: string; parts: string[] }
-export const TABS = ['home', 'schedule', 'study', 'garden', 'grades', 'settings'] as const
+export const TABS = ['home', 'schedule', 'study', 'garden', 'grades', 'settings', 'add'] as const
 /** Old v1 links keep working. */
 const ALIAS: Record<string, string> = { today: 'home', courses: 'study', focus: 'garden', calendar: 'schedule' }
 function read(): Route {
-  const h = decodeURIComponent(location.hash.replace(/^#\/?/, ''))
+  const h = decodeURIComponent(location.hash.replace(/^#\/?/, '').split('?')[0])
   const parts = h.split('/').filter(Boolean)
   const first = ALIAS[parts[0]] || parts[0]
   const tab = (TABS as readonly string[]).includes(first) ? first : 'home'
