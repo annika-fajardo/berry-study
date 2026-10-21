@@ -1,20 +1,35 @@
 import { useEffect, useState } from 'react'
-import { useRoute, TABS } from './lib/router'
-import { TabIcon, TAB_LABEL } from './components/Icons'
-import { Toasts, XpFloats, BerryBuddy, LevelUp } from './components/Overlays'
-import { Berry, TuxCat } from './components/Characters'
-import { Modal } from './components/Modal'
-import { Today } from './views/Today'
-import { Schedule } from './views/Schedule'
+import { LayoutDashboard, CalendarDays, BookOpen, Sprout, GraduationCap, Settings as SettingsIcon, Menu, X, Plus, CalendarPlus, ClipboardList, Timer as TimerIcon } from 'lucide-react'
+import { useRoute, type Route } from './lib/router'
+import { I, type Icon } from './components/ui'
+import { Toasts, XpFloats, LevelUpToasts } from './components/Overlays'
+import { Dashboard } from './views/Dashboard'
+import { Calendar } from './views/Calendar'
 import { Courses } from './views/Courses'
 import { Focus } from './views/Focus'
 import { Grades } from './views/Grades'
 import { Settings, applyTheme } from './views/Settings'
+import { QuickCapture } from './views/QuickCapture'
 import { useAppState, getState } from './store/store'
-import { completeTimer, setSetting } from './store/actions'
+import { completeTimer } from './store/actions'
 import { useNow } from './lib/hooks'
+import { startAutoSync } from './lib/calendar'
+import { levelInfo, xpTotal, streak } from './lib/game'
+import { todayStr } from './lib/dates'
+import { on } from './lib/events'
 
-/** Completes the focus timer when it runs out, on whichever tab is open (and after a reload). */
+const NAV_ITEMS: { k: string; label: string; icon: Icon }[] = [
+  { k: 'home', label: 'Dashboard', icon: LayoutDashboard },
+  { k: 'schedule', label: 'Calendar', icon: CalendarDays },
+  { k: 'study', label: 'Courses', icon: BookOpen },
+  { k: 'garden', label: 'Focus', icon: Sprout },
+]
+const MORE: { k: string; label: string; icon: Icon }[] = [
+  { k: 'grades', label: 'Grades', icon: GraduationCap },
+  { k: 'settings', label: 'Settings', icon: SettingsIcon },
+]
+
+/** Completes a focus session when its time is up, whatever page is open (and after a reload). */
 function TimerWatcher() {
   const s = useAppState()
   const now = useNow(1000)
@@ -25,52 +40,106 @@ function TimerWatcher() {
   return null
 }
 
-function Onboarding() {
+function LevelLine() {
   const s = useAppState()
-  const [name, setName] = useState('Tux')
-  if (s.settings.onboarded) return null
-  const done = () => { setSetting('catName', name.trim().slice(0, 24) || 'Tux'); setSetting('onboarded', true) }
+  const info = levelInfo(xpTotal(s)), st = streak(s, todayStr())
   return (
-    <Modal title="Welcome to Berry Study" onClose={done}>
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-        <Berry mood="cheering" size={110} /><TuxCat pose="sit" size={110} name={name || 'Tux'} style={{ marginLeft: -16 }} />
+    <div className="level-line">
+      <span>Level <b>{info.level}</b> · {info.name} · <b className="num">{info.total.toLocaleString('en-CA')}</b> xp</span>
+      <span className="thin"><span style={{ width: Math.round(info.pct * 100) + '%' }} /></span>
+      <span className="note">{st.count ? `${st.count}-day streak` : 'No streak yet'}</span>
+    </div>
+  )
+}
+
+function Capture({ onPick }: { onPick: (k: 'due' | 'test' | 'class' | 'focus') => void }) {
+  return (
+    <div className="nav-group">
+      <div className="nav-label">Quick capture</div>
+      <div className="capture">
+        <button type="button" onClick={() => onPick('due')}><I as={Plus} />New deadline</button>
+        <button type="button" onClick={() => onPick('test')}><I as={CalendarPlus} />New exam</button>
+        <button type="button" onClick={() => onPick('class')}><I as={ClipboardList} />New reading</button>
+        <button type="button" onClick={() => onPick('focus')}><I as={TimerIcon} />Log focus time</button>
       </div>
-      <p>Your Course Desk schedule, grades and practice history are already here. Berry will keep you company, and so will your tuxedo cat.</p>
-      <form className="stack" onSubmit={e => { e.preventDefault(); done() }}>
-        <label className="field">What's your cat's name?<input className="input" value={name} maxLength={24} onChange={e => setName(e.target.value)} autoFocus id="onboard-name" /></label>
-        <div className="wrap" style={{ justifyContent: 'flex-end' }}><button type="submit" className="btn berry">Let's go</button></div>
-      </form>
-    </Modal>
+    </div>
+  )
+}
+
+function NavList({ route, onNavigate }: { route: Route; onNavigate?: () => void }) {
+  return (
+    <>
+      <div className="nav-group">
+        <div className="nav-label">Navigation</div>
+        {[...NAV_ITEMS, ...MORE].map(x => (
+          <a key={x.k} href={'#/' + x.k} aria-current={route.tab === x.k ? 'page' : undefined} onClick={onNavigate}><I as={x.icon} />{x.label}</a>
+        ))}
+      </div>
+    </>
   )
 }
 
 export function App() {
   const r = useRoute()
   const s = useAppState()
+  const [drawer, setDrawer] = useState(false)
+  const [capture, setCapture] = useState<null | 'due' | 'test' | 'class' | 'focus'>(null)
   useEffect(() => { applyTheme(s.settings.theme) }, [s.settings.theme])
-  useEffect(() => { document.title = TAB_LABEL[r.tab] + ' · Berry Study' }, [r.tab])
-  const nav = (cls: string) => (
-    <nav className={cls} aria-label="Main">
-      {cls === 'rail' && <div className="wordmark" aria-label="Berry Study">berry<span>study</span></div>}
-      {TABS.map(t => <a key={t} href={'#/' + t} aria-current={r.tab === t ? 'page' : undefined}><TabIcon name={t} /><span>{TAB_LABEL[t]}</span></a>)}
-      {cls === 'rail' && <div className="rail-foot"><Berry mood={s.timer ? 'studying' : 'happy'} size={64} /><span>Works offline · data on this device</span></div>}
-    </nav>
+  useEffect(() => {
+    const t = NAV_ITEMS.concat(MORE).find(x => x.k === r.tab)
+    document.title = (t ? t.label : 'Dashboard') + ' · Berry Study'
+  }, [r.tab])
+  useEffect(() => { setDrawer(false) }, [r.tab, r.parts.join('/')])
+  useEffect(() => { if (s.cal.connected) startAutoSync() }, [s.cal.connected])
+  useEffect(() => on('capture', e => setCapture(e.k)), [])
+
+  const body = (
+    <>
+      {r.tab === 'home' && <Dashboard />}
+      {r.tab === 'schedule' && <Calendar parts={r.parts} />}
+      {r.tab === 'study' && <Courses parts={r.parts} />}
+      {r.tab === 'garden' && <Focus parts={r.parts} />}
+      {r.tab === 'grades' && <Grades />}
+      {r.tab === 'settings' && <Settings parts={r.parts} />}
+    </>
   )
   return (
-    <div className="shell">
-      <a href="#main" className="sr-only" onFocus={e => e.currentTarget.classList.remove('sr-only')} onBlur={e => e.currentTarget.classList.add('sr-only')}>Skip to content</a>
-      {nav('rail')}
-      <main className="main" id="main">
-        {r.tab === 'today' && <Today />}
-        {r.tab === 'schedule' && <Schedule />}
-        {r.tab === 'courses' && <Courses parts={r.parts} />}
-        {r.tab === 'focus' && <Focus parts={r.parts} />}
-        {r.tab === 'grades' && <Grades />}
-        {r.tab === 'settings' && <Settings />}
-      </main>
-      {nav('tabbar')}
+    <div className="app">
+      <a href="#main" className="sr-only skip">Skip to content</a>
+      <aside className="side">
+        <a className="wordmark" href="#/home">Berry Study<small>·</small></a>
+        <Capture onPick={setCapture} />
+        <NavList route={r} />
+        <LevelLine />
+        <div className="side-foot"><span className="script">Small steps,<br />most days.</span></div>
+      </aside>
+
+      <header className="topbar">
+        <a className="wordmark" href="#/home">Berry Study</a>
+        <button type="button" className="icon-btn" aria-label="Menu" aria-expanded={drawer} onClick={() => setDrawer(true)}><I as={Menu} size={22} /></button>
+      </header>
+
+      <main className="main" id="main">{body}</main>
+
+      <nav className="bottombar" aria-label="Main">
+        {NAV_ITEMS.map(x => <a key={x.k} href={'#/' + x.k} aria-current={r.tab === x.k ? 'page' : undefined}><I as={x.icon} size={20} /><span>{x.label}</span></a>)}
+      </nav>
+
+      {drawer && (
+        <>
+          <div className="drawer-back" onClick={() => setDrawer(false)} />
+          <div className="drawer" role="dialog" aria-label="Menu">
+            <div className="row-between"><span className="wordmark">Berry Study</span><button type="button" className="icon-btn" aria-label="Close menu" onClick={() => setDrawer(false)}><I as={X} size={20} /></button></div>
+            <Capture onPick={k => { setDrawer(false); setCapture(k) }} />
+            <NavList route={r} onNavigate={() => setDrawer(false)} />
+            <LevelLine />
+          </div>
+        </>
+      )}
+
+      {capture && <QuickCapture kind={capture} onClose={() => setCapture(null)} />}
       <TimerWatcher />
-      <Toasts /><XpFloats /><BerryBuddy /><LevelUp /><Onboarding />
+      <Toasts /><XpFloats /><LevelUpToasts />
     </div>
   )
 }

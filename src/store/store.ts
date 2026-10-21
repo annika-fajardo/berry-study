@@ -57,4 +57,7 @@ export async function initStore() {
   }
 }
 
-export function useAppState() { return useSyncExternalStore(subscribe, getState) }
+export function useAppState() { return useSyncExternalStore(subscribe, getState, getState) }
+
+/** For unit tests and offline rendering scripts only. */
+export function __setStateForTests(s: AppState) { state = s }

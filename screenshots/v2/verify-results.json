@@ -1,0 +1,245 @@
+{
+  "results": [
+    {
+      "name": "seed: 64 schedule items",
+      "pass": true,
+      "detail": "Right now: 64 schedule items, 36 grade rows, 28 practice records, 1 sessions, 71 xp entries (1,386 xp, level 6)."
+    },
+    {
+      "name": "seed: 36 grade rows",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "agenda lists all 64 items",
+      "pass": true,
+      "detail": "64"
+    },
+    {
+      "name": "projected GPA shows a number",
+      "pass": true,
+      "detail": "3.67"
+    },
+    {
+      "name": "ticking a task hides it and raises xp",
+      "pass": true,
+      "detail": "1386 → 1416"
+    },
+    {
+      "name": "undo is offered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "undo puts the xp back",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "week grid draws 7 day columns",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "week grid shows suggested blocks",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "deadlines show as all-day chips",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "day view draws one column",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "month view draws a 6-week grid",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "today is marked in the month view",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "accepting a suggestion books it",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "skipping a suggestion drops that slot",
+      "pass": true,
+      "detail": "b05#0"
+    },
+    {
+      "name": "Google connect lists the calendars",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "events read from Google appear",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a shift is marked as work",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "an accepted block is written to Google",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the written event is titled and coloured",
+      "pass": true,
+      "detail": "Study: FNCE 477 · Five Cs of credit"
+    },
+    {
+      "name": "a D2L date she does not have is offered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "adding a D2L item puts it in the list",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "an .ics file imports",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "study blocks export as .ics",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a quiz answer shows the steps",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "it explains why the other answers are wrong",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a drill shows a worked solution",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a flashcard flips",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "readiness shows a percentage",
+      "pass": true,
+      "detail": "18% ready"
+    },
+    {
+      "name": "readiness lists weak topics to practise",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a what-if slider changes the projection",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the real mark is untouched",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "what-ifs reset",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "logging a Flora session adds minutes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the session shows in this week",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the timer runs with the cat beside it",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "clicking the cat triggers a reaction",
+      "pass": true,
+      "detail": "no live cat on this page"
+    },
+    {
+      "name": "switching companion takes effect",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "the companion choice persists",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "unearned companions are locked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "quick capture adds an item",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "reset to seed changes the data",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "export → reset → import round-trips",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "data survives a reload",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "a file that is not a backup is refused",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "reduced motion puts the cat in calm mode",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no horizontal overflow at 360px",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no console errors and no page errors",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "errors": []
+}

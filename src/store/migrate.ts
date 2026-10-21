@@ -6,10 +6,13 @@ import { COLLECTION_KEYS } from './types'
 import { itemXp, makeXp, plantFor, XP } from '../lib/game'
 import { todayStr } from '../lib/dates'
 
-export const CURRENT_SCHEMA = 2
+export const CURRENT_SCHEMA = 3
 type Loose = Record<string, any>
 
-export const DEFAULT_SETTINGS = { theme: 'auto' as const, catName: 'Tux', onboarded: false, planOpen: true, ch5only: false }
+export const DEFAULT_SETTINGS = { theme: 'light' as const, catName: 'Emi', onboarded: false, planOpen: true, ch5only: false, catAnim: 'auto' as const, companion: 'emi' }
+const W: [number, number][] = Array.from({ length: 7 }, () => [9 * 60, 22 * 60] as [number, number])
+export const DEFAULT_PREFS = { window: W, maxHours: 4, blockMin: 50, breakMin: 10, gapMin: 15, noStudy: [] as number[], shiftRestMin: 60, longShiftH: 5, heavyDayH: 8, lightMin: 30 }
+export const DEFAULT_CAL = { clientId: '', connected: false, calendars: [], writeCal: 'primary', addToGoogle: true }
 
 const MIGRATIONS: Record<number, (s: Loose) => Loose> = {
   2: (s) => {
@@ -41,6 +44,19 @@ const MIGRATIONS: Record<number, (s: Loose) => Loose> = {
     }
     return out
   },
+  3: (s) => {
+    const out: Loose = { ...s, schema: 3 }
+    out.events = out.events || {}; out.skips = out.skips || {}; out.ics = out.ics || {}
+    out.gcache = out.gcache || { events: [] }
+    out.classes = out.classes || {}; out.workMarks = out.workMarks || {}; out.whatIf = out.whatIf || {}; out.d2lIgnore = out.d2lIgnore || {}
+    out.cal = { ...DEFAULT_CAL, ...(out.cal || {}) }
+    out.prefs = { ...DEFAULT_PREFS, ...(out.prefs || {}) }
+    // v3 makes light the default look; an untouched "auto" becomes light (Auto stays available in Settings)
+    if (out.settings && out.settings.theme === 'auto') out.settings.theme = 'light'
+    // the cat has a name now: Emi (only replaces the old default)
+    if (out.settings && (!out.settings.catName || out.settings.catName === 'Tux')) out.settings.catName = 'Emi'
+    return out
+  },
 }
 
 export function migrate(raw: Loose): AppState {
@@ -49,5 +65,7 @@ export function migrate(raw: Loose): AppState {
   if (v > CURRENT_SCHEMA) throw new Error('This backup comes from a newer version of Berry Study.')
   while (v < CURRENT_SCHEMA) { v++; s = MIGRATIONS[v](s) }
   s.settings = { ...DEFAULT_SETTINGS, ...(s.settings || {}) }
+  s.prefs = { ...DEFAULT_PREFS, ...(s.prefs || {}) }
+  s.cal = { ...DEFAULT_CAL, ...(s.cal || {}) }
   return s as AppState
 }

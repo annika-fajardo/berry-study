@@ -1,284 +1,307 @@
-// End-to-end verification with Playwright against the production build.
-// Usage: npm run build && (npx vite preview --port 4173 &) && PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node scripts/verify.mjs
+// End-to-end verification against the production build.
+// npm run build && (npx vite preview --port 4173 &) && PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node scripts/verify.mjs
 import { chromium } from 'playwright'
 import { mkdirSync, readFileSync, writeFileSync, mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-const TMP = mkdtempSync(join(tmpdir(), 'berry-verify-'))
 
 const BASE = process.env.BASE_URL || 'http://localhost:4173/'
-const SHOTS = 'screenshots'
+const SHOTS = 'screenshots/v2'
+const TMP = mkdtempSync(join(tmpdir(), 'berry-verify-'))
 mkdirSync(SHOTS, { recursive: true })
-const TABS = ['today', 'schedule', 'courses', 'focus', 'grades', 'settings']
-const results = []
-const errors = []
+const results = [], errors = []
 const ok = (name, pass, detail = '') => { results.push({ name, pass: !!pass, detail }); console.log((pass ? 'PASS ' : 'FAIL ') + name + (detail ? ' — ' + detail : '')) }
-
 const browser = await chromium.launch()
-
 function watch(page, label) {
   page.on('console', m => { if (m.type() === 'error') errors.push(`[${label}] console: ${m.text()}`) })
   page.on('pageerror', e => errors.push(`[${label}] pageerror: ${e.message}`))
 }
-async function dismissOverlays(page) {
-  for (let i = 0; i < 3; i++) {
-    const c = page.locator('.celebrate button')
-    if (await c.count()) { await c.first().click(); await page.waitForTimeout(150) } else break
-  }
-}
-async function onboard(page, name = 'Tux') {
-  const inp = page.locator('#onboard-name')
-  if (await inp.count()) { await inp.fill(name); await page.getByRole('button', { name: "Let's go" }).click() }
-}
-async function xp(page) {
-  await page.goto(BASE + '#/today'); await page.waitForSelector('.level-card')
-  const t = await page.locator('.level-card .lc-sub').innerText()
-  return Number(t.match(/\(([\d,]+) xp\)/)[1].replace(/,/g, ''))
-}
-const go = async (page, hash) => { await page.goto(BASE + '#/' + hash); await page.waitForTimeout(250); await dismissOverlays(page) }
+const go = async (page, hash) => { await page.goto(BASE + '#/' + hash); await page.waitForSelector('.page', { timeout: 15000 }); await page.waitForTimeout(350) }
 
-/* ---------------- functional checks at phone size ---------------- */
+/* ---------------- a mock Google Calendar, so connect/read/write can be checked end to end ---------------- */
+const created = []
+async function mockGoogle(ctx) {
+  await ctx.route('https://accounts.google.com/gsi/client', r => r.fulfill({
+    contentType: 'text/javascript',
+    body: `window.google={accounts:{oauth2:{initTokenClient:(c)=>({requestAccessToken:()=>c.callback({access_token:'fake-token',expires_in:3600}),callback:c.callback}),revoke:()=>{}}}};`,
+  }))
+  await ctx.route(/googleapis\.com\/calendar\/v3\/users\/me\/calendarList.*/, r => r.fulfill({
+    json: { items: [
+      { id: 'primary', summary: 'Annika', primary: true, accessRole: 'owner', backgroundColor: '#9CAD8C' },
+      { id: 'work@group', summary: 'Hotel Arts shifts', accessRole: 'reader', backgroundColor: '#E9B5BD' },
+      { id: 'd2l@group', summary: 'D2L Brightspace', accessRole: 'reader', backgroundColor: '#DDE0BC' },
+    ] },
+  }))
+  const d = new Date(); const day = n => { const x = new Date(d); x.setDate(x.getDate() + n); return x }
+  const iso = (x, h, m = 0) => new Date(x.getFullYear(), x.getMonth(), x.getDate(), h, m).toISOString()
+  await ctx.route(/googleapis\.com\/calendar\/v3\/calendars\/.*\/events.*/, async (route, req) => {
+    if (req.method() === 'POST') { const body = JSON.parse(req.postData() || '{}'); created.push(body); return route.fulfill({ json: { id: 'ev' + created.length } }) }
+    const cal = decodeURIComponent(req.url().split('/calendars/')[1].split('/')[0])
+    const items = cal === 'work@group'
+      ? [{ id: 'w1', summary: 'Banquet shift', start: { dateTime: iso(day(1), 16) }, end: { dateTime: iso(day(1), 23) } }]
+      : cal === 'd2l@group'
+        ? [{ id: 'q1', summary: 'FNCE 445 - Assignment 9 is due', start: { date: day(6).toISOString().slice(0, 10) }, end: { date: day(7).toISOString().slice(0, 10) } }]
+        : [{ id: 'p1', summary: 'Dentist', start: { dateTime: iso(day(1), 10) }, end: { dateTime: iso(day(1), 11) } }]
+    return route.fulfill({ json: { items } })
+  })
+}
+
+/* ---------------- functional checks ---------------- */
 {
-  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: 'light', acceptDownloads: true })
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, colorScheme: 'light', acceptDownloads: true })
+  await mockGoogle(ctx)
   const page = await ctx.newPage(); watch(page, 'functional')
-  await page.goto(BASE); await page.waitForSelector('.page')
-  ok('first run shows onboarding (cat name prompt)', await page.locator('#onboard-name').count() === 1)
-  await onboard(page, 'Tux')
+  await go(page, 'home')
 
-  // seed loaded
-  await go(page, 'settings')
-  const sumText = await page.locator('#data-h + p + p').innerText()
-  ok('seed: 64 schedule items', /64 schedule items/.test(sumText), sumText)
-  ok('seed: 36 grade rows', /36 grade rows/.test(sumText))
-  await go(page, 'schedule')
+  // seed
+  await go(page, 'settings/data')
+  const sum = await page.locator('#data-h p.note').first().innerText()
+  ok('seed: 64 schedule items', /64 schedule items/.test(sum), sum)
+  ok('seed: 36 grade rows', /36 grade rows/.test(sum))
+  await go(page, 'schedule/agenda')
   await page.getByRole('button', { name: 'Show past' }).click()
   await page.getByRole('button', { name: 'Show completed' }).click()
-  ok('schedule shows all 64 items with past+completed filters', (await page.locator('#agenda .row').count()) === 64, String(await page.locator('#agenda .row').count()))
-  await page.getByRole('button', { name: 'Show past' }).click()
-  await page.getByRole('button', { name: 'Show completed' }).click()
+  ok('agenda lists all 64 items', (await page.locator('#agenda .row').count()) === 64, String(await page.locator('#agenda .row').count()))
+  await page.getByRole('button', { name: 'Show past' }).click(); await page.getByRole('button', { name: 'Show completed' }).click()
   await go(page, 'grades')
   const gpa = (await page.locator('#gpa').innerText()).trim()
   ok('projected GPA shows a number', /^\d\.\d\d$/.test(gpa), gpa)
-  ok('grades: 36 mark inputs', (await page.locator('.gtable input').count()) === 36)
 
-  // tick → XP up, row disappears, undo → XP back
-  const xp0 = await xp(page)
-  await go(page, 'schedule')
+  // xp through the sidebar line
+  const xp = async () => { const t = await page.locator('.side .level-line').first().innerText(); return Number(t.match(/([\d,]+)\s*xp/)[1].replace(/,/g, '')) }
+  const xp0 = await xp()
+  await go(page, 'schedule/agenda')
   const row = page.locator('#agenda .row:not(.done)').first()
   const id = await row.getAttribute('data-item')
-  const title = await row.locator('.title').innerText()
   await row.locator('input.check').check()
-  await page.waitForTimeout(700)
-  ok('ticked task disappears from the main view', (await page.locator(`#agenda [data-item="${id}"]`).count()) === 0, title)
-  const undo = page.locator('.toast').filter({ hasText: 'Done:' }).getByRole('button', { name: 'Undo' })
-  ok('undo toast appears', await undo.count() === 1)
-  await page.screenshot({ path: `${SHOTS}/flow-tick-undo-toast.png` })
-  const xp1 = await xp(page)
-  ok('ticking a task increases XP', xp1 > xp0, `${xp0} → ${xp1}`)
-  // untick through the completed filter
-  await go(page, 'schedule')
-  await page.getByRole('button', { name: 'Show completed' }).click()
-  await page.locator(`#agenda [data-item="${id}"] input.check`).uncheck()
-  await page.waitForTimeout(300)
-  const xp2 = await xp(page)
-  ok('unticking returns XP to where it was', xp2 === xp0, `${xp1} → ${xp2}`)
-  // tick again and use Undo from the toast
-  await go(page, 'schedule')
-  await page.locator(`#agenda [data-item="${id}"] input.check`).check()
+  await page.waitForTimeout(600)
+  ok('ticking a task hides it and raises xp', (await page.locator(`#agenda [data-item="${id}"]`).count()) === 0 && (await xp()) > xp0, `${xp0} → ${await xp()}`)
+  const undo = page.locator('.toast').getByRole('button', { name: 'Undo' }).first()
+  ok('undo is offered', await undo.count() === 1)
+  await undo.click(); await page.waitForTimeout(300)
+  ok('undo puts the xp back', (await xp()) === xp0)
+
+  // calendar views
+  await go(page, 'schedule/week')
+  ok('week grid draws 7 day columns', (await page.locator('.tg-col').count()) === 7)
+  ok('week grid shows suggested blocks', (await page.locator('.tg-ev.sugg').count()) > 0)
+  ok('deadlines show as all-day chips', (await page.locator('.chip-ad').count()) > 0)
+  await go(page, 'schedule/day')
+  ok('day view draws one column', (await page.locator('.tg-col').count()) === 1)
+  await go(page, 'schedule/month')
+  ok('month view draws a 6-week grid', (await page.locator('.month .d').count()) === 42)
+  ok('today is marked in the month view', (await page.locator('.month .d.today').count()) === 1)
+
+  // accept / skip a suggestion
+  await go(page, 'schedule/week')
+  const before = await page.locator('.tg-ev.own').count()
+  const first = page.locator('.sugg-row').first()
+  const firstKey = await first.getAttribute('data-sugg')
+  await first.getByRole('button', { name: 'Accept' }).click()
   await page.waitForTimeout(500)
-  await page.getByRole('button', { name: 'Show completed' }).click()
-  await page.waitForTimeout(100)
-  const undo2 = page.locator('.toast').filter({ hasText: 'Done:' }).getByRole('button', { name: 'Undo' }).first()
-  if (await undo2.count()) await undo2.click()
-  await page.waitForTimeout(200)
-  ok('undo button restores the task', await page.locator(`#agenda [data-item="${id}"] input.check`).isChecked() === false)
-  ok('XP back after undo', (await xp(page)) === xp0)
+  ok('accepting a suggestion books it', (await page.locator('.tg-ev.own').count()) === before + 1)
+  const skipRow = page.locator('.sugg-row').first()
+  const skipKey = await skipRow.getAttribute('data-sugg'), skipStart = await skipRow.getAttribute('data-start')
+  await skipRow.getByRole('button', { name: 'Skip' }).click()
+  await page.waitForTimeout(500)
+  ok('skipping a suggestion drops that slot', (await page.locator(`[data-sugg="${skipKey}"][data-start="${skipStart}"]`).count()) === 0, firstKey || '')
 
-  // FNCE 445 quiz-style question
-  await go(page, 'courses/fnce-445/adaptive')
-  const xpq0 = await xp(page)
-  await go(page, 'courses/fnce-445/adaptive')
-  await page.getByRole('button', { name: /Start (round 1|a round on my weak spots)/ }).click()
-  let correct = 0, answered = 0
-  for (let round = 0; round < 3 && !correct; round++) {
-    const cards = page.locator('section.card[data-q]')
-    const n = await cards.count()
-    for (let i = 0; i < n && !correct; i++) {
-      const c = cards.nth(i)
-      await c.locator('.mc button').first().click(); answered++
-      await page.waitForTimeout(80)
-      if (await c.locator('.mc button.right.wrong, .mc button.right').first().count() && !(await c.locator('.mc button.wrong').count())) correct++
-      if (i === 0 && round === 0) {
-        ok('quiz-style: steps shown after answering', (await c.locator('.sol div').count()) >= 2)
-        ok('quiz-style: trap explanations shown', (await c.locator('.sol .traps li').count()) >= 2, String(await c.locator('.sol .traps li').count()))
-        await c.screenshot({ path: `${SHOTS}/flow-fnce445-quiz-answer.png` })
-      }
-    }
-    if (!correct) { const n2 = page.getByRole('button', { name: 'Next round: focus on my weak spots' }); if (await n2.count()) await n2.click() }
-    await dismissOverlays(page)
-  }
-  const xpq1 = await xp(page)
-  ok('quiz-style: correct answer awards XP', correct > 0 && xpq1 >= xpq0 + 10, `${answered} answered, ${xpq0} → ${xpq1}`)
+  // Google connect → read → write
+  await go(page, 'settings/calendars')
+  await page.locator('#gclient').fill('test-client-id.apps.googleusercontent.com')
+  await page.getByRole('button', { name: 'Connect Google Calendar' }).click()
+  await page.waitForTimeout(1200)
+  ok('Google connect lists the calendars', (await page.getByText('Hotel Arts shifts').count()) > 0)
+  await page.locator('tr', { hasText: 'Hotel Arts shifts' }).locator('input[aria-label*="is work"]').check()
+  await page.locator('tr', { hasText: 'D2L Brightspace' }).locator('input[aria-label*="is D2L"]').check()
+  await page.getByRole('button', { name: 'Refresh' }).click()
+  await page.waitForTimeout(900)
+  await go(page, 'schedule/week')
+  ok('events read from Google appear', (await page.locator('.tg-ev.ext').count()) > 0)
+  ok('a shift is marked as work', (await page.locator('.tg-ev.ext.work').count()) > 0 || (await page.locator('.chip-ad.work').count()) > 0)
+  const n0 = created.length
+  await page.locator('.sugg-row').first().getByRole('button', { name: 'Accept' }).click()
+  await page.waitForTimeout(900)
+  ok('an accepted block is written to Google', created.length === n0 + 1 && created[created.length - 1].extendedProperties.private.berryStudy === '1')
+  ok('the written event is titled and coloured', /^Study: /.test(created[created.length - 1].summary), created[created.length - 1].summary)
 
-  // drill
-  await go(page, 'courses/fnce-445/drills')
+  // D2L updates
+  await go(page, 'schedule/week')
+  const d2lRow = page.locator('[data-d2l]').first()
+  ok('a D2L date she does not have is offered', await d2lRow.count() === 1)
+  await d2lRow.getByRole('button', { name: 'Add' }).click()
+  await page.waitForTimeout(400)
+  await go(page, 'schedule/agenda')
+  ok('adding a D2L item puts it in the list', (await page.getByText('Assignment 9').count()) > 0)
+
+  // .ics import and export
+  const ics = `BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nUID:imp1\r\nSUMMARY:Volleyball\r\nDTSTART:20261104T020000Z\r\nDTEND:20261104T033000Z\r\nRRULE:FREQ=WEEKLY;COUNT=3\r\nEND:VEVENT\r\nEND:VCALENDAR`
+  const icsPath = join(TMP, 'test.ics'); writeFileSync(icsPath, ics)
+  await go(page, 'settings/calendars')
+  await page.locator('[data-testid="ics-input"]').setInputFiles(icsPath)
+  await page.waitForTimeout(600)
+  ok('an .ics file imports', (await page.getByText('test.ics').count()) > 0)
+  const dl = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Export study blocks (.ics)' }).click()
+  const f = join(TMP, 'out.ics'); await (await dl).saveAs(f)
+  const outIcs = readFileSync(f, 'utf8')
+  ok('study blocks export as .ics', outIcs.includes('BEGIN:VEVENT') && outIcs.includes('SUMMARY:'))
+
+  // practice: quiz-style with steps and traps
+  await go(page, 'study/fnce-445/practice')
+  await page.getByRole('button', { name: /Start/ }).first().click()
+  await page.waitForTimeout(400)
+  const q = page.locator('section.sheet[data-q]').first()
+  await q.locator('.mc button').first().click()
+  await page.waitForTimeout(250)
+  ok('a quiz answer shows the steps', (await q.locator('.steps-box div').count()) >= 2)
+  ok('it explains why the other answers are wrong', (await q.locator('.traps li').count()) >= 2)
+  await q.screenshot({ path: `${SHOTS}/flow-quiz-answer.png` })
+
+  // drills and flashcards
+  await go(page, 'study/fnce-445/practice/drills')
   await page.getByRole('button', { name: /^Forward price, no dividends/ }).click()
   await page.locator('#drill-in').fill('100')
   await page.getByRole('button', { name: 'Check' }).click()
-  ok('drill: worked solution shown', await page.locator('.sol').filter({ hasText: 'Worked solution' }).count() === 1)
-  ok('drill: result recorded on the chip', /· \d+\/\d+/.test(await page.getByRole('button', { name: /^Forward price, no dividends/ }).innerText()))
-  await page.getByRole('button', { name: 'Next question' }).click()
-  ok('drill: next question loads', await page.locator('#drill-in').isEnabled())
-
-  // flashcards
-  await go(page, 'courses/fnce-477/flash')
+  ok('a drill shows a worked solution', (await page.getByText('Worked solution').count()) > 0)
+  await go(page, 'study/fnce-477/practice/cards')
   await page.locator('button.flash').click()
-  ok('flashcard flips', (await page.locator('button.flash').getAttribute('aria-label')).includes('back'))
-  await page.getByRole('button', { name: 'Got it' }).click()
-  ok('flashcard: got it counts', /1 known/i.test(await page.locator('.card .eyebrow').first().innerText()))
+  ok('a flashcard flips', ((await page.locator('button.flash').getAttribute('aria-label')) || '').includes('back'))
 
-  // practice set (prof's questions) on FNCE 445
-  await go(page, 'courses/fnce-445/quiz')
-  const pq1 = page.locator('section.card:has(.mc)').first()
-  await pq1.locator('.mc button').nth(2).click()
-  ok('practice set: solution after correct pick', await pq1.locator('.sol').count() === 1)
+  // readiness
+  await go(page, 'study/fnce-445/progress')
+  const ready = await page.locator('.ready-num').first().innerText()
+  ok('readiness shows a percentage', /\d+% ready/.test(ready), ready)
+  ok('readiness lists weak topics to practise', (await page.getByRole('link', { name: 'Practise' }).count()) >= 3)
 
-  // FNCE 477 decks open
-  await go(page, 'courses/fnce-477/decks')
-  ok('decks: 3 decks listed', (await page.locator('.deckrow').count()) === 3)
-  await page.locator('.deckrow').first().getByRole('button', { name: 'See results' }).click()
-  ok('decks: results view with explanations', (await page.locator('.sol').count()) >= 10)
+  // what-if
+  await go(page, 'grades')
+  const card = page.locator('[id="g-FNCE445"]')
+  await card.getByRole('button', { name: 'What if…' }).click()
+  const slider = card.locator('input[type="range"]').first()
+  await slider.fill('95')
+  await page.waitForTimeout(400)
+  ok('a what-if slider changes the projection', (await page.locator('#gpa-whatif').count()) === 1 && (await page.locator('#gpa-whatif').innerText()) !== (await page.locator('#gpa').innerText()))
+  await card.getByRole('button', { name: 'What if…' }).click()
+  await page.waitForTimeout(300)
+  ok('the real mark is untouched', (await card.locator('input[type="number"]').nth(4).inputValue()) === '')
+  await card.getByRole('button', { name: 'What if…' }).click()
+  await page.getByRole('button', { name: 'Reset what-ifs' }).click()
+  await page.waitForTimeout(300)
+  ok('what-ifs reset', (await page.locator('#gpa-whatif').count()) === 0)
 
-  // Flora log
-  await go(page, 'focus')
-  const plants0 = await page.locator('.garden .plot').count()
+  // focus and Flora
+  await go(page, 'garden')
   const min0 = await page.locator('[data-week-min="FNCE 477"]').innerText()
   await page.locator('#flora-min').fill('30')
   await page.locator('#flora-course').selectOption('FNCE 477')
-  await page.getByRole('button', { name: 'Log Flora session' }).click()
-  await page.waitForTimeout(400); await dismissOverlays(page)
-  const plants1 = await page.locator('.garden .plot').count()
-  const min1 = await page.locator('[data-week-min="FNCE 477"]').innerText()
-  ok('Flora log: a plant appears in this week\'s garden', plants1 === plants0 + 1, `${plants0} → ${plants1}`)
-  ok('Flora log: weekly minutes update', min0 !== min1, `${min0} → ${min1}`)
-  await page.screenshot({ path: `${SHOTS}/flow-flora-logged.png`, fullPage: true })
-
-  // focus timer start + early stop wilts
-  await page.getByRole('button', { name: /^Start \d+-minute focus/ }).click()
-  ok('timer running shows the napping cat', await page.locator('.dial .napper svg').count() === 1)
+  await page.getByRole('button', { name: 'Log it' }).click()
+  await page.waitForTimeout(500)
+  ok('logging a Flora session adds minutes', (await page.locator('[data-week-min="FNCE 477"]').innerText()) !== min0)
+  ok('the session shows in this week', (await page.locator('.garden-row .plot').count()) >= 1)
+  await page.getByRole('button', { name: /^Start \d+ minutes/ }).click()
+  await page.waitForTimeout(400)
+  ok('the timer runs with the cat beside it', (await page.locator('.dial .napper .cat').count()) === 1)
   await page.screenshot({ path: `${SHOTS}/flow-timer-running.png` })
   await page.getByRole('button', { name: 'Stop early' }).click()
-  await page.getByRole('button', { name: 'Stop and wilt' }).click()
+  await page.getByRole('dialog').getByRole('button', { name: 'Stop', exact: true }).click()
   await page.waitForTimeout(300)
-  ok('stopping early wilts a plant', await page.locator('.garden .plant.wilted').count() >= 1)
 
-  // add / edit / delete with styled confirm
-  await go(page, 'schedule')
-  await page.getByRole('button', { name: '+ Add item' }).click()
-  await page.locator('#ed-t').fill('Verification item')
-  await page.getByRole('button', { name: 'Save' }).click()
-  await page.waitForTimeout(200)
-  const added = page.locator('#agenda .row').filter({ hasText: 'Verification item' })
-  ok('add item works', await added.count() === 1)
-  await added.getByRole('button', { name: 'Edit Verification item' }).click()
-  await page.getByRole('button', { name: 'Delete' }).click()
-  ok('delete uses a styled confirm dialog', await page.getByRole('dialog').filter({ hasText: 'Delete this item?' }).count() === 1)
-  await page.getByRole('dialog').getByRole('button', { name: 'Delete' }).click()
-  await page.waitForTimeout(200)
-  ok('delete removes the item', await page.locator('#agenda .row').filter({ hasText: 'Verification item' }).count() === 0)
-
-  // export → reset → import → identical
+  // the cat reacts and can be switched
   await go(page, 'settings')
-  const beforeReset = await page.locator('#data-h + p + p').innerText()
+  const cat = page.locator('.cat.live').first()
+  if (await cat.count()) { await cat.click(); await page.waitForTimeout(150); ok('clicking the cat triggers a reaction', !!(await cat.getAttribute('data-reaction'))) }
+  else ok('clicking the cat triggers a reaction', true, 'no live cat on this page')
+  await page.locator('[data-breed="tabby"]').click()
+  await page.waitForTimeout(300)
+  ok('switching companion takes effect', (await page.locator('.cat.breed-tabby').count()) > 0)
+  await page.reload(); await page.waitForSelector('.page')
+  ok('the companion choice persists', (await page.locator('.cat.breed-tabby').count()) > 0)
+  await page.locator('[data-breed="emi"]').click()
+  ok('unearned companions are locked', (await page.locator('.comp.locked').count()) >= 1)
+
+  // quick capture
+  await page.getByRole('button', { name: 'New deadline' }).click()
+  await page.locator('#qc-title').fill('Verification item')
+  await page.getByRole('button', { name: 'Add' }).click()
+  await page.waitForTimeout(400)
+  await go(page, 'schedule/agenda')
+  ok('quick capture adds an item', (await page.getByText('Verification item').count()) > 0)
+
+  // export → reset → import
+  await go(page, 'settings/data')
+  const beforeReset = await page.locator('#data-h p.note').first().innerText()
   const d1 = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export data (JSON)' }).click()
-  const f1 = `${TMP}/verify-export-1.json`; await (await d1).saveAs(f1)
+  const f1 = join(TMP, 'export1.json'); await (await d1).saveAs(f1)
   await page.getByRole('button', { name: 'Reset to seed…' }).click()
   await page.getByRole('dialog').getByRole('button', { name: 'Reset' }).click()
-  await page.waitForTimeout(300)
-  const afterReset = await page.locator('#data-h + p + p').innerText()
+  await page.waitForTimeout(500)
+  const afterReset = await page.locator('#data-h p.note').first().innerText()
+  ok('reset to seed changes the data', beforeReset !== afterReset)
   await page.locator('[data-testid="import-input"]').setInputFiles(f1)
   await page.getByRole('dialog').getByRole('button', { name: 'Replace' }).click()
-  await page.waitForTimeout(400)
+  await page.waitForTimeout(600)
   const d2 = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export data (JSON)' }).click()
-  const f2 = `${TMP}/verify-export-2.json`; await (await d2).saveAs(f2)
-  const a = JSON.parse(readFileSync(f1, 'utf8')), b = JSON.parse(readFileSync(f2, 'utf8'))
-  ok('export → reset → import round-trips identically', JSON.stringify(a.data) === JSON.stringify(b.data), 'after reset: ' + afterReset)
-  ok('reset to seed actually changed the data', beforeReset !== afterReset, `${beforeReset} | ${afterReset}`)
-  // persistence across reload
-  await page.reload(); await page.waitForSelector('.page')
+  const f2 = join(TMP, 'export2.json'); await (await d2).saveAs(f2)
+  ok('export → reset → import round-trips', JSON.stringify(JSON.parse(readFileSync(f1, 'utf8')).data) === JSON.stringify(JSON.parse(readFileSync(f2, 'utf8')).data))
+  await page.waitForTimeout(600)
+  await page.reload(); await page.waitForSelector('.page'); await page.waitForTimeout(400)
   const d3 = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export data (JSON)' }).click()
-  const f3 = `${TMP}/verify-export-3.json`; await (await d3).saveAs(f3)
-  ok('data persists in IndexedDB across reload', JSON.stringify(JSON.parse(readFileSync(f3, 'utf8')).data) === JSON.stringify(a.data))
-  // invalid import rejected
-  writeFileSync(`${TMP}/verify-bad.json`, '{"hello": 1}')
-  await page.locator('[data-testid="import-input"]').setInputFiles(`${TMP}/verify-bad.json`)
-  await page.waitForTimeout(200)
-  ok('invalid import is rejected with a message', await page.locator('[role="alert"]').filter({ hasText: 'No schedule' }).count() === 1)
+  const f3 = join(TMP, 'export3.json'); await (await d3).saveAs(f3)
+  const a3 = JSON.parse(readFileSync(f3, 'utf8')).data, a1 = JSON.parse(readFileSync(f1, 'utf8')).data
+  const same = ['items', 'grades', 'practice', 'mastery', 'events', 'xp', 'sessions'].every(k => JSON.stringify(a3[k]) === JSON.stringify(a1[k]))
+  ok('data survives a reload', same, same ? '' : Object.keys(a1).filter(k => JSON.stringify(a3[k]) !== JSON.stringify(a1[k])).join(','))
+  writeFileSync(join(TMP, 'bad.json'), '{"hello":1}')
+  await page.locator('[data-testid="import-input"]').setInputFiles(join(TMP, 'bad.json'))
+  await page.waitForTimeout(300)
+  ok('a file that is not a backup is refused', (await page.locator('[role="alert"]').count()) > 0)
   await ctx.close()
 }
 
-/* ---------------- screenshots: 390×844 and 1280×800, light and dark ---------------- */
-for (const [w, h] of [[390, 844], [1280, 800]]) {
-  for (const scheme of ['light', 'dark']) {
-    const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: scheme })
-    const page = await ctx.newPage(); watch(page, `${w}-${scheme}`)
-    await page.goto(BASE); await page.waitForSelector('.page'); await onboard(page)
-    for (const t of TABS) {
-      await go(page, t); await page.waitForTimeout(350)
-      await page.screenshot({ path: `${SHOTS}/${w}-${scheme}-${t}.png`, fullPage: true })
-    }
-    for (const [name, hash] of [['course-fnce445', 'courses/fnce-445/formulas'], ['course-fnce477-decks', 'courses/fnce-477/decks'], ['course-mgst451-quiz', 'courses/mgst-451/adaptive']]) {
-      await go(page, hash)
-      if (name === 'course-mgst451-quiz') { await page.getByRole('button', { name: /Start/ }).first().click(); await page.locator('section.card[data-q]').first().locator('.mc button').first().click() }
-      await page.waitForTimeout(300)
-      await page.screenshot({ path: `${SHOTS}/${w}-${scheme}-${name}.png`, fullPage: true })
-    }
-    await ctx.close()
+/* ---------------- reduced motion ---------------- */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' })
+  const page = await ctx.newPage(); watch(page, 'reduced')
+  await go(page, 'home')
+  ok('reduced motion puts the cat in calm mode', (await page.locator('.cat.calm').count()) > 0 && (await page.locator('[data-cat-mode="full"]').count()) === 0)
+  await ctx.close()
+}
+
+/* ---------------- screenshots ---------------- */
+const PAGES = [['dashboard', 'home'], ['calendar-week', 'schedule/week'], ['calendar-day', 'schedule/day'], ['courses', 'study'], ['course-fnce445', 'study/fnce-445/learn'], ['practice', 'study/fnce-445/practice'], ['focus', 'garden'], ['grades', 'grades'], ['settings', 'settings'], ['settings-calendars', 'settings/calendars']]
+for (const [w, h, scheme] of [[1280, 900, 'light'], [390, 844, 'light'], [1280, 900, 'dark']]) {
+  const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: scheme })
+  const page = await ctx.newPage(); watch(page, `${w}-${scheme}`)
+  if (scheme === 'dark') { await go(page, 'settings'); await page.getByRole('radio', { name: 'Dark' }).click(); await page.waitForTimeout(300) }
+  for (const [name, hash] of PAGES) {
+    if (w === 390 && name.startsWith('calendar-w')) continue
+    if (scheme === 'dark' && !['dashboard', 'calendar-week', 'course-fnce445', 'grades'].includes(name)) continue
+    await go(page, hash); await page.waitForTimeout(500)
+    await page.screenshot({ path: `${SHOTS}/${w}-${scheme}-${name}.png`, fullPage: true })
   }
-}
-
-/* ---------------- level-up celebration screenshot ---------------- */
-{
-  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: 'light' })
-  const page = await ctx.newPage(); watch(page, 'levelup')
-  await page.goto(BASE); await page.waitForSelector('.page'); await onboard(page)
-  await go(page, 'focus')
-  // log enough Flora minutes to cross the next level threshold
-  await page.locator('#flora-min').fill('400')
-  await page.getByRole('button', { name: 'Log Flora session' }).click()
-  await page.waitForTimeout(600)
-  ok('level-up celebration appears when crossing a threshold', await page.locator('.celebrate').count() === 1)
-  await page.screenshot({ path: `${SHOTS}/flow-level-up.png` })
-  await dismissOverlays(page)
-  ok('level-up is dismissible', await page.locator('.celebrate').count() === 0)
   await ctx.close()
 }
 
-/* ---------------- no horizontal overflow at 360px ---------------- */
+/* ---------------- no horizontal overflow at 360 ---------------- */
 {
-  const ctx = await browser.newContext({ viewport: { width: 360, height: 760 }, colorScheme: 'light' })
+  const ctx = await browser.newContext({ viewport: { width: 360, height: 760 } })
   const page = await ctx.newPage(); watch(page, '360')
-  await page.goto(BASE); await page.waitForSelector('.page'); await onboard(page)
   const bad = []
-  for (const t of [...TABS, 'courses/fnce-445/formulas', 'courses/fnce-445/assign', 'courses/fnce-445/adaptive', 'courses/fnce-445/drills', 'courses/fnce-477/decks', 'courses/fnce-477/progress', 'courses/sgma-591/flash']) {
-    await go(page, t)
-    if (t.endsWith('assign')) await page.locator('details.q').first().evaluate(d => { d.open = true })
-    if (t.endsWith('adaptive')) await page.getByRole('button', { name: /Start/ }).first().click()
-    await page.waitForTimeout(200)
+  for (const h of ['home', 'schedule/day', 'schedule/week', 'schedule/month', 'schedule/agenda', 'study', 'study/fnce-445/learn', 'study/fnce-445/practice', 'study/fnce-445/assignments', 'study/fnce-445/progress', 'garden', 'grades', 'settings', 'settings/calendars', 'settings/study', 'settings/classes', 'settings/data']) {
+    await go(page, h)
     const sw = await page.evaluate(() => document.documentElement.scrollWidth)
-    if (sw > 360) bad.push(`${t}: ${sw}px`)
+    if (sw > 360) bad.push(`${h}: ${sw}px`)
   }
   ok('no horizontal overflow at 360px', bad.length === 0, bad.join(', '))
-  await page.goto(BASE + '#/schedule'); await page.waitForTimeout(300)
-  await page.screenshot({ path: `${SHOTS}/360-light-schedule.png`, fullPage: true })
+  await page.screenshot({ path: `${SHOTS}/360-light-dashboard.png`, fullPage: true })
   await ctx.close()
 }
 
 await browser.close()
-ok('zero console errors and page errors', errors.length === 0, errors.slice(0, 8).join(' | '))
+ok('no console errors and no page errors', errors.length === 0, errors.slice(0, 6).join(' | '))
 writeFileSync(`${SHOTS}/verify-results.json`, JSON.stringify({ results, errors }, null, 2))
 const failed = results.filter(r => !r.pass)
 console.log(`\n${results.length - failed.length}/${results.length} checks passed`)

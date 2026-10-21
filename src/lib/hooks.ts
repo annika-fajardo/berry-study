@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useAppState } from '../store/store'
 import { itemsOf, gradesOf } from '../store/actions'
-import { on, type Mood } from './events'
-import { stripStats } from './schedule'
-import { lastActive } from './game'
-import { daysBetween, todayStr } from './dates'
+import { todayStr } from './dates'
 
 export function useNow(ms = 1000) {
   const [n, setN] = useState(() => Date.now())
@@ -21,20 +18,3 @@ export function useData() {
   return { s, items, grades }
 }
 
-/** Berry's resting mood from the state of things, briefly overridden by reactions (cheering/proud). */
-export function useBerryMood(): Mood {
-  const { s, items } = useData()
-  const t = useToday()
-  const [flash, setFlash] = useState<Mood | null>(null)
-  useEffect(() => {
-    let tm: ReturnType<typeof setTimeout>
-    const off = on('berry', e => { setFlash(e.mood); clearTimeout(tm); tm = setTimeout(() => setFlash(null), 2600) })
-    return () => { off(); clearTimeout(tm) }
-  }, [])
-  if (flash) return flash
-  if (s.timer) return 'studying'
-  if (stripStats(items, t).late.length) return 'worried'
-  const la = lastActive(s)
-  if (!la || daysBetween(la, t) >= 2) return 'sleepy'
-  return 'happy'
-}

@@ -17,10 +17,10 @@ export function setItemDone(id: string, done: boolean) {
     if (done) gained = grantXp(d, itemXp(i), 'Ticked off: ' + i.c + ' ' + i.t, { ref: 'item:' + id, c: i.c })
     else revokeXp(d, 'item:' + id)
   })
-  if (done) celebrateXp(gained)
+  if (done) celebrateXp(gained, 'tick')
   return gained
 }
-export type ItemDraft = { c: string; k: Kind; t: string; d: string; w: string; n: string }
+export type ItemDraft = { c: string; k: Kind; t: string; d: string; w: string; n: string; effort?: string }
 export function saveItem(id: string | null, x: ItemDraft) {
   update(d => {
     const base = id && d.items[id] ? d.items[id] : null
@@ -28,6 +28,8 @@ export function saveItem(id: string | null, x: ItemDraft) {
     if (x.d) doc.d = x.d; else if (base) doc.d = null
     if (x.w.trim()) doc.w = x.w.trim(); else if (base) doc.w = null
     if (x.n.trim()) doc.n = x.n.trim(); else if (base) doc.n = null
+    const ef = x.effort != null && x.effort.trim() !== '' ? Number(x.effort) : NaN
+    if (isFinite(ef) && ef >= 0) doc.effort = Math.round(ef * 100) / 100; else if (base && base.effort != null) doc.effort = null
     d.items[id || uid('it')] = doc
     if (id && base && base.done) { // keep the XP in step with the task's new weight
       revokeXp(d, 'item:' + id); grantXp(d, itemXp(doc), 'Ticked off: ' + doc.c + ' ' + doc.t, { ref: 'item:' + id, c: doc.c })
@@ -79,7 +81,6 @@ function addStudy(d: AppState, c: string, date: string, mins: number) {
 }
 export function startTimer(c: string, planned: number) {
   update(d => { d.timer = { c, start: Date.now(), planned } })
-  emit('berry', { mood: 'studying' })
 }
 /** Timer reached its planned length: the plant is grown, minutes and XP are logged. */
 export function completeTimer() {
@@ -110,8 +111,8 @@ export function addSession(x: { c: string; minutes: number; date: string; source
     addStudy(d, x.c, x.date, sess.minutes)
     if (x.status === 'grown') gained = grantXp(d, sess.minutes * XP.perMinute, (x.source === 'flora' ? 'Flora session: ' : 'Focus session: ') + x.c + ' ' + sess.minutes + ' min', { ref: 'session:' + id, c: x.c }, x.date)
   })
-  celebrateXp(gained, 'proud')
-  toast(PLANT_LABEL[sess.plant] + ' planted for ' + x.c + ' · +' + gained + ' XP')
+  celebrateXp(gained, x.source === 'timer' ? 'timerdone' : 'tick')
+  toast(PLANT_LABEL[sess.plant] + ' planted for ' + x.c + ' · ' + sess.minutes + ' min · +' + gained + ' xp')
   return sess
 }
 export function logFlora(c: string, minutes: number, date: string) { return addSession({ c, minutes, date, source: 'flora', status: 'grown' }) }

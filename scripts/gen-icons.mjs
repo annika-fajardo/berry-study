@@ -6,9 +6,9 @@ import { chromium } from 'playwright'
 const out = JSON.parse(execFileSync('npx', ['tsx', '-e', `
 import { berrySvg } from './scripts/icon-svg.tsx'
 console.log(JSON.stringify({
-  fav: berrySvg({ pad: 2, size: 64 }),
-  any: berrySvg({ pad: 8, bg: '#FCEBF1' }),
-  mask: berrySvg({ pad: 38, bg: '#FCEBF1' }),
+  fav: berrySvg({ pad: 4, bg: '#9CAD8C', size: 64 }),
+  any: berrySvg({ pad: 5, bg: '#9CAD8C' }),
+  mask: berrySvg({ pad: 18, bg: '#9CAD8C' }),
 }))`], { encoding: 'utf8' }))
 mkdirSync('public', { recursive: true })
 writeFileSync('public/favicon.svg', out.fav)

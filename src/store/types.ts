@@ -1,7 +1,7 @@
 /* Data model. Collections and field names from the old Course Desk are kept exactly
    (items, grades, practice, mastery, study, decks, deckruns, deckmeta) so ids keep matching. */
 export type Kind = 'test' | 'due' | 'class'
-export type Item = { id: string; c: string; d?: string | null; k: Kind; t: string; w?: string | null; n?: string | null; done?: boolean }
+export type Item = { id: string; c: string; d?: string | null; k: Kind; t: string; w?: string | null; n?: string | null; done?: boolean; effort?: number | null }
 export type Grade = { id: string; c: string; name: string; wt: number; score?: number | null; d?: string; o?: number }
 export type Practice = { c: string; label: string; tries: number; correct: number; last?: string }
 export type Mastery = { c: string; concept: string; seen: number; correct: number; last?: string }
@@ -29,7 +29,24 @@ export type Session = {
   status: 'grown' | 'wilted'; plant: PlantKind; ts: string
 }
 export type Timer = { c: string; start: number; planned: number } | null
-export type Settings = { theme: 'auto' | 'light' | 'dark'; catName: string; onboarded: boolean; planOpen: boolean; ch5only: boolean }
+export type CatAnim = 'auto' | 'full' | 'calm' | 'off'
+export type Settings = { theme: 'auto' | 'light' | 'dark'; catName: string; onboarded: boolean; planOpen: boolean; ch5only: boolean; catAnim: CatAnim; companion: string }
+
+/* Calendar (v3). Times are local wall-clock strings 'YYYY-MM-DDTHH:mm'; all-day events use 'YYYY-MM-DD'. */
+export type CalEvent = { title: string; start: string; end: string; c?: string; kind: 'study' | 'custom'; itemId?: string; note?: string; gcalId?: string; gcalCal?: string; created?: string }
+export type ExtEvent = { id: string; title: string; start: string; end: string; allDay: boolean; busy: boolean; source: 'google' | 'ics'; cal: string; color?: string; berry?: boolean; desc?: string }
+export type IcsSource = { name: string; importedAt: string; events: ExtEvent[]; work?: boolean; d2l?: boolean }
+export type Skip = { itemId: string; start: string }
+/** window[weekday] = [startMin, endMin], weekday 0 = Sunday */
+export type StudyPrefs = {
+  window: [number, number][]; maxHours: number; blockMin: number; breakMin: number; gapMin: number; noStudy: number[]
+  /* shift protection */
+  shiftRestMin: number; longShiftH: number; heavyDayH: number; lightMin: number
+}
+/** A weekly class meeting. selfStudy = she studies on her own instead of attending. */
+export type ClassMeet = { c: string; weekday: number; start: number; end: number; selfStudy: boolean }
+export type GCal = { id: string; summary: string; color?: string; selected: boolean; primary?: boolean; writable?: boolean; work?: boolean; d2l?: boolean }
+export type CalSettings = { clientId: string; connected: boolean; email?: string; calendars: GCal[]; writeCal: string; addToGoogle: boolean; lastSync?: string }
 
 export type Collections = {
   items: Record<string, Omit<Item, 'id'>>
@@ -49,6 +66,19 @@ export type AppState = Collections & {
   settings: Settings
   timer: Timer
   meta: { createdAt: string; seededFrom: string }
+  events: Record<string, CalEvent>
+  skips: Record<string, Skip>
+  ics: Record<string, IcsSource>
+  gcache: { events: ExtEvent[]; fetchedAt?: string }
+  cal: CalSettings
+  prefs: StudyPrefs
+  classes: Record<string, ClassMeet>
+  /** event ids the user marked as work (true) or explicitly not work (false) */
+  workMarks: Record<string, boolean>
+  /** what-if marks per grade row; never written into grades */
+  whatIf: Record<string, number>
+  /** D2L updates the user chose to ignore, by key */
+  d2lIgnore: Record<string, boolean>
 }
 export const COLLECTION_KEYS = ['items', 'grades', 'practice', 'mastery', 'study', 'decks', 'deckruns', 'deckmeta'] as const
-export const APP_KEYS = ['xp', 'sessions', 'written'] as const
+export const APP_KEYS = ['xp', 'sessions', 'written', 'events', 'skips', 'ics', 'classes', 'workMarks', 'whatIf', 'd2lIgnore'] as const
