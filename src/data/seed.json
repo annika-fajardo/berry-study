@@ -1,0 +1,3287 @@
+{
+ "items": {
+  "a01": {
+   "c": "FNCE 477",
+   "d": "2026-10-13",
+   "done": true,
+   "k": "test",
+   "n": "Covers Oct 6 & 8: cash flow, net worth, tax on assets and liabilities, banking, credit, debt",
+   "t": "Quiz 4",
+   "w": "5%"
+  },
+  "a02": {
+   "c": "FNCE 477",
+   "d": "2026-10-13",
+   "done": true,
+   "k": "class",
+   "n": "Read More$ Ch 7 & 12",
+   "t": "Non-registered & registered accounts (RRSP, RRIF, TFSA, FHSA, RDSP)"
+  },
+  "a03": {
+   "c": "FNCE 477",
+   "d": "2026-10-15",
+   "done": false,
+   "k": "class",
+   "n": "Read More$ Ch 3 · Handbook Mod 5 in class",
+   "t": "Registered accounts continued + RESPs"
+  },
+  "a04": {
+   "c": "FNCE 477",
+   "d": "2026-10-20",
+   "done": false,
+   "k": "test",
+   "n": "Covers Oct 13 & 15: registered accounts and RESPs",
+   "t": "Quiz 5",
+   "w": "5%"
+  },
+  "a05": {
+   "c": "FNCE 477",
+   "d": "2026-10-20",
+   "done": true,
+   "k": "class",
+   "n": "Read Wealthing Ch 3 & 6",
+   "t": "Finances of housing, HELOC"
+  },
+  "a06": {
+   "c": "FNCE 477",
+   "d": "2026-10-22",
+   "done": false,
+   "k": "class",
+   "n": "Read More$ Ch 9 · Barber p. 89–96",
+   "t": "Individual & corporate tax planning"
+  },
+  "a07": {
+   "c": "FNCE 477",
+   "d": "2026-10-27",
+   "done": false,
+   "k": "class",
+   "t": "Life, property & casualty insurance"
+  },
+  "a08": {
+   "c": "FNCE 477",
+   "d": "2026-10-29",
+   "done": false,
+   "k": "test",
+   "n": "In class, closed book. Course outcomes 1–6",
+   "t": "Midterm exam",
+   "w": "15%"
+  },
+  "a09": {
+   "c": "FNCE 477",
+   "d": "2026-11-03",
+   "done": false,
+   "k": "class",
+   "n": "Read Barber p. 111–115",
+   "t": "Retirement: CPP, OAS, corporate pensions"
+  },
+  "a10": {
+   "c": "FNCE 477",
+   "d": "2026-11-05",
+   "done": false,
+   "k": "class",
+   "n": "Read Psych of $ Ch 5",
+   "t": "Retirement planning continued"
+  },
+  "a11": {
+   "c": "FNCE 477",
+   "d": "2026-11-17",
+   "done": false,
+   "k": "test",
+   "n": "Covers Nov 3 & 5 retirement material",
+   "t": "Quiz 6",
+   "w": "5%"
+  },
+  "a12": {
+   "c": "FNCE 477",
+   "d": "2026-11-17",
+   "done": false,
+   "k": "class",
+   "n": "Read Wealthing Ch 9",
+   "t": "Wills, POAs & estate planning"
+  },
+  "a13": {
+   "c": "FNCE 477",
+   "d": "2026-11-19",
+   "done": false,
+   "k": "class",
+   "n": "Read Barber p. 183–184",
+   "t": "Prenups and trusts"
+  },
+  "a14": {
+   "c": "FNCE 477",
+   "d": "2026-11-24",
+   "done": false,
+   "k": "test",
+   "n": "Missing it counts as zero, no deferral",
+   "t": "Group in-class financial planning case",
+   "w": "15%"
+  },
+  "a15": {
+   "c": "FNCE 477",
+   "d": "2026-11-26",
+   "done": false,
+   "k": "test",
+   "n": "Covers Nov 17 & 19: estate planning, prenups, trusts",
+   "t": "Quiz 7",
+   "w": "5%"
+  },
+  "a16": {
+   "c": "FNCE 477",
+   "d": "2026-12-03",
+   "done": false,
+   "k": "test",
+   "n": "All course material, no sources allowed",
+   "t": "Individual in-class financial planning case",
+   "w": "15%"
+  },
+  "a17": {
+   "c": "FNCE 477",
+   "d": "2026-12-04",
+   "done": false,
+   "k": "due",
+   "n": "Individual or pairs. 50% off if late within 24h, zero after",
+   "t": "Our Amazing Investment Portfolio project",
+   "w": "10%"
+  },
+  "b01": {
+   "c": "FNCE 445",
+   "d": "2026-10-16",
+   "done": true,
+   "k": "due",
+   "n": "D2L dropbox by 11:00 pm. No late submissions",
+   "t": "Assignment 2 (group)",
+   "w": "of 20%"
+  },
+  "b02": {
+   "c": "FNCE 445",
+   "d": "2026-10-14",
+   "done": true,
+   "k": "test",
+   "n": "Computer-based, in person, closed book, start of class",
+   "t": "Quiz 2",
+   "w": "of 15%"
+  },
+  "b03": {
+   "c": "FNCE 445",
+   "d": "2026-10-14",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 5",
+   "t": "Pricing financial forwards & futures"
+  },
+  "b04": {
+   "c": "FNCE 445",
+   "d": "2026-10-19",
+   "done": false,
+   "k": "class",
+   "n": "Ch 5",
+   "t": "Pricing forwards & futures continued"
+  },
+  "b05": {
+   "c": "FNCE 445",
+   "d": "2026-10-21",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 7",
+   "t": "Interest rate forwards & futures"
+  },
+  "b06": {
+   "c": "FNCE 445",
+   "d": "2026-10-26",
+   "done": false,
+   "k": "class",
+   "n": "Ch 7",
+   "t": "Interest rate forwards & futures continued"
+  },
+  "b07": {
+   "c": "FNCE 445",
+   "d": "2026-10-28",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 9",
+   "t": "Put-call parity"
+  },
+  "b08": {
+   "c": "FNCE 445",
+   "d": "2026-11-02",
+   "done": false,
+   "k": "due",
+   "n": "D2L dropbox by midnight",
+   "t": "Assignment 3 (group)",
+   "w": "of 20%"
+  },
+  "b09": {
+   "c": "FNCE 445",
+   "d": "2026-11-02",
+   "done": false,
+   "k": "class",
+   "n": "Ch 9",
+   "t": "Put-call parity continued"
+  },
+  "b10": {
+   "c": "FNCE 445",
+   "d": "2026-11-04",
+   "done": false,
+   "k": "test",
+   "n": "90 min, calculator + formula sheet. No questions answered in the last 24h",
+   "t": "Midterm exam",
+   "w": "25%"
+  },
+  "b11": {
+   "c": "FNCE 445",
+   "d": "2026-11-16",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 10",
+   "t": "Binomial option pricing"
+  },
+  "b12": {
+   "c": "FNCE 445",
+   "d": "2026-11-18",
+   "done": false,
+   "k": "class",
+   "n": "Ch 10",
+   "t": "Binomial option pricing continued"
+  },
+  "b13": {
+   "c": "FNCE 445",
+   "d": "2026-11-23",
+   "done": false,
+   "k": "class",
+   "n": "Ch 10",
+   "t": "The Black-Scholes model"
+  },
+  "b14": {
+   "c": "FNCE 445",
+   "d": "2026-11-25",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 12",
+   "t": "Black-Scholes continued"
+  },
+  "b15": {
+   "c": "FNCE 445",
+   "d": "2026-11-30",
+   "done": false,
+   "k": "due",
+   "n": "D2L dropbox by midnight",
+   "t": "Assignment 4 (group)",
+   "w": "of 20%"
+  },
+  "b16": {
+   "c": "FNCE 445",
+   "d": "2026-12-02",
+   "done": false,
+   "k": "class",
+   "t": "Final exam review"
+  },
+  "b17": {
+   "c": "FNCE 445",
+   "done": false,
+   "k": "test",
+   "n": "Date set by the Registrar. Calculator + formula sheet allowed",
+   "t": "Final exam",
+   "w": "35%"
+  },
+  "c01": {
+   "c": "MGST 451",
+   "d": "2026-10-13",
+   "done": true,
+   "k": "due",
+   "n": "You're doing the intro and conclusion. Upload slides with citations to D2L before the debate starts",
+   "t": "Your debate (Team 3): FOR mandatory board diversity quotas",
+   "w": "15%"
+  },
+  "c02": {
+   "c": "MGST 451",
+   "d": "2026-10-15",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 7 & 8",
+   "t": "CEO labor market & succession; executive compensation"
+  },
+  "c03": {
+   "c": "MGST 451",
+   "d": "2026-10-20",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 9",
+   "t": "Executive equity ownership"
+  },
+  "c04": {
+   "c": "MGST 451",
+   "d": "2026-10-22",
+   "done": false,
+   "k": "class",
+   "n": "Ask a question for participation marks",
+   "t": "Other teams present (9, 8, 7) + executive equity ownership"
+  },
+  "c05": {
+   "c": "MGST 451",
+   "d": "2026-10-27",
+   "done": false,
+   "k": "class",
+   "n": "You score the debate. Good participation day",
+   "t": "Debate 3 (watch): Are CEOs overpaid?"
+  },
+  "c06": {
+   "c": "MGST 451",
+   "d": "2026-10-29",
+   "done": false,
+   "k": "class",
+   "n": "Materials in D2L",
+   "t": "Supermajority shares + role of ESG"
+  },
+  "c07": {
+   "c": "MGST 451",
+   "d": "2026-11-03",
+   "done": false,
+   "k": "test",
+   "n": "Scantron, in class. Covers preceding lectures",
+   "t": "Quiz 2",
+   "w": "10%"
+  },
+  "c08": {
+   "c": "MGST 451",
+   "d": "2026-11-05",
+   "done": false,
+   "k": "class",
+   "n": "You score the debate",
+   "t": "Debate 4 (watch): Tech founders' supermajority voting rights"
+  },
+  "c09": {
+   "c": "MGST 451",
+   "d": "2026-11-17",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 11",
+   "t": "Other teams present (4, 5, 6) + market for corporate control"
+  },
+  "c10": {
+   "c": "MGST 451",
+   "d": "2026-11-19",
+   "done": false,
+   "k": "class",
+   "n": "You score the debate",
+   "t": "Debate 5 (watch): ESG, essential or a distraction?"
+  },
+  "c11": {
+   "c": "MGST 451",
+   "d": "2026-11-24",
+   "done": false,
+   "k": "due",
+   "n": "8 minutes. Email your company choice to the prof when asked; upload slides to D2L before presenting. Read Ch 11",
+   "t": "Your governance failure presentation (Team 3)",
+   "w": "12.5%"
+  },
+  "c12": {
+   "c": "MGST 451",
+   "d": "2026-11-26",
+   "done": false,
+   "k": "due",
+   "n": "D2L dropbox. 10% off per late hour. Don't upload the case into AI tools",
+   "t": "Group case report",
+   "w": "12.5%"
+  },
+  "c13": {
+   "c": "MGST 451",
+   "d": "2026-11-26",
+   "done": false,
+   "k": "class",
+   "n": "Same day your case report is due",
+   "t": "Debate 6 (watch): AI in governance"
+  },
+  "c14": {
+   "c": "MGST 451",
+   "d": "2026-12-01",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 2",
+   "t": "International governance models; case and course recap"
+  },
+  "c15": {
+   "c": "MGST 451",
+   "done": false,
+   "k": "test",
+   "n": "2 hours, paper, no sources. Covers lectures, cases, debates, presentations",
+   "t": "Final exam",
+   "w": "30%"
+  },
+  "d01": {
+   "c": "SGMA 591",
+   "d": "2026-10-12",
+   "done": true,
+   "k": "due",
+   "n": "Full workbook to the D2L dropbox",
+   "t": "FUSION workbook: Apply & Reflect",
+   "w": "10%"
+  },
+  "d02": {
+   "c": "SGMA 591",
+   "d": "2026-10-13",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 9 · Case: Nike Acquires RTFKT",
+   "t": "Strategic alliances, mergers & acquisitions"
+  },
+  "d03": {
+   "c": "SGMA 591",
+   "d": "2026-10-15",
+   "done": false,
+   "k": "class",
+   "t": "Guest: Aasit Amin, Jayman Built (corporate strategy)"
+  },
+  "d04": {
+   "c": "SGMA 591",
+   "d": "2026-10-25",
+   "done": false,
+   "k": "due",
+   "n": "Outline also says Oct 25, so confirm. Max 10 pages; case-era and present-day analysis",
+   "t": "ICA take-home midterm",
+   "w": "25%"
+  },
+  "d05": {
+   "c": "SGMA 591",
+   "d": "2026-10-20",
+   "done": false,
+   "k": "class",
+   "t": "Guest: Jonathan Reimche, PwC (synergy through corporate strategy)"
+  },
+  "d06": {
+   "c": "SGMA 591",
+   "d": "2026-10-22",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 10 · Case: IKEA",
+   "t": "Global strategy + mini-case preview"
+  },
+  "d07": {
+   "c": "SGMA 591",
+   "d": "2026-10-27",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 11 & 12 · Case: OpenAI",
+   "t": "Organizational design, governance & ethics"
+  },
+  "d08": {
+   "c": "SGMA 591",
+   "d": "2026-10-29",
+   "done": false,
+   "k": "class",
+   "n": "Watch and engage for participation",
+   "t": "Mini-case presentations (Groups 8, 7, 6, 5)"
+  },
+  "d09": {
+   "c": "SGMA 591",
+   "d": "2026-11-03",
+   "done": false,
+   "k": "due",
+   "n": "15 min with Q&A. Upload slides to D2L before class",
+   "t": "Your mini-case presentation (Group 1)",
+   "w": "5%"
+  },
+  "d10": {
+   "c": "SGMA 591",
+   "d": "2026-11-05",
+   "done": false,
+   "k": "test",
+   "n": "No devices. Graded on participation",
+   "t": "Analog Case Competition Day",
+   "w": "5%"
+  },
+  "d11": {
+   "c": "SGMA 591",
+   "d": "2026-11-17",
+   "done": false,
+   "k": "class",
+   "n": "Read Ch 5 · Case: Patagonia",
+   "t": "Competitive advantage, shared value & business models"
+  },
+  "d12": {
+   "c": "SGMA 591",
+   "d": "2026-11-24",
+   "done": false,
+   "k": "due",
+   "n": "20 min + 10 min questions. First slot of the term",
+   "t": "Your SAP presentation (Group 1)",
+   "w": "10%"
+  },
+  "d13": {
+   "c": "SGMA 591",
+   "d": "2026-12-04",
+   "done": false,
+   "k": "due",
+   "n": "Up to 30 slides to D2L. 10% off per late day",
+   "t": "SAP written submission",
+   "w": "25%"
+  },
+  "d14": {
+   "c": "SGMA 591",
+   "d": "2026-12-05",
+   "done": false,
+   "k": "due",
+   "n": "Within 24h of the SAP deadline, via D2L",
+   "t": "SAP peer evaluation"
+  },
+  "d15": {
+   "c": "SGMA 591",
+   "d": "2026-11-23",
+   "done": false,
+   "k": "due",
+   "n": "At least 24h before your Nov 24 presentation",
+   "t": "SAP slides to Dr. Dewald"
+  }
+ },
+ "grades": {
+  "g445-01": {
+   "c": "FNCE 445",
+   "d": "Sep 26",
+   "name": "Assignment 1",
+   "o": 1,
+   "score": 100,
+   "wt": 5
+  },
+  "g445-02": {
+   "c": "FNCE 445",
+   "d": "Sep 28",
+   "name": "Quiz 1",
+   "o": 2,
+   "score": 73.33,
+   "wt": 7.5
+  },
+  "g445-03": {
+   "c": "FNCE 445",
+   "d": "Oct 16",
+   "name": "Assignment 2",
+   "o": 3,
+   "score": 97.5,
+   "wt": 5
+  },
+  "g445-04": {
+   "c": "FNCE 445",
+   "d": "Oct 14",
+   "name": "Quiz 2",
+   "o": 4,
+   "score": 53.85,
+   "wt": 7.5
+  },
+  "g445-05": {
+   "c": "FNCE 445",
+   "d": "Nov 2",
+   "name": "Assignment 3",
+   "o": 5,
+   "score": null,
+   "wt": 5
+  },
+  "g445-06": {
+   "c": "FNCE 445",
+   "d": "Nov 4",
+   "name": "Midterm",
+   "o": 6,
+   "score": null,
+   "wt": 25
+  },
+  "g445-07": {
+   "c": "FNCE 445",
+   "d": "Nov 30",
+   "name": "Assignment 4",
+   "o": 7,
+   "score": null,
+   "wt": 5
+  },
+  "g445-08": {
+   "c": "FNCE 445",
+   "name": "Participation",
+   "o": 8,
+   "score": null,
+   "wt": 5
+  },
+  "g445-09": {
+   "c": "FNCE 445",
+   "d": "TBD",
+   "name": "Final exam",
+   "o": 9,
+   "score": null,
+   "wt": 35
+  },
+  "g451-01": {
+   "c": "MGST 451",
+   "d": "Oct 1",
+   "name": "Quiz 1",
+   "o": 1,
+   "score": null,
+   "wt": 10
+  },
+  "g451-02": {
+   "c": "MGST 451",
+   "d": "Oct 13",
+   "name": "Debate (group)",
+   "o": 2,
+   "score": null,
+   "wt": 15
+  },
+  "g451-03": {
+   "c": "MGST 451",
+   "d": "Nov 3",
+   "name": "Quiz 2",
+   "o": 3,
+   "score": null,
+   "wt": 10
+  },
+  "g451-04": {
+   "c": "MGST 451",
+   "d": "Nov 24",
+   "name": "Governance failure presentation",
+   "o": 4,
+   "score": null,
+   "wt": 12.5
+  },
+  "g451-05": {
+   "c": "MGST 451",
+   "d": "Nov 26",
+   "name": "Case report (group)",
+   "o": 5,
+   "score": null,
+   "wt": 12.5
+  },
+  "g451-06": {
+   "c": "MGST 451",
+   "name": "Participation",
+   "o": 6,
+   "score": null,
+   "wt": 10
+  },
+  "g451-07": {
+   "c": "MGST 451",
+   "d": "TBD",
+   "name": "Final exam",
+   "o": 7,
+   "score": null,
+   "wt": 30
+  },
+  "g477-01": {
+   "c": "FNCE 477",
+   "d": "Sep 8",
+   "name": "Quiz 1",
+   "o": 1,
+   "score": 90,
+   "wt": 5
+  },
+  "g477-02": {
+   "c": "FNCE 477",
+   "d": "Sep 15",
+   "name": "Quiz 2",
+   "o": 2,
+   "score": 88.9,
+   "wt": 5
+  },
+  "g477-03": {
+   "c": "FNCE 477",
+   "d": "Sep 22",
+   "name": "Quiz 3",
+   "o": 3,
+   "score": 90,
+   "wt": 5
+  },
+  "g477-04": {
+   "c": "FNCE 477",
+   "d": "Oct 1",
+   "name": "TVM quiz",
+   "o": 4,
+   "score": 95,
+   "wt": 10
+  },
+  "g477-05": {
+   "c": "FNCE 477",
+   "d": "Oct 13",
+   "name": "Quiz 4",
+   "o": 5,
+   "score": 84,
+   "wt": 5
+  },
+  "g477-06": {
+   "c": "FNCE 477",
+   "d": "Oct 20",
+   "name": "Quiz 5",
+   "o": 6,
+   "score": null,
+   "wt": 5
+  },
+  "g477-07": {
+   "c": "FNCE 477",
+   "d": "Oct 29",
+   "name": "Midterm",
+   "o": 7,
+   "score": null,
+   "wt": 15
+  },
+  "g477-08": {
+   "c": "FNCE 477",
+   "d": "Nov 17",
+   "name": "Quiz 6",
+   "o": 8,
+   "score": null,
+   "wt": 5
+  },
+  "g477-09": {
+   "c": "FNCE 477",
+   "d": "Nov 24",
+   "name": "Group case",
+   "o": 9,
+   "score": null,
+   "wt": 15
+  },
+  "g477-10": {
+   "c": "FNCE 477",
+   "d": "Nov 26",
+   "name": "Quiz 7",
+   "o": 10,
+   "score": null,
+   "wt": 5
+  },
+  "g477-11": {
+   "c": "FNCE 477",
+   "d": "Dec 3",
+   "name": "Individual case",
+   "o": 11,
+   "score": null,
+   "wt": 15
+  },
+  "g477-12": {
+   "c": "FNCE 477",
+   "d": "Dec 4",
+   "name": "Investment portfolio",
+   "o": 12,
+   "score": null,
+   "wt": 10
+  },
+  "g591-01": {
+   "c": "SGMA 591",
+   "d": "Sep 23",
+   "name": "FUSION Explore",
+   "o": 1,
+   "score": 100,
+   "wt": 5
+  },
+  "g591-02": {
+   "c": "SGMA 591",
+   "d": "Oct 12",
+   "name": "FUSION Apply & Reflect",
+   "o": 2,
+   "score": null,
+   "wt": 10
+  },
+  "g591-03": {
+   "c": "SGMA 591",
+   "d": "Oct 18",
+   "name": "ICA take-home midterm",
+   "o": 3,
+   "score": null,
+   "wt": 25
+  },
+  "g591-04": {
+   "c": "SGMA 591",
+   "d": "Nov 3",
+   "name": "Mini-case presentation",
+   "o": 4,
+   "score": null,
+   "wt": 5
+  },
+  "g591-05": {
+   "c": "SGMA 591",
+   "d": "Nov 5",
+   "name": "Analog Day",
+   "o": 5,
+   "score": null,
+   "wt": 5
+  },
+  "g591-06": {
+   "c": "SGMA 591",
+   "d": "Nov 24",
+   "name": "SAP presentation",
+   "o": 6,
+   "score": null,
+   "wt": 10
+  },
+  "g591-07": {
+   "c": "SGMA 591",
+   "d": "Dec 4",
+   "name": "SAP written",
+   "o": 7,
+   "score": null,
+   "wt": 25
+  },
+  "g591-08": {
+   "c": "SGMA 591",
+   "name": "Participation",
+   "o": 8,
+   "score": null,
+   "wt": 15
+  }
+ },
+ "practice": {
+  "a2-1": {
+   "c": "FNCE 445",
+   "correct": 8,
+   "label": "Assignment 2 · Q1",
+   "last": "2026-10-12",
+   "tries": 11
+  },
+  "a2-2": {
+   "c": "FNCE 445",
+   "correct": 7,
+   "label": "Assignment 2 · Q2",
+   "last": "2026-10-12",
+   "tries": 15
+  },
+  "a2-3": {
+   "c": "FNCE 445",
+   "correct": 9,
+   "label": "Assignment 2 · Q3",
+   "last": "2026-10-16",
+   "tries": 17
+  },
+  "a2-4": {
+   "c": "FNCE 445",
+   "correct": 7,
+   "label": "Assignment 2 · Q4",
+   "last": "2026-10-16",
+   "tries": 8
+  },
+  "a2-5": {
+   "c": "FNCE 445",
+   "correct": 4,
+   "label": "Assignment 2 · Q5",
+   "last": "2026-10-16",
+   "tries": 4
+  },
+  "drill-arb": {
+   "c": "FNCE 445",
+   "correct": 1,
+   "label": "Arbitrage profit on a mispriced forward",
+   "last": "2026-10-13",
+   "tries": 4
+  },
+  "drill-prep": {
+   "c": "FNCE 445",
+   "correct": 0,
+   "label": "Prepaid forward (discrete dividends)",
+   "last": "2026-10-13",
+   "tries": 2
+  },
+  "pq1": {
+   "c": "FNCE 445",
+   "correct": 1,
+   "label": "Quiz 2 practice 1",
+   "last": "2026-10-14",
+   "tries": 3
+  },
+  "pq2": {
+   "c": "FNCE 445",
+   "correct": 2,
+   "label": "Quiz 2 practice 2",
+   "last": "2026-10-14",
+   "tries": 2
+  },
+  "pq3": {
+   "c": "FNCE 445",
+   "correct": 2,
+   "label": "Quiz 2 practice 3",
+   "last": "2026-10-14",
+   "tries": 2
+  },
+  "pq4": {
+   "c": "FNCE 445",
+   "correct": 2,
+   "label": "Quiz 2 practice 4",
+   "last": "2026-10-14",
+   "tries": 2
+  },
+  "pq5": {
+   "c": "FNCE 445",
+   "correct": 1,
+   "label": "Quiz 2 practice 5",
+   "last": "2026-10-14",
+   "tries": 3
+  },
+  "pq6": {
+   "c": "FNCE 445",
+   "correct": 1,
+   "label": "Quiz 2 practice 6",
+   "last": "2026-10-14",
+   "tries": 3
+  },
+  "q477-1": {
+   "c": "FNCE 477",
+   "correct": 0,
+   "label": "Quiz 4 practice 1",
+   "last": "2026-10-13",
+   "tries": 2
+  },
+  "q477-10": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 10",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-11": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 11",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-12": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 12",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-13": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 13",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-14": {
+   "c": "FNCE 477",
+   "correct": 0,
+   "label": "Quiz 4 practice 14",
+   "last": "2026-10-13",
+   "tries": 2
+  },
+  "q477-15": {
+   "c": "FNCE 477",
+   "correct": 0,
+   "label": "Quiz 4 practice 15",
+   "last": "2026-10-13",
+   "tries": 2
+  },
+  "q477-2": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 2",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-3": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 3",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-4": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 4",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-5": {
+   "c": "FNCE 477",
+   "correct": 0,
+   "label": "Quiz 4 practice 5",
+   "last": "2026-10-13",
+   "tries": 2
+  },
+  "q477-6": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 6",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-7": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 7",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-8": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 8",
+   "last": "2026-10-13",
+   "tries": 1
+  },
+  "q477-9": {
+   "c": "FNCE 477",
+   "correct": 1,
+   "label": "Quiz 4 practice 9",
+   "last": "2026-10-13",
+   "tries": 1
+  }
+ },
+ "mastery": {
+  "fnce-445--qt-arb": {
+   "c": "FNCE 445",
+   "concept": "Arbitrage on a mispriced forward",
+   "correct": 1,
+   "last": "2026-10-14",
+   "seen": 1
+  },
+  "fnce-445--qt-bfly": {
+   "c": "FNCE 445",
+   "concept": "Butterfly max profit",
+   "correct": 1,
+   "last": "2026-10-14",
+   "seen": 1
+  },
+  "fnce-445--qt-bound": {
+   "c": "FNCE 445",
+   "concept": "No-arbitrage bounds",
+   "correct": 0,
+   "last": "2026-10-14",
+   "seen": 1
+  },
+  "fnce-445--qt-collar": {
+   "c": "FNCE 445",
+   "concept": "Collar min/max profit",
+   "correct": 0,
+   "last": "2026-10-14",
+   "seen": 1
+  },
+  "fnce-445--qt-fvalL": {
+   "c": "FNCE 445",
+   "concept": "Value of a long forward",
+   "correct": 0,
+   "last": "2026-10-14",
+   "seen": 1
+  },
+  "fnce-445--qt-fwd": {
+   "c": "FNCE 445",
+   "concept": "Forward price (no dividends)",
+   "correct": 2,
+   "last": "2026-10-14",
+   "seen": 2
+  },
+  "fnce-445--qt-fwdy": {
+   "c": "FNCE 445",
+   "concept": "Forward with a dividend yield",
+   "correct": 1,
+   "last": "2026-10-14",
+   "seen": 2
+  },
+  "fnce-445--qt-pcp": {
+   "c": "FNCE 445",
+   "concept": "Put-call parity",
+   "correct": 1,
+   "last": "2026-10-14",
+   "seen": 1
+  },
+  "fnce-477--assets": {
+   "c": "FNCE 477",
+   "concept": "Assets",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--balance-sheet-net-worth-statement": {
+   "c": "FNCE 477",
+   "concept": "Balance sheet (net worth statement)",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--balance-vs-flow-the-classic-trap": {
+   "c": "FNCE 477",
+   "concept": "Balance vs flow: the classic trap",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--big-idea": {
+   "c": "FNCE 477",
+   "concept": "Big idea",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--cash-flow-statement": {
+   "c": "FNCE 477",
+   "concept": "Cash flow statement",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--deck-c-5cs": {
+   "c": "FNCE 477",
+   "concept": "Five Cs of credit",
+   "correct": 0,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-adverse": {
+   "c": "FNCE 477",
+   "concept": "Adverse data time limits and disputes",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-bankrupt": {
+   "c": "FNCE 477",
+   "concept": "Bankruptcy and consumer proposals",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-basics": {
+   "c": "FNCE 477",
+   "concept": "What credit is; good vs bad debt",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-cosign": {
+   "c": "FNCE 477",
+   "concept": "Co-signer vs guarantor",
+   "correct": 1,
+   "last": "2026-10-20",
+   "seen": 4
+  },
+  "fnce-477--deck-c-factors": {
+   "c": "FNCE 477",
+   "concept": "The five credit score factors",
+   "correct": 2,
+   "last": "2026-10-20",
+   "seen": 4
+  },
+  "fnce-477--deck-c-heloc": {
+   "c": "FNCE 477",
+   "concept": "HELOC",
+   "correct": 1,
+   "last": "2026-10-20",
+   "seen": 3
+  },
+  "fnce-477--deck-c-improve": {
+   "c": "FNCE 477",
+   "concept": "Improving your score; minimum payment trap",
+   "correct": 3,
+   "last": "2026-10-20",
+   "seen": 4
+  },
+  "fnce-477--deck-c-lease": {
+   "c": "FNCE 477",
+   "concept": "Lease vs buy a car",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-loc": {
+   "c": "FNCE 477",
+   "concept": "Instalment loans vs lines of credit",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-ratios": {
+   "c": "FNCE 477",
+   "concept": "Debt ratios: DPI, debt-to-equity, GDS, TDS",
+   "correct": 2,
+   "last": "2026-10-20",
+   "seen": 4
+  },
+  "fnce-477--deck-c-report": {
+   "c": "FNCE 477",
+   "concept": "Credit reports and your credit file",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-score": {
+   "c": "FNCE 477",
+   "concept": "Credit scores: range and why they matter",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-sources": {
+   "c": "FNCE 477",
+   "concept": "Sources of credit: cheap to expensive",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 1
+  },
+  "fnce-477--deck-c-types": {
+   "c": "FNCE 477",
+   "concept": "Consumer loans vs revolving credit",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-71": {
+   "c": "FNCE 477",
+   "concept": "Age 71: RRIF, annuity or cash out",
+   "correct": 2,
+   "last": "2026-10-20",
+   "seen": 3
+  },
+  "fnce-477--deck-r-annuity": {
+   "c": "FNCE 477",
+   "concept": "Annuities: types, pros and cons, payment factors",
+   "correct": 0,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-fhsa": {
+   "c": "FNCE 477",
+   "concept": "FHSA",
+   "correct": 4,
+   "last": "2026-10-20",
+   "seen": 5
+  },
+  "fnce-477--deck-r-hbp-llp": {
+   "c": "FNCE 477",
+   "concept": "Home Buyers' Plan and Lifelong Learning Plan",
+   "correct": 4,
+   "last": "2026-10-20",
+   "seen": 5
+  },
+  "fnce-477--deck-r-lira": {
+   "c": "FNCE 477",
+   "concept": "LIRA and LIF",
+   "correct": 2,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-nonreg": {
+   "c": "FNCE 477",
+   "concept": "Non-registered: tax, asset location, ACB",
+   "correct": 3,
+   "last": "2026-10-20",
+   "seen": 8
+  },
+  "fnce-477--deck-r-rrif": {
+   "c": "FNCE 477",
+   "concept": "RRIF minimum withdrawals",
+   "correct": 2,
+   "last": "2026-10-20",
+   "seen": 5
+  },
+  "fnce-477--deck-r-rrsp-choice": {
+   "c": "FNCE 477",
+   "concept": "RRSP vs TFSA: tax rate now vs later",
+   "correct": 1,
+   "last": "2026-10-20",
+   "seen": 3
+  },
+  "fnce-477--deck-r-rrsp-room": {
+   "c": "FNCE 477",
+   "concept": "RRSP room, deadline, over-contribution",
+   "correct": 6,
+   "last": "2026-10-20",
+   "seen": 10
+  },
+  "fnce-477--deck-r-rrsp-tax": {
+   "c": "FNCE 477",
+   "concept": "RRSP withdrawals, withholding, taxation",
+   "correct": 2,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-rrsp-types": {
+   "c": "FNCE 477",
+   "concept": "Types of RRSPs and beneficiaries",
+   "correct": 0,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-rrsp-unused": {
+   "c": "FNCE 477",
+   "concept": "Unused RRSP deduction balance",
+   "correct": 1,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-split": {
+   "c": "FNCE 477",
+   "concept": "Spousal RRSP and pension income splitting",
+   "correct": 2,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-tfsa-death": {
+   "c": "FNCE 477",
+   "concept": "TFSA beneficiary vs successor holder",
+   "correct": 0,
+   "last": "2026-10-19",
+   "seen": 2
+  },
+  "fnce-477--deck-r-tfsa": {
+   "c": "FNCE 477",
+   "concept": "TFSA rules and room",
+   "correct": 6,
+   "last": "2026-10-20",
+   "seen": 7
+  },
+  "fnce-477--liabilities": {
+   "c": "FNCE 477",
+   "concept": "Liabilities",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--monthly-take-home-smith-case": {
+   "c": "FNCE 477",
+   "concept": "Monthly take-home (Smith case)",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--mortgage-payment-on-the-ba-ii-plus": {
+   "c": "FNCE 477",
+   "concept": "Mortgage payment on the BA II Plus",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--recommendations-framework": {
+   "c": "FNCE 477",
+   "concept": "Recommendations framework",
+   "correct": 1,
+   "last": "2026-10-13",
+   "seen": 1
+  },
+  "fnce-477--retirement-gap-smith-case": {
+   "c": "FNCE 477",
+   "concept": "Retirement gap (Smith case)",
+   "correct": 0,
+   "last": "2026-10-13",
+   "seen": 1
+  }
+ },
+ "study": {
+  "2026-10-13": {
+   "FNCE 477": 11.1
+  }
+ },
+ "decks": {
+  "fnce477-d1": {
+   "c": "FNCE 477",
+   "covers": "Lecture 12: credit score, utilization, co-signing, HELOC, GDS/TDS. Lecture 13: TFSA, RRSP room and choice, HBP, age 71, RRIF, FHSA, non-registered.",
+   "created": "2026-10-19",
+   "n": 3,
+   "qs": [
+    {
+     "a": 1,
+     "explain": "A TFSA withdrawal comes back as room on January 1 of the next year, in addition to that year's new annual room. Putting it back in the same year with no room left is an over-contribution. Option D describes the RRSP, where withdrawals never restore room.",
+     "id": "d1q1",
+     "lvl": "c",
+     "opts": [
+      "Right away, since it's her own money",
+      "On or after Jan 1, 2027, on top of her new 2027 annual room",
+      "On or after Jan 1, 2027, but it uses up part of her 2027 annual room",
+      "Never: TFSA withdrawals don't restore contribution room"
+     ],
+     "stem": "In June 2026, Ayesha withdraws $12,000 from her TFSA. She had already used all of her 2026 room. When can she put the $12,000 back without an over-contribution penalty?",
+     "topic": "r-tfsa",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Unused 2026 room carries forward: 18,000 − 10,000 = 8,000. Add 2027's new room of 18% × 100,000 = 18,000, for 26,000 in total. $36,000 forgets the $10,000 you already used.",
+     "id": "d1q2",
+     "lvl": "c",
+     "opts": [
+      "$18,000",
+      "$26,000",
+      "$28,000",
+      "$36,000"
+     ],
+     "stem": "In 2026 you earn a $100,000 salary, which creates $18,000 of RRSP room, and you contribute $10,000. Your salary is the same in 2027 and you don't contribute again. How much RRSP room will you have by Dec 31, 2027?",
+     "topic": "r-rrsp-room",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "The deadline for a tax year is about March 1 of the following year. Contributions made from Jan 1 to about Mar 1 can count toward either the previous year or the current year, whichever deduction you want.",
+     "id": "d1q3",
+     "lvl": "c",
+     "opts": [
+      "It can only be deducted on your 2027 return",
+      "You choose whether to deduct it on your 2026 or your 2027 return",
+      "It's too late for 2026, because the deadline was Dec 31, 2026",
+      "It must be deducted on your 2026 return"
+     ],
+     "stem": "It's February 10, 2027, and you contribute $5,000 to your RRSP. Which statement is true?",
+     "topic": "r-rrsp-room",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "An RRSP pays off when your tax rate is higher when you contribute than when you withdraw. At $52,000 (under about $60,000) the TFSA usually wins. If he still wants to use the RRSP, he can contribute now and save the deduction (the unused RRSP deduction balance) for a year when his marginal rate is higher. Option B claims the deduction at his lowest rate, which wastes it.",
+     "id": "d1q4",
+     "lvl": "c",
+     "opts": [
+      "Put it in his TFSA, because his tax rate is low now; or contribute to his RRSP but hold off claiming the deduction until his income is higher",
+      "Put it in his RRSP, because a deduction saves the same amount of tax at any income",
+      "Put it in a non-registered account, because capital gains are only 50% taxable",
+      "Put it in his RRSP and claim the deduction now, because he'll earn more later"
+     ],
+     "stem": "Jordan, 24, earns $52,000 and expects to earn over $90,000 within a few years. He has unused RRSP room and $6,000 to save. Based on the lecture, what's the best move this year?",
+     "topic": "r-rrsp-choice",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "The HBP lets first-time buyers withdraw up to $60,000 tax-free and repay over 15 years, at least 1/15 a year. Skipping a payment only adds that year's portion to taxable income, not the whole balance.",
+     "id": "d1q5",
+     "lvl": "c",
+     "opts": [
+      "Nothing; she can catch up next year",
+      "That year's required repayment is added to her taxable income",
+      "The whole remaining balance becomes taxable",
+      "She loses that much RRSP room, but pays no tax"
+     ],
+     "stem": "Under the Home Buyers' Plan, Lena withdrew $45,000 from her RRSP for her first home. This year she skips her required repayment. What happens?",
+     "topic": "r-hbp-llp",
+     "type": "mc"
+    },
+    {
+     "a": 3,
+     "explain": "By Dec 31 of the year you turn 71, the RRSP must close. The options are converting to a RRIF, buying an annuity, or cashing out (taxed at your top rate, not advisable). There's no tax-free rollover into a TFSA.",
+     "id": "d1q6",
+     "lvl": "c",
+     "opts": [
+      "Convert it to a RRIF",
+      "Use it to buy an annuity",
+      "Cash it out and pay tax on it",
+      "Roll it into his TFSA tax-free"
+     ],
+     "stem": "Bob turns 71 this year and still has an RRSP. Which of these is NOT one of his options by December 31?",
+     "topic": "r-71",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "The age-65 factor is 4.00%: 400,000 × 4.00% = 16,000. $11,440 uses the age-55 factor (2.86%), $13,320 age 60 (3.33%) and $20,000 age 70 (5.00%). No tax is withheld on the minimum; anything above it has 10–30% withheld.",
+     "id": "d1q7",
+     "lvl": "c",
+     "opts": [
+      "$11,440",
+      "$13,320",
+      "$16,000",
+      "$20,000"
+     ],
+     "stem": "Priya's RRIF holds $400,000 on January 1, and she is 65 on that date. Using the lecture's table, what is her minimum withdrawal this year?",
+     "topic": "r-rrif",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "FHSA room starts when you open the account. Also: contributions are deductible, withdrawals for a first home are tax-free, only one year's unused room ($8,000) carries forward, and the account must be used within 15 years or by age 71.",
+     "id": "d1q8",
+     "lvl": "c",
+     "opts": [
+      "FHSA room starts only once you open the account, while TFSA room builds from age 18 even if you never open one",
+      "The FHSA has no time limit, just like the TFSA",
+      "FHSA contributions aren't tax-deductible, just like the TFSA",
+      "Unused FHSA room carries forward without limit, like the TFSA"
+     ],
+     "stem": "Which of these is a true difference between the FHSA and the TFSA?",
+     "topic": "r-fhsa",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "Interest is fully taxable at your marginal rate, so GICs and bonds belong in registered accounts. Canadian dividends get the dividend tax credit and capital gains are only 50% taxable, so those go in non-registered accounts.",
+     "id": "d1q9",
+     "lvl": "c",
+     "opts": [
+      "Canadian dividend-paying stocks",
+      "Low-turnover ETFs",
+      "GICs and bonds",
+      "Equity funds focused on capital gains"
+     ],
+     "stem": "Using the lecture's asset location advice, which of these is better held inside an RRSP or TFSA than in a non-registered account?",
+     "topic": "r-nonreg",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "ACB = 10,000 + 20 commission + 480 reinvested dividends = 10,500. Gain = 13,000 − 10,500 = 2,500. $2,980 forgets the DRIP, which means paying tax twice on dividends already taxed. $1,250 is the taxable half of the gain, not the gain.",
+     "id": "d1q10",
+     "lvl": "c",
+     "opts": [
+      "$3,000",
+      "$2,980",
+      "$2,500",
+      "$1,250"
+     ],
+     "stem": "In a non-registered account you bought 200 shares at $50 ($10,000) and paid a $20 commission. Over the years, $480 of dividends were automatically reinvested (DRIP). You now sell all the shares for $13,000. What is your capital gain?",
+     "topic": "r-nonreg",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Payment history is about 35%, amounts owed (utilization) about 30%, length of history about 15%, new inquiries about 10%, and credit mix about 10%.",
+     "id": "d1q11",
+     "lvl": "c",
+     "opts": [
+      "Payment history",
+      "Amounts owed (credit utilization)",
+      "Length of credit history",
+      "New credit inquiries"
+     ],
+     "stem": "Which credit score factor makes up about 30% of your score?",
+     "topic": "c-factors",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Keep utilization under 30%: 30% × 2,500 = 750. A high balance hurts even if paid in full by the due date, because the balance reported to the bureau is what counts. Paying before the statement date lowers it.",
+     "id": "d1q12",
+     "lvl": "c",
+     "opts": [
+      "$250",
+      "$750",
+      "$1,250",
+      "$2,500, as long as she pays it in full"
+     ],
+     "stem": "Maya has one credit card with a $2,500 limit. To follow the lecture's utilization guideline, her balance should stay under:",
+     "topic": "c-improve",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "Co-signer: equally responsible, the debt shows on their credit report, can be chased for any missed payment immediately, and on a mortgage is on the title. Guarantor: usually pays only on total default and isn't on the title. About 38% of co-signers end up paying, so only agree if you could repay the whole loan yourself.",
+     "id": "d1q13",
+     "lvl": "c",
+     "opts": [
+      "A guarantor is on the title of the asset, but a co-signer isn't",
+      "Neither one's credit is affected unless the lender sues",
+      "A co-signer is equally responsible: the loan shows on their credit report and the lender can chase them for any missed payment right away. A guarantor is usually called on only if the borrower totally defaults",
+      "A guarantor is equally responsible from day one; a co-signer pays only if the borrower totally defaults"
+     ],
+     "stem": "A friend asks you to co-sign her car loan. What's the key difference between a co-signer and a guarantor?",
+     "topic": "c-cosign",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "GDS = 2,300 ÷ 7,500 = 30.7%, under the 32% limit. TDS = (2,300 + 800) ÷ 7,500 = 41.3%, over the 40% limit. Both ratios use GROSS monthly income.",
+     "id": "d1q14",
+     "lvl": "c",
+     "opts": [
+      "Both GDS and TDS are within the guidelines",
+      "GDS is within the guideline, but TDS is too high",
+      "GDS is too high, but TDS is within the guideline",
+      "Both GDS and TDS are too high"
+     ],
+     "stem": "Sam's gross monthly income is $7,500. His mortgage payment plus heat and property tax is $2,300 a month, and his car loan and credit card payments add $800 a month. Which is true?",
+     "topic": "c-ratios",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "500,000 × 80% = 400,000, minus the 260,000 still owed = 140,000. $240,000 skips the 80% step. Interest is deductible only when the money is invested outside registered plans (for example a non-registered account), not for spending or for money put into an RRSP or TFSA.",
+     "id": "d1q15",
+     "lvl": "c",
+     "opts": [
+      "$140,000; whenever it's used for anything",
+      "$240,000; always",
+      "$140,000; when the money is invested outside registered plans",
+      "$400,000; when the money goes into an RRSP"
+     ],
+     "stem": "A home is appraised at $500,000, $260,000 is still owed on the mortgage, and the lender allows up to 80% of the home's value. What is the maximum HELOC, and when is the interest tax-deductible?",
+     "topic": "c-heloc",
+     "type": "mc"
+    }
+   ],
+   "stage": "Step 2 · Comprehension: applying it to scenarios",
+   "title": "Deck 3 · Comprehension: mixed scenarios"
+  },
+  "fnce477-k1": {
+   "c": "FNCE 477",
+   "covers": "Lecture 13 definitions: TFSA, RRSP room, unused deduction, LLP, RRIF, LIRA, income splitting, annuities, FHSA, ACB.",
+   "created": "2026-10-19",
+   "n": 1,
+   "qs": [
+    {
+     "a": 1,
+     "explain": "A TFSA uses after-tax money: no deduction going in, but growth and withdrawals are tax-free. Option A is the RRSP, option C is the FHSA, and option D is a non-registered account.",
+     "id": "k1q1",
+     "lvl": "k",
+     "opts": [
+      "Contributions are deductible; withdrawals are taxed",
+      "Contributions aren't deductible; growth and withdrawals are tax-free",
+      "Contributions are deductible and withdrawals are tax-free",
+      "Contributions aren't deductible; growth is taxed every year"
+     ],
+     "stem": "How is a TFSA taxed?",
+     "topic": "r-tfsa",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "$7,000 for 2026. You must be 18 or older with a valid SIN, and unused room carries forward indefinitely. $8,000 is the FHSA's annual limit and $33,810 is the RRSP maximum.",
+     "id": "k1q2",
+     "lvl": "k",
+     "opts": [
+      "$6,500",
+      "$7,000",
+      "$8,000",
+      "$33,810"
+     ],
+     "stem": "What is the TFSA annual contribution limit for 2026?",
+     "topic": "r-tfsa",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Only a spouse or common-law partner can be a successor holder, and the growth stays tax-free after your death. Anyone alive, or a charity, can be a beneficiary instead, but growth after your death is taxable to them.",
+     "id": "k1q3",
+     "lvl": "k",
+     "opts": [
+      "Any adult child",
+      "Only your spouse or common-law partner",
+      "Anyone who is alive, or a charity",
+      "Only a registered charity"
+     ],
+     "stem": "Who can be named the successor holder of your TFSA?",
+     "topic": "r-tfsa-death",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "Only salary income creates room: 18% of it, up to $33,810. Workplace pension contributions (the pension adjustment) reduce it, unused room carries forward indefinitely, and your Notice of Assessment shows how much you have. Option D describes a TFSA; RRSP withdrawals never restore room.",
+     "id": "k1q4",
+     "lvl": "k",
+     "opts": [
+      "18% of salary up to $33,810, but any room you don't use by Dec 31 is lost",
+      "18% of all income, including dividends and capital gains, up to $33,810; unused room carries forward",
+      "18% of earned (salary) income up to $33,810, reduced by pension adjustments; unused room carries forward and is shown on your Notice of Assessment",
+      "18% of salary up to $33,810, and money you withdraw is added back to your room the next year"
+     ],
+     "stem": "Which statement about RRSP contribution room is correct?",
+     "topic": "r-rrsp-room",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "There's a $2,000 lifetime over-contribution buffer. Beyond that, the excess is charged 1% a month.",
+     "id": "k1q5",
+     "lvl": "k",
+     "opts": [
+      "Nothing; any excess is penalized",
+      "$1,000",
+      "$2,000",
+      "$5,000"
+     ],
+     "stem": "How much can you over-contribute to your RRSP in total without a penalty?",
+     "topic": "r-rrsp-room",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "It's money you've already contributed and reported to CRA but haven't claimed as a deduction yet. You can claim it in any later year, for example when your marginal rate is higher. Option A is unused contribution room, which is a different thing.",
+     "id": "k1q6",
+     "lvl": "k",
+     "opts": [
+      "RRSP room you haven't contributed yet",
+      "Contributions you made and reported but chose not to deduct yet",
+      "Tax withheld when you withdraw from an RRSP",
+      "Over-contributions above the $2,000 buffer"
+     ],
+     "stem": "What is the unused RRSP deduction balance?",
+     "topic": "r-rrsp-unused",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "LLP: up to $10,000 a year and $20,000 total for full-time education for you or your spouse, repaid over 10 years. Option A is the Home Buyers' Plan; option C mixes in the FHSA limits.",
+     "id": "k1q7",
+     "lvl": "k",
+     "opts": [
+      "Withdraw up to $60,000 tax-free for a first home, repaid over 15 years",
+      "Withdraw up to $10,000 a year ($20,000 total) for full-time education, repaid over 10 years",
+      "Contribute $8,000 a year, up to $40,000, for education",
+      "Withdraw up to $20,000 a year for any education, with no repayment"
+     ],
+     "stem": "What does the Lifelong Learning Plan (LLP) allow?",
+     "topic": "r-hbp-llp",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "A RRIF (Registered Retirement Income Fund) is the payout version of an RRSP. You must convert by Dec 31 of the year you turn 71 (or earlier), withdraw at least the minimum each year (you can use a younger spouse's age to lower it), and every withdrawal is taxable. What's left keeps growing tax-deferred.",
+     "id": "k1q8",
+     "lvl": "k",
+     "opts": [
+      "An RRSP must be converted by Dec 31 of the year you turn 71; you must withdraw at least a minimum % each year based on your age on Jan 1, and withdrawals are taxable",
+      "An RRSP must be converted at 65, and the whole balance has to be withdrawn within 10 years",
+      "An RRSP converts into a RRIF on your 71st birthday; you can withdraw as little as you like, including nothing",
+      "An RRSP must be converted by Dec 31 of the year you turn 71; you must withdraw a minimum % each year, and withdrawals are tax-free"
+     ],
+     "stem": "Which statement describes a RRIF correctly?",
+     "topic": "r-rrif",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Every RRSP withdrawal is taxed as ordinary income. The bank withholds 10–30% right away, and unlike a TFSA, the room is gone for good. That's why the RRSP shouldn't be used as an emergency fund.",
+     "id": "k1q9",
+     "lvl": "k",
+     "opts": [
+      "It's tax-free if under $10,000",
+      "It's taxed as income, 10–30% is withheld up front, and the room isn't restored",
+      "It's taxed as income, but the room comes back next year",
+      "It's taxed only at the 50% capital gains rate"
+     ],
+     "stem": "What happens when you make an early RRSP withdrawal (not under the HBP or LLP)?",
+     "topic": "r-rrsp-tax",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "A Locked-In Retirement Account holds the commuted value of a workplace pension after you leave the employer. It works like a locked RRSP: tax-deferred, no withdrawals, and usually unlocked from age 55 by converting to a LIF or a life annuity. Option D describes a life annuity.",
+     "id": "k1q10",
+     "lvl": "k",
+     "opts": [
+      "A locked-in account holding pension money from a former employer that can't be withdrawn until retirement age",
+      "A TFSA for people with low incomes",
+      "An RRSP held in your spouse's name",
+      "An account that pays a fixed income until death"
+     ],
+     "stem": "What is a LIRA?",
+     "topic": "r-lira",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Up to 50% of eligible pension income can be split with a spouse, which lowers the couple's total tax when one spouse has much more retirement income.",
+     "id": "k1q11",
+     "lvl": "k",
+     "opts": [
+      "25%",
+      "50%",
+      "75%",
+      "100%"
+     ],
+     "stem": "Once you convert to a RRIF, up to what share of eligible pension income can you split with your spouse?",
+     "topic": "r-split",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "A spouse, partner, or minor or disabled dependent child gets a tax-deferred rollover. Any other beneficiary receives the money after tax, because the RRSP is deemed to be cashed out at death.",
+     "id": "k1q12",
+     "lvl": "k",
+     "opts": [
+      "It transfers to your spouse tax-deferred",
+      "It's paid out after tax, like for any other beneficiary",
+      "It must be donated to charity",
+      "It moves into your spouse's TFSA"
+     ],
+     "stem": "You name your spouse as the beneficiary of your RRSP. What happens to it at your death?",
+     "topic": "r-rrsp-types",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "Life annuity: you hand a lump sum to an insurer and get guaranteed income until death (money can be forfeited when you die unless there's a guarantee). Fixed-term: income for a set period, with any unpaid amount going to your estate or beneficiary. Neither allows lump-sum withdrawals.",
+     "id": "k1q13",
+     "lvl": "k",
+     "opts": [
+      "Both let you take out lump sums whenever you want; only the interest rate differs",
+      "A life annuity pays whatever is left to your estate when you die; a fixed-term annuity forfeits it",
+      "A fixed-term annuity pays for a set period, and if you die early the rest goes to your estate or beneficiary; a life annuity pays until you die",
+      "A fixed-term annuity pays until you die; a life annuity pays for a set number of years"
+     ],
+     "stem": "How is a fixed-term annuity different from a life annuity?",
+     "topic": "r-annuity",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "$8,000 a year and $40,000 lifetime, and only one year's unused room ($8,000) carries forward. Option C is the LLP and option D is the HBP.",
+     "id": "k1q14",
+     "lvl": "k",
+     "opts": [
+      "$7,000 a year, no lifetime limit",
+      "$8,000 a year, $40,000 lifetime",
+      "$10,000 a year, $20,000 lifetime",
+      "$60,000 lifetime"
+     ],
+     "stem": "What are the FHSA's contribution limits?",
+     "topic": "r-fhsa",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "ACB = purchase price + transaction costs + reinvested distributions. Capital gain = proceeds of sale − ACB, and 50% of the gain is taxable when you sell. Leaving out reinvested dividends means paying tax on them twice. Option D describes your net proceeds, not your cost.",
+     "id": "k1q15",
+     "lvl": "k",
+     "opts": [
+      "The purchase price, plus transaction costs and reinvested distributions (like DRIP dividends)",
+      "The purchase price plus any dividends you received in cash",
+      "The purchase price only",
+      "The sale price minus commissions"
+     ],
+     "stem": "What goes into the adjusted cost base (ACB) of an investment?",
+     "topic": "r-nonreg",
+     "type": "mc"
+    }
+   ],
+   "stage": "Step 1 · Knowledge: definitions and key facts",
+   "title": "Deck 1 · Knowledge: registered accounts"
+  },
+  "fnce477-k2": {
+   "c": "FNCE 477",
+   "covers": "Lecture 12 definitions: good vs bad debt, loan types, credit sources, LOC, leases, bureaus, scores, the five factors, secured cards, proposals, Five Cs, GDS/TDS.",
+   "created": "2026-10-19",
+   "n": 2,
+   "qs": [
+    {
+     "a": 0,
+     "explain": "Good debt helps you build wealth: education, a business loan, a mortgage. Bad debt is high-interest borrowing for consumption.",
+     "id": "k2q1",
+     "lvl": "k",
+     "opts": [
+      "A student loan for your degree",
+      "Maxing out a credit card for a vacation",
+      "A payday loan to buy concert tickets",
+      "A store card for a new TV you can't afford"
+     ],
+     "stem": "Which of these is 'good debt', according to the lecture?",
+     "topic": "c-basics",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "Revolving credit lets you borrow continuously up to a limit and pay at least part each period: credit cards, charge cards, lines of credit, overdraft protection. Mortgages, auto loans and demand loans are consumer (instalment) loans.",
+     "id": "k2q2",
+     "lvl": "k",
+     "opts": [
+      "An auto loan",
+      "A mortgage",
+      "A line of credit",
+      "A demand loan"
+     ],
+     "stem": "Which of these is revolving credit?",
+     "topic": "c-types",
+     "type": "mc"
+    },
+    {
+     "a": 3,
+     "explain": "Consumer loans: one-time, fixed schedule (mortgages, auto loans, other instalment loans, demand loans). Revolving credit: continuous borrowing up to a limit, billed for at least a partial payment (bank and store credit cards, charge cards, lines of credit, overdraft protection).",
+     "id": "k2q3",
+     "lvl": "k",
+     "opts": [
+      "Consumer loans include lines of credit and overdraft protection; revolving credit includes mortgages",
+      "Both have fixed payment schedules; revolving credit just has a lower interest rate",
+      "Consumer loan: you can keep borrowing up to a limit (e.g. a credit card). Revolving credit: a one-time loan with fixed payments (e.g. a mortgage)",
+      "Consumer loan: a one-time loan repaid on a fixed schedule (e.g. an auto loan). Revolving credit: you can keep borrowing up to a limit and pay at least part each period (e.g. a credit card)"
+     ],
+     "stem": "Which statement correctly describes consumer loans and revolving credit?",
+     "topic": "c-types",
+     "type": "mc"
+    },
+    {
+     "a": 3,
+     "explain": "Inexpensive: parents and family. Medium-priced: chartered banks, trust companies, credit unions. Expensive: finance companies, retailers like car or appliance dealers, and bank credit cards and cash advances.",
+     "id": "k2q4",
+     "lvl": "k",
+     "opts": [
+      "Your parents",
+      "A credit union",
+      "A chartered bank",
+      "A finance company or a credit card cash advance"
+     ],
+     "stem": "Which is an expensive source of consumer credit?",
+     "topic": "c-sources",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "A LOC has a variable rate tied to prime, compounded daily, and payments that aren't fixed. That's why rising rates are a risk. A fixed-rate instalment loan is the opposite.",
+     "id": "k2q5",
+     "lvl": "k",
+     "opts": [
+      "Fixed for the whole term",
+      "Variable, tied to the lender's prime rate and compounded daily",
+      "Set at 5% by the Bank of Canada",
+      "Zero for the first 30 days, then fixed"
+     ],
+     "stem": "How is the interest rate on a personal line of credit usually set?",
+     "topic": "c-loc",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Open-end: you owe the residual value and any fees. Closed-end: you can choose to buy the car or simply return it.",
+     "id": "k2q6",
+     "lvl": "k",
+     "opts": [
+      "You can return the car with nothing more to pay",
+      "You're responsible for the car's residual value plus any fees in the lease",
+      "Ownership transfers to you for free",
+      "The dealer pays you the residual value"
+     ],
+     "stem": "With an open-end car lease, what happens at the end of the lease?",
+     "topic": "c-lease",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "Equifax Canada and TransUnion Canada keep your credit report. CDIC and CIPF are deposit and investment protection plans.",
+     "id": "k2q7",
+     "lvl": "k",
+     "opts": [
+      "Equifax and TransUnion",
+      "Experian and Moody's",
+      "CDIC and CIPF",
+      "FCAC and OSFI"
+     ],
+     "stem": "Which are Canada's two credit bureaus?",
+     "topic": "c-report",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "A first bankruptcy stays 7 years. A second keeps both on file for 14 years. Late payments stay about 6 years.",
+     "id": "k2q8",
+     "lvl": "k",
+     "opts": [
+      "3 years",
+      "6 years",
+      "7 years",
+      "14 years"
+     ],
+     "stem": "How long does a first bankruptcy stay on your credit file?",
+     "topic": "c-adverse",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "Scores run from about 300 (worst) to 900 (best), and 660 or higher is generally good. A higher score means easier approval and better rates.",
+     "id": "k2q9",
+     "lvl": "k",
+     "opts": [
+      "300 to 900; 660 or higher",
+      "0 to 1,000; 500 or higher",
+      "300 to 850; 760 or higher",
+      "1 to 100; 70 or higher"
+     ],
+     "stem": "Roughly what range do Canadian credit scores cover, and what is generally considered a good score?",
+     "topic": "c-score",
+     "type": "mc"
+    },
+    {
+     "a": 3,
+     "explain": "Payment history ~35% (the biggest), amounts owed or utilization ~30%, length of credit history ~15%, new credit inquiries ~10%, credit mix ~10%. Don't confuse 'payment history' with 'length of credit history'.",
+     "id": "k2q10",
+     "lvl": "k",
+     "opts": [
+      "Amounts owed (~35%), payment history (~30%), length of history (~15%), then new inquiries and credit mix (~10% each)",
+      "Payment history (~35%), length of history (~30%), amounts owed (~15%), then new inquiries and credit mix (~10% each)",
+      "Credit mix (~35%), payment history (~30%), amounts owed (~15%), then new inquiries and length of history (~10% each)",
+      "Payment history (~35%), amounts owed (~30%), length of history (~15%), then new inquiries and credit mix (~10% each)"
+     ],
+     "stem": "Which ranks the five credit score factors correctly, from most to least weight?",
+     "topic": "c-factors",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "You deposit, say, $300 and get a $300 limit. It's a way to build or rebuild credit: use it for a small bill each month and pay it off in full.",
+     "id": "k2q11",
+     "lvl": "k",
+     "opts": [
+      "A card backed by a deposit you put down, which sets your limit",
+      "A card that includes fraud insurance",
+      "A card only credit unions can issue",
+      "A card that charges no interest"
+     ],
+     "stem": "What is a secured credit card?",
+     "topic": "c-improve",
+     "type": "mc"
+    },
+    {
+     "a": 2,
+     "explain": "About 38%. A co-signer is equally responsible, and the loan shows on their credit report as if it were their own.",
+     "id": "k2q12",
+     "lvl": "k",
+     "opts": [
+      "8%",
+      "18%",
+      "38%",
+      "68%"
+     ],
+     "stem": "According to the lecture, roughly what share of co-signers end up paying some or all of the loan?",
+     "topic": "c-cosign",
+     "type": "mc"
+    },
+    {
+     "a": 1,
+     "explain": "Consumer proposal: max 5 years, must be insolvent with less than $250,000 of debt excluding a home mortgage, and both the court and creditors must approve. Option C is a consolidation loan.",
+     "id": "k2q13",
+     "lvl": "k",
+     "opts": [
+      "A plan of up to 10 years for any amount of debt",
+      "A plan of up to 5 years, for someone insolvent with under $250,000 of debt (excluding the mortgage), approved by the court and creditors",
+      "A loan that combines all your debts into one payment",
+      "A plan only your creditors approve, with no debt limit"
+     ],
+     "stem": "Which describes a consumer proposal?",
+     "topic": "c-bankrupt",
+     "type": "mc"
+    },
+    {
+     "a": 3,
+     "explain": "Character: your credit history or score. Capacity: your ability to repay (cash flow, debt-to-income). Collateral: assets pledged to secure the loan. Capital: your own wealth or investment in the purchase. Conditions: the loan's purpose, the interest rate and outside economic conditions.",
+     "id": "k2q14",
+     "lvl": "k",
+     "opts": [
+      "Character = credit history; Capacity = total credit limit; Collateral = co-signer; Capital = income; Conditions = loan term",
+      "Consumer, Credit, Character, Capacity and Collateral",
+      "Character = ability to repay; Capacity = credit history; Collateral = your own wealth; Capital = assets securing the loan; Conditions = the economy",
+      "Character = credit history; Capacity = ability to repay; Collateral = assets securing the loan; Capital = your own wealth or investment; Conditions = purpose, interest rate and the economy"
+     ],
+     "stem": "Which correctly matches each of the Five Cs of credit?",
+     "topic": "c-5cs",
+     "type": "mc"
+    },
+    {
+     "a": 0,
+     "explain": "Shelter costs (GDS) shouldn't exceed 32% of gross monthly income, and all debt payments including shelter (TDS) shouldn't exceed 40%. Separately, consumer debt payments should stay under 20% of NET income.",
+     "id": "k2q15",
+     "lvl": "k",
+     "opts": [
+      "GDS 32%, TDS 40%",
+      "GDS 20%, TDS 32%",
+      "GDS 40%, TDS 50%",
+      "GDS 28%, TDS 36%"
+     ],
+     "stem": "What are the guideline limits for GDS and TDS, as a share of gross monthly income?",
+     "topic": "c-ratios",
+     "type": "mc"
+    }
+   ],
+   "stage": "Step 1 · Knowledge: definitions and key facts",
+   "title": "Deck 2 · Knowledge: credit"
+  }
+ },
+ "deckruns": {
+  "fnce477-d1--1": {
+   "answers": {
+    "d1q1": {
+     "pick": 1
+    },
+    "d1q10": {
+     "pick": 1
+    },
+    "d1q11": {
+     "pick": 1
+    },
+    "d1q12": {
+     "pick": 1
+    },
+    "d1q13": {
+     "text": "A Co-signer signs the loan beside the original signer, which means that if the original doesn't pay the monthly loan, the dealership will come after the co-signer in the same way they would the original signer. A guarantor means that you promise to pay the loan if the original signer does not. Consider their credit, if they are good at paying their monthly paymentrs, and the amount of trust that you have in this individual."
+    },
+    "d1q14": {
+     "pick": 0
+    },
+    "d1q15": {
+     "text": "500,000*80% = 400,000\n400K-260K = 140K\nThe maximum HELOC is $140K, and the HELOC interest is tax-deductible when the proceeds are being used for investmentzs"
+    },
+    "d1q2": {
+     "pick": 1
+    },
+    "d1q3": {
+     "pick": 1
+    },
+    "d1q4": {
+     "text": "The $6000 should go into his RRSP because he currently has a lower income that what he expects to have in the future, and so because of that if he invests into his RRSP now, he can save that $6000 instead of putting it towards the current year's tax savings to the future because he'll be earning more."
+    },
+    "d1q5": {
+     "pick": 1
+    },
+    "d1q6": {
+     "pick": 3
+    },
+    "d1q7": {
+     "pick": 2
+    },
+    "d1q8": {
+     "text": "The FHSA has an $8000 yearly limit, with a lifetime limit of $40,000. The contributions that you put into it are tax-deductible, and the growth is tax free, however the room growth on your FHSA only starts when you open the account, unlike a TFSA as it starts as soon as you turn 18. A FHSA you have 15 years to use the funds to buy a home, and it will not allow you to carry-forward limits like the TFSA. You can only carry forward a year's worth of contribution"
+    },
+    "d1q9": {
+     "pick": 2
+    }
+   },
+   "attempt": 1,
+   "c": "FNCE 477",
+   "deck": "fnce477-d1",
+   "max": 19,
+   "perm": {
+    "d1q1": [
+     1,
+     0,
+     2,
+     3
+    ],
+    "d1q10": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "d1q11": [
+     1,
+     0,
+     2,
+     3
+    ],
+    "d1q12": [
+     0,
+     3,
+     1,
+     2
+    ],
+    "d1q14": [
+     3,
+     2,
+     1,
+     0
+    ],
+    "d1q2": [
+     0,
+     1,
+     3,
+     2
+    ],
+    "d1q3": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "d1q5": [
+     3,
+     0,
+     1,
+     2
+    ],
+    "d1q6": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "d1q7": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "d1q9": [
+     1,
+     3,
+     2,
+     0
+    ]
+   },
+   "pts": 13,
+   "results": {
+    "d1q1": {
+     "v": "correct"
+    },
+    "d1q10": {
+     "v": "missed"
+    },
+    "d1q11": {
+     "v": "correct"
+    },
+    "d1q12": {
+     "v": "correct"
+    },
+    "d1q13": {
+     "fb": "You correctly said a co-signer is pursued just like the original borrower, and you gave advice on trust and her payment history. Missing: the guarantor is usually called on only after total default, and a co-signer is equally responsible and the loan appears on their credit report. Also add that you should only agree if you could repay the whole loan yourself, and that you can ask the lender to notify you of late payments.",
+     "v": "partial"
+    },
+    "d1q14": {
+     "v": "missed"
+    },
+    "d1q15": {
+     "fb": "Your calculation is correct and well shown: $140,000. The deductibility condition is too vague, though. Specify that interest is deductible only when the money is invested outside registered plans, such as in a non-registered account. It isn't deductible for personal spending or for money put into an RRSP or TFSA.",
+     "v": "partial"
+    },
+    "d1q2": {
+     "v": "correct"
+    },
+    "d1q3": {
+     "v": "correct"
+    },
+    "d1q4": {
+     "fb": "You identified that Jordan's income will rise, which is the right starting point, but you concluded RRSP, and the lecture says TFSA. At $52,000 he's in a low bracket, so a deduction now is worth little. Improve it by choosing the TFSA, then explaining that he could contribute to the RRSP now but defer the deduction until his marginal rate is higher.",
+     "v": "missed"
+    },
+    "d1q5": {
+     "v": "correct"
+    },
+    "d1q6": {
+     "v": "correct"
+    },
+    "d1q7": {
+     "v": "correct"
+    },
+    "d1q8": {
+     "fb": "You gave four accurate differences: the $8,000 annual and $40,000 lifetime limits, deductible contributions with tax-free growth, room starting only when the account is opened (versus TFSA room from age 18), and the 15-year limit with only one year of carry-forward. For even more detail, you could add what happens if you never buy a home: a tax-free transfer to an RRSP or RRIF.",
+     "v": "correct"
+    },
+    "d1q9": {
+     "v": "correct"
+    }
+   },
+   "started": "2026-10-19T17:13:06.828Z",
+   "status": "graded",
+   "submitted": "2026-10-19",
+   "submittedAt": "2026-10-19T17:29:54.236Z"
+  },
+  "fnce477-d1--2": {
+   "answers": {},
+   "attempt": 2,
+   "c": "FNCE 477",
+   "deck": "fnce477-d1",
+   "max": 15,
+   "perm": {
+    "d1q1": [
+     1,
+     2,
+     3,
+     0
+    ],
+    "d1q10": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "d1q11": [
+     3,
+     1,
+     0,
+     2
+    ],
+    "d1q12": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "d1q14": [
+     3,
+     2,
+     1,
+     0
+    ],
+    "d1q2": [
+     3,
+     2,
+     0,
+     1
+    ],
+    "d1q3": [
+     3,
+     1,
+     0,
+     2
+    ],
+    "d1q5": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "d1q6": [
+     3,
+     1,
+     0,
+     2
+    ],
+    "d1q7": [
+     3,
+     0,
+     1,
+     2
+    ],
+    "d1q9": [
+     0,
+     3,
+     1,
+     2
+    ]
+   },
+   "pts": 0,
+   "results": {
+    "d1q1": {
+     "v": "missed"
+    },
+    "d1q10": {
+     "v": "missed"
+    },
+    "d1q11": {
+     "v": "missed"
+    },
+    "d1q12": {
+     "v": "missed"
+    },
+    "d1q13": {
+     "v": "missed"
+    },
+    "d1q14": {
+     "v": "missed"
+    },
+    "d1q15": {
+     "v": "missed"
+    },
+    "d1q2": {
+     "v": "missed"
+    },
+    "d1q3": {
+     "v": "missed"
+    },
+    "d1q4": {
+     "v": "missed"
+    },
+    "d1q5": {
+     "v": "missed"
+    },
+    "d1q6": {
+     "v": "missed"
+    },
+    "d1q7": {
+     "v": "missed"
+    },
+    "d1q8": {
+     "v": "missed"
+    },
+    "d1q9": {
+     "v": "missed"
+    }
+   },
+   "started": "2026-10-19T17:31:43.575Z",
+   "status": "graded",
+   "submitted": "2026-10-20",
+   "submittedAt": "2026-10-20T17:09:04.699Z"
+  },
+  "fnce477-d1--3": {
+   "answers": {
+    "d1q1": {
+     "pick": 1
+    },
+    "d1q10": {
+     "pick": 2
+    },
+    "d1q11": {
+     "pick": 1
+    },
+    "d1q12": {
+     "pick": 1
+    },
+    "d1q13": {
+     "pick": 2
+    },
+    "d1q14": {
+     "pick": 1
+    },
+    "d1q15": {
+     "pick": 2
+    },
+    "d1q2": {
+     "pick": 1
+    },
+    "d1q3": {
+     "pick": 1
+    },
+    "d1q4": {
+     "pick": 0
+    },
+    "d1q5": {
+     "pick": 1
+    },
+    "d1q6": {
+     "pick": 3
+    },
+    "d1q7": {
+     "pick": 2
+    },
+    "d1q8": {
+     "pick": 0
+    },
+    "d1q9": {
+     "pick": 2
+    }
+   },
+   "attempt": 3,
+   "c": "FNCE 477",
+   "deck": "fnce477-d1",
+   "max": 15,
+   "perm": {
+    "d1q1": [
+     0,
+     1,
+     3,
+     2
+    ],
+    "d1q10": [
+     2,
+     1,
+     3,
+     0
+    ],
+    "d1q11": [
+     1,
+     0,
+     2,
+     3
+    ],
+    "d1q12": [
+     3,
+     1,
+     2,
+     0
+    ],
+    "d1q13": [
+     3,
+     2,
+     0,
+     1
+    ],
+    "d1q14": [
+     2,
+     1,
+     3,
+     0
+    ],
+    "d1q15": [
+     0,
+     2,
+     3,
+     1
+    ],
+    "d1q2": [
+     0,
+     3,
+     2,
+     1
+    ],
+    "d1q3": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "d1q4": [
+     1,
+     3,
+     0,
+     2
+    ],
+    "d1q5": [
+     1,
+     3,
+     0,
+     2
+    ],
+    "d1q6": [
+     3,
+     0,
+     2,
+     1
+    ],
+    "d1q7": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "d1q8": [
+     3,
+     2,
+     1,
+     0
+    ],
+    "d1q9": [
+     0,
+     2,
+     3,
+     1
+    ]
+   },
+   "pts": 15,
+   "results": {
+    "d1q1": {
+     "v": "correct"
+    },
+    "d1q10": {
+     "v": "correct"
+    },
+    "d1q11": {
+     "v": "correct"
+    },
+    "d1q12": {
+     "v": "correct"
+    },
+    "d1q13": {
+     "v": "correct"
+    },
+    "d1q14": {
+     "v": "correct"
+    },
+    "d1q15": {
+     "v": "correct"
+    },
+    "d1q2": {
+     "v": "correct"
+    },
+    "d1q3": {
+     "v": "correct"
+    },
+    "d1q4": {
+     "v": "correct"
+    },
+    "d1q5": {
+     "v": "correct"
+    },
+    "d1q6": {
+     "v": "correct"
+    },
+    "d1q7": {
+     "v": "correct"
+    },
+    "d1q8": {
+     "v": "correct"
+    },
+    "d1q9": {
+     "v": "correct"
+    }
+   },
+   "started": "2026-10-20T17:09:07.862Z",
+   "status": "graded",
+   "submitted": "2026-10-20",
+   "submittedAt": "2026-10-20T17:11:32.342Z"
+  },
+  "fnce477-k1--1": {
+   "answers": {
+    "k1q1": {
+     "pick": 1
+    },
+    "k1q10": {
+     "pick": 0
+    },
+    "k1q11": {
+     "pick": 1
+    },
+    "k1q12": {
+     "pick": 1
+    },
+    "k1q13": {
+     "text": "i dont know"
+    },
+    "k1q14": {
+     "pick": 1
+    },
+    "k1q15": {
+     "text": "id"
+    },
+    "k1q2": {
+     "pick": 1
+    },
+    "k1q3": {
+     "pick": 2
+    },
+    "k1q4": {
+     "text": "RRSP contribution room is 18% of your annual salary, with the dollar maximum being around $33,000. it can be reduced if your salary decreases, and you can find your available room on the CRA website"
+    },
+    "k1q5": {
+     "pick": 2
+    },
+    "k1q6": {
+     "pick": 0
+    },
+    "k1q7": {
+     "pick": 1
+    },
+    "k1q8": {
+     "text": "A RRIF is what your RRSP becomes when you turn the age of 71. With RRIF withdrawals, you MUST withdraw the minimum depending on your age"
+    },
+    "k1q9": {
+     "pick": 1
+    }
+   },
+   "attempt": 1,
+   "c": "FNCE 477",
+   "deck": "fnce477-k1",
+   "max": 19,
+   "perm": {
+    "k1q1": [
+     3,
+     0,
+     1,
+     2
+    ],
+    "k1q10": [
+     0,
+     2,
+     3,
+     1
+    ],
+    "k1q11": [
+     0,
+     1,
+     3,
+     2
+    ],
+    "k1q12": [
+     2,
+     3,
+     0,
+     1
+    ],
+    "k1q14": [
+     3,
+     0,
+     2,
+     1
+    ],
+    "k1q2": [
+     0,
+     3,
+     1,
+     2
+    ],
+    "k1q3": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "k1q5": [
+     2,
+     0,
+     3,
+     1
+    ],
+    "k1q6": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "k1q7": [
+     1,
+     2,
+     3,
+     0
+    ],
+    "k1q9": [
+     1,
+     3,
+     0,
+     2
+    ]
+   },
+   "pts": 10,
+   "results": {
+    "k1q1": {
+     "v": "correct"
+    },
+    "k1q10": {
+     "v": "correct"
+    },
+    "k1q11": {
+     "v": "correct"
+    },
+    "k1q12": {
+     "v": "missed"
+    },
+    "k1q13": {
+     "fb": "No answer was given, so there's nothing to mark. Define a life annuity (a lump sum to an insurer for guaranteed income until death) and a fixed-term annuity (guaranteed income for a set period, with the remainder going to your estate). Add one advantage, such as predictable income, and one disadvantage, such as no inflation protection.",
+     "v": "missed"
+    },
+    "k1q14": {
+     "v": "correct"
+    },
+    "k1q15": {
+     "fb": "Your answer, \"id\", doesn't address the question. Define ACB as your total cost of an investment for tax purposes. Include the purchase price, commissions, and reinvested distributions such as DRIP dividends. Then give the formula: capital gain = proceeds of sale − ACB, with 50% of the gain taxable.",
+     "v": "missed"
+    },
+    "k1q2": {
+     "v": "correct"
+    },
+    "k1q3": {
+     "v": "missed"
+    },
+    "k1q4": {
+     "fb": "You correctly gave 18% of earned income, a maximum of about $33,000, and a place to look. But you missed carry-forward of unused room. Pension contributions (the pension adjustment) reduce room, not a lower salary. Also name the Notice of Assessment as the source, and state the exact maximum of $33,810.",
+     "v": "partial"
+    },
+    "k1q5": {
+     "v": "correct"
+    },
+    "k1q6": {
+     "v": "missed"
+    },
+    "k1q7": {
+     "v": "correct"
+    },
+    "k1q8": {
+     "fb": "You correctly said a RRIF is what an RRSP becomes and that you must withdraw a minimum based on age. Missing: the deadline is Dec 31 of the year you turn 71 (or earlier), not at 71 itself. Also state that withdrawals are taxable income and the remaining funds keep growing tax-deferred. Say it's the payout version of an RRSP.",
+     "v": "partial"
+    },
+    "k1q9": {
+     "v": "correct"
+    }
+   },
+   "started": "2026-10-19T18:03:25.120Z",
+   "status": "graded",
+   "submitted": "2026-10-19",
+   "submittedAt": "2026-10-19T18:08:36.747Z"
+  },
+  "fnce477-k1--2": {
+   "answers": {
+    "k1q1": {
+     "pick": 1
+    },
+    "k1q10": {
+     "pick": 0
+    },
+    "k1q11": {
+     "pick": 1
+    },
+    "k1q12": {
+     "pick": 1
+    },
+    "k1q13": {
+     "text": "  A life annuity is a payment that will be paid out to you on an annual basis that will essentially go until death, and then by death it will move on to paying your beneficiary. A fixed term is for a fixed term"
+    },
+    "k1q14": {
+     "pick": 1
+    },
+    "k1q15": {
+     "text": "z"
+    },
+    "k1q2": {
+     "pick": 1
+    },
+    "k1q3": {
+     "pick": 2
+    },
+    "k1q4": {
+     "text": "RRSP contribution is 18% of your annual salary, the dollar maximum is around $33,000 i believe, and if you have a group pension plan paid out by your employer, your contribution room will be less than, but only because it accounts for the amount that your group pension pays for. You can find you available room on the CRA website"
+    },
+    "k1q5": {
+     "pick": 2
+    },
+    "k1q6": {
+     "pick": 1
+    },
+    "k1q7": {
+     "pick": 1
+    },
+    "k1q8": {
+     "text": "a RRIF Is a Registered Retirement Income Fund, this is what you have to open when you turn 71. Basically your RRSP turns into a RRIF! RRIF withdrawals are calculated based off of a minimum amount, you can take them out monthly, quarterly or yearly"
+    },
+    "k1q9": {
+     "pick": 1
+    }
+   },
+   "attempt": 2,
+   "c": "FNCE 477",
+   "deck": "fnce477-k1",
+   "max": 19,
+   "perm": {
+    "k1q1": [
+     2,
+     3,
+     0,
+     1
+    ],
+    "k1q10": [
+     3,
+     1,
+     2,
+     0
+    ],
+    "k1q11": [
+     2,
+     1,
+     3,
+     0
+    ],
+    "k1q12": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "k1q14": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "k1q2": [
+     2,
+     1,
+     3,
+     0
+    ],
+    "k1q3": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "k1q5": [
+     0,
+     3,
+     1,
+     2
+    ],
+    "k1q6": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "k1q7": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "k1q9": [
+     1,
+     3,
+     0,
+     2
+    ]
+   },
+   "pts": 12,
+   "results": {
+    "k1q1": {
+     "v": "correct"
+    },
+    "k1q10": {
+     "v": "correct"
+    },
+    "k1q11": {
+     "v": "correct"
+    },
+    "k1q12": {
+     "v": "missed"
+    },
+    "k1q13": {
+     "fb": "Your life annuity definition is partly right: income until death. But you didn't mention the lump sum paid to an insurer, and passing payments to a beneficiary isn't typical (money can be forfeited at death). The fixed-term definition is circular: say income for a set period, with the remainder going to the estate if you die. You also need one advantage and one disadvantage.",
+     "v": "partial"
+    },
+    "k1q14": {
+     "v": "correct"
+    },
+    "k1q15": {
+     "fb": "Your answer, \"z\", doesn't address the question. Define ACB as your total cost of an investment for tax purposes, including the purchase price, commissions, and reinvested distributions like DRIP dividends. Then give the formula: capital gain = sale proceeds − ACB, with 50% of the gain taxable.",
+     "v": "missed"
+    },
+    "k1q2": {
+     "v": "correct"
+    },
+    "k1q3": {
+     "v": "missed"
+    },
+    "k1q4": {
+     "fb": "You correctly gave 18% of salary, a maximum of about $33,000, and the pension adjustment reduction. You're missing that unused room carries forward. The best place to find your room is your Notice of Assessment, which also includes unused room from past years. Quote the exact $33,810 maximum.",
+     "v": "partial"
+    },
+    "k1q5": {
+     "v": "correct"
+    },
+    "k1q6": {
+     "v": "correct"
+    },
+    "k1q7": {
+     "v": "correct"
+    },
+    "k1q8": {
+     "fb": "You correctly defined a RRIF as the payout version of an RRSP and gave the minimum withdrawal idea. But the deadline is Dec 31 of the year you turn 71, not simply at 71, and you could convert earlier. Add that withdrawals are taxable income, the remaining money grows tax-deferred, and the minimum is based on your age on Jan 1.",
+     "v": "partial"
+    },
+    "k1q9": {
+     "v": "correct"
+    }
+   },
+   "started": "2026-10-19T18:23:51.196Z",
+   "status": "graded",
+   "submitted": "2026-10-19",
+   "submittedAt": "2026-10-19T18:36:33.853Z"
+  },
+  "fnce477-k2--1": {
+   "answers": {
+    "k2q1": {
+     "pick": 0
+    },
+    "k2q10": {
+     "text": "Credit utilization (30%), Credit history (35%), credit diversification (10%), credit checks (like from the bank) (10%), im not sure the other one"
+    },
+    "k2q11": {
+     "pick": 0
+    },
+    "k2q12": {
+     "pick": 3
+    },
+    "k2q13": {
+     "pick": 1
+    },
+    "k2q14": {
+     "text": "Character, Consumer, Credit, idk"
+    },
+    "k2q15": {
+     "pick": 0
+    },
+    "k2q2": {
+     "pick": 2
+    },
+    "k2q3": {
+     "text": "Consumer loans are loans that people can take at the bank for their own personal need such as an auto loan or a mortgage loan, and a revolving credit is a type of loan that consumers have available at their disposal, but only charged interest when they use it such as a Personal line of credit or a HELOC"
+    },
+    "k2q4": {
+     "pick": 3
+    },
+    "k2q5": {
+     "pick": 1
+    },
+    "k2q6": {
+     "pick": 1
+    },
+    "k2q7": {
+     "pick": 0
+    },
+    "k2q8": {
+     "pick": 2
+    },
+    "k2q9": {
+     "pick": 0
+    }
+   },
+   "attempt": 1,
+   "c": "FNCE 477",
+   "deck": "fnce477-k2",
+   "max": 18,
+   "perm": {
+    "k2q1": [
+     2,
+     1,
+     3,
+     0
+    ],
+    "k2q11": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "k2q12": [
+     1,
+     0,
+     3,
+     2
+    ],
+    "k2q13": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "k2q15": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "k2q2": [
+     3,
+     0,
+     1,
+     2
+    ],
+    "k2q4": [
+     3,
+     1,
+     0,
+     2
+    ],
+    "k2q5": [
+     2,
+     3,
+     1,
+     0
+    ],
+    "k2q6": [
+     3,
+     2,
+     0,
+     1
+    ],
+    "k2q7": [
+     1,
+     0,
+     2,
+     3
+    ],
+    "k2q8": [
+     0,
+     2,
+     3,
+     1
+    ],
+    "k2q9": [
+     2,
+     0,
+     1,
+     3
+    ]
+   },
+   "pts": 13,
+   "results": {
+    "k2q1": {
+     "v": "correct"
+    },
+    "k2q10": {
+     "fb": "You correctly matched payment history (35%) and utilization (30%), and credit mix (10%) and new inquiries (10%) are the right ideas. But you didn't name the fifth factor, length of credit history (15%), and you listed 'credit history' with 35%, which blurs it with payment history. Name all five and label them precisely: payment history, amounts owed, length of history, new credit, credit mix.",
+     "v": "partial"
+    },
+    "k2q11": {
+     "v": "correct"
+    },
+    "k2q12": {
+     "v": "missed"
+    },
+    "k2q13": {
+     "v": "correct"
+    },
+    "k2q14": {
+     "fb": "Only 'Character' is right, and you didn't define it. 'Consumer' and 'Credit' aren't among the Five Cs. Learn all five: Character (credit history/score), Capacity (ability to repay, cash flow, debt-to-income), Collateral (assets securing the loan), Capital (your own wealth invested), and Conditions (loan purpose, interest rate, economy). Give a short definition for each.",
+     "v": "missed"
+    },
+    "k2q15": {
+     "v": "correct"
+    },
+    "k2q2": {
+     "v": "correct"
+    },
+    "k2q3": {
+     "fb": "You correctly gave auto loans and mortgages as consumer loans, and a line of credit as revolving credit, and you noted that interest is charged only on what you use. Missing: the consumer loan definition needs a one-time loan repaid on a fixed schedule. Revolving credit needs continuous borrowing with periodic minimum payments. Also, a HELOC is a line of credit, so give a distinct example such as a credit card.",
+     "v": "partial"
+    },
+    "k2q4": {
+     "v": "correct"
+    },
+    "k2q5": {
+     "v": "correct"
+    },
+    "k2q6": {
+     "v": "correct"
+    },
+    "k2q7": {
+     "v": "correct"
+    },
+    "k2q8": {
+     "v": "correct"
+    },
+    "k2q9": {
+     "v": "correct"
+    }
+   },
+   "started": "2026-10-19T18:37:00.021Z",
+   "status": "graded",
+   "submitted": "2026-10-19",
+   "submittedAt": "2026-10-19T18:40:47.662Z"
+  }
+ },
+ "deckmeta": {
+  "fnce477": {
+   "c": "FNCE 477",
+   "title": "Coverage: Lecture 12 (credit) and Lecture 13 (registered accounts)",
+   "topics": [
+    {
+     "id": "c-basics",
+     "lec": "Lecture 12 · Credit",
+     "name": "What credit is; good vs bad debt"
+    },
+    {
+     "id": "c-proscons",
+     "lec": "Lecture 12 · Credit",
+     "name": "Advantages and disadvantages of credit"
+    },
+    {
+     "id": "c-sources",
+     "lec": "Lecture 12 · Credit",
+     "name": "Sources of credit: cheap to expensive"
+    },
+    {
+     "id": "c-types",
+     "lec": "Lecture 12 · Credit",
+     "name": "Consumer loans vs revolving credit"
+    },
+    {
+     "id": "c-loc",
+     "lec": "Lecture 12 · Credit",
+     "name": "Instalment loans vs lines of credit"
+    },
+    {
+     "id": "c-heloc",
+     "lec": "Lecture 12 · Credit",
+     "name": "HELOC"
+    },
+    {
+     "id": "c-student",
+     "lec": "Lecture 12 · Credit",
+     "name": "Student loans"
+    },
+    {
+     "id": "c-lease",
+     "lec": "Lecture 12 · Credit",
+     "name": "Lease vs buy a car"
+    },
+    {
+     "id": "c-fraud",
+     "lec": "Lecture 12 · Credit",
+     "name": "Stolen cards and fraud protection"
+    },
+    {
+     "id": "c-report",
+     "lec": "Lecture 12 · Credit",
+     "name": "Credit reports and your credit file"
+    },
+    {
+     "id": "c-adverse",
+     "lec": "Lecture 12 · Credit",
+     "name": "Adverse data time limits and disputes"
+    },
+    {
+     "id": "c-score",
+     "lec": "Lecture 12 · Credit",
+     "name": "Credit scores: range and why they matter"
+    },
+    {
+     "id": "c-factors",
+     "lec": "Lecture 12 · Credit",
+     "name": "The five credit score factors"
+    },
+    {
+     "id": "c-improve",
+     "lec": "Lecture 12 · Credit",
+     "name": "Improving your score; minimum payment trap"
+    },
+    {
+     "id": "c-cosign",
+     "lec": "Lecture 12 · Credit",
+     "name": "Co-signer vs guarantor"
+    },
+    {
+     "id": "c-trouble",
+     "lec": "Lecture 12 · Credit",
+     "name": "Debt warning signs, counselling, consolidation"
+    },
+    {
+     "id": "c-bankrupt",
+     "lec": "Lecture 12 · Credit",
+     "name": "Bankruptcy and consumer proposals"
+    },
+    {
+     "id": "c-5cs",
+     "lec": "Lecture 12 · Credit",
+     "name": "Five Cs of credit"
+    },
+    {
+     "id": "c-ratios",
+     "lec": "Lecture 12 · Credit",
+     "name": "Debt ratios: DPI, debt-to-equity, GDS, TDS"
+    },
+    {
+     "id": "r-tfsa",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "TFSA rules and room"
+    },
+    {
+     "id": "r-tfsa-death",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "TFSA beneficiary vs successor holder"
+    },
+    {
+     "id": "r-rrsp-room",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "RRSP room, deadline, over-contribution"
+    },
+    {
+     "id": "r-rrsp-choice",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "RRSP vs TFSA: tax rate now vs later"
+    },
+    {
+     "id": "r-rrsp-unused",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "Unused RRSP deduction balance"
+    },
+    {
+     "id": "r-hbp-llp",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "Home Buyers' Plan and Lifelong Learning Plan"
+    },
+    {
+     "id": "r-rrsp-types",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "Types of RRSPs and beneficiaries"
+    },
+    {
+     "id": "r-rrsp-tax",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "RRSP withdrawals, withholding, taxation"
+    },
+    {
+     "id": "r-split",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "Spousal RRSP and pension income splitting"
+    },
+    {
+     "id": "r-71",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "Age 71: RRIF, annuity or cash out"
+    },
+    {
+     "id": "r-rrif",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "RRIF minimum withdrawals"
+    },
+    {
+     "id": "r-lira",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "LIRA and LIF"
+    },
+    {
+     "id": "r-annuity",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "Annuities: types, pros and cons, payment factors"
+    },
+    {
+     "id": "r-fhsa",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "FHSA"
+    },
+    {
+     "id": "r-nonreg",
+     "lec": "Lecture 13 · Registered accounts",
+     "name": "Non-registered: tax, asset location, ACB"
+    }
+   ]
+  }
+ }
+}
